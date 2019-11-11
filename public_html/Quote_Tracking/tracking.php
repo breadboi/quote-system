@@ -5,7 +5,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script type="text/javascript" src="javascript/tracking.js"></script>
     <?php
-    require_once('tableformat.php');
+    require_once('../../resources/library/tableformat.php');
     require_once('../../resources/library/legacy.php');
     //require_once('../../resources/library/azure.php');
     ?>

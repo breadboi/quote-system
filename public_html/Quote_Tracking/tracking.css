@@ -51,6 +51,12 @@ a:link, a:visited {
       cursor: pointer;
     border:1px solid #186dad;
   }
+
+  .add_form_field:hover
+  {
+    background-color: lightblue;
+    color: teal;
+  }
   
   .price
   {

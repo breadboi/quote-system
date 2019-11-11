@@ -4,7 +4,7 @@
     <link rel="stylesheet" href="tracking.css">
     <?php
     require_once('../../resources/library/legacy.php');
-    require_once('tableformat.php');
+    require_once('../../resources/library/tableformat.php');
     ?>
 </head>
 
