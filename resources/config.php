@@ -6,7 +6,7 @@ $config = array(
     "db" => array(
         "dev" => array(
             "dbname" => "DEV",
-            "username" => "server",
+            "username" => "website",
             "password" => "CSCI467S3rverAuth2019",
             "host" => "breadboi.database.windows.net"
         ),
