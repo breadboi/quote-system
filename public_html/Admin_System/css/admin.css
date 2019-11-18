@@ -1,0 +1,26 @@
+.songsearch {
+    margin-top: 2%;
+    width: 30%;
+}
+
+.cellfill {
+    background-color: #337ab7;
+    width: 5%
+}
+
+.cellselect {
+    background-color: #337ab7;
+}
+
+.inputField {
+    width: 30%;
+    margin: 2px;
+}
+
+.sqlSuccess {
+    color: green;
+}
+
+.sqlFail {
+    color: red;
+}
