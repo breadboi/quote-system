@@ -6,7 +6,7 @@ $config = array(
     "db" => array(
         "dev" => array(
             "dbname" => "quotes",
-            "username" => "server",
+            "username" => "webserver",
             "password" => "CSCI467S3rverAuth2019",
             "host" => "cnet.brettcarney.com"
         ),
