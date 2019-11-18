@@ -17,34 +17,6 @@
 <body>
     <?php
 include('sql.php');
-include('djsql.php');
-    
-    $sql="SELECT CustomerID, SongName, FileName, CustomerName, Time FROM Customer
-            JOIN KaraokeFile ON KaraokeFile.KaraokeFileID = Customer.KaraokeFileID
-            JOIN Song ON Song.SongID = KaraokeFile.SongID
-            WHERE Paid = 0
-            AND Played = 0";
-    $sql2="SELECT CustomerID, SongName, FileName, CustomerName, Time, Amount FROM Customer
-            JOIN KaraokeFile ON KaraokeFile.KaraokeFileID = Customer.KaraokeFileID
-            JOIN Song ON Song.SongID = KaraokeFile.SongID
-            WHERE Paid = 1
-            AND Played = 0";
-    $rs = $pdo->query($sql);
-    $rs2 = $pdo->query($sql2);
-    $rows = $rs->fetchAll(PDO::FETCH_ASSOC);
-    $rows2 = $rs2->fetchAll(PDO::FETCH_ASSOC);
-    echo "<div>", djtableHead($rows, "Free Queue"), djtableBody($rows), "</div>";
-    echo "<div>", djtableHead($rows2, "Paid Queue"), djtableBody($rows2), "</div>";
-    // Update the played flag based on selected queue item
-    if (isset($_POST["played"]) && $_POST["played"] != "")
-    {
-        $songToRemove = $_POST["played"];
-        $sql="UPDATE Customer
-                SET Played = 1
-                WHERE CustomerID = \"$songToRemove\"";
-        $rows3 = $pdo->query($sql);
-        echo "<meta http-equiv='refresh' content='0'>";
-    }    
     ?>
 
 </body>
