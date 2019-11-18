@@ -1,8 +1,3 @@
-
-<link rel="stylesheet" href="karaoke.css">
-<link rel="stylesheet" href="https://cdn.datatables.net/1.10.18/css/dataTables.bootstrap4.min.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-
 <?php
     function tableHead($rows)
     {

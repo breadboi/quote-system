@@ -1,3 +1,4 @@
+/*
 a:link, a:visited {
     background-color: blue;
     color: white;
@@ -10,11 +11,7 @@ a:link, a:visited {
   a:hover, a:active {
     background-color: lightblue;
   }
-  
-  .container1 input[type=text] {
-  padding:5px 0px;
-  margin:5px 5px 5px 0px;
-  }
+
   label
   {
     width: 120px;
@@ -36,7 +33,12 @@ a:link, a:visited {
     background-color: lightblue;
     color: teal;
   }
-  
+
+  .container1 input[type=text] {
+    padding:5px 0px;
+    margin:5px 5px 5px 0px;
+    }
+
   .add_form_field
   {
       background-color: blue;
@@ -49,7 +51,7 @@ a:link, a:visited {
       font-size: 16px;
       margin: 4px 2px;
       cursor: pointer;
-    border:1px solid #186dad;
+      border:1px solid #186dad;
   }
 
   .add_form_field:hover
@@ -57,15 +59,7 @@ a:link, a:visited {
     background-color: lightblue;
     color: teal;
   }
-  
-  .price
-  {
-      border: 1px solid #1c97f3;
-      width: 100px;
-      height: 40px;
-      margin-bottom:14px;
-  }
-  
+
   .lineitem
   {
       border: 1px solid #1c97f3;
@@ -87,6 +81,14 @@ a:link, a:visited {
       cursor: pointer;
   }
 
+  .price
+  {
+      border: 1px solid #1c97f3;
+      width: 100px;
+      height: 40px;
+      margin-bottom:14px;
+  }
+
   .cellselect {
     background-color: rgb(45, 94, 99);
 }
@@ -95,3 +97,4 @@ a:link, a:visited {
   background-color: rgb(45, 94, 99);
   width: 5%
 }
+*/

@@ -1,77 +1,94 @@
 <html>
+<?php
+require_once('../../resources/library/bootstrap.php');
+require_once('../../resources/library/tableformat.php');
+require_once('../../resources/library/legacy.php');
+require_once('../../resources/library/azure.php');
+?>
 
-<head>
-    <link rel="stylesheet" href="tracking.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script type="text/javascript" src="javascript/tracking.js"></script>
-    <?php
-    require_once('../../resources/library/tableformat.php');
-    require_once('../../resources/library/legacy.php');
-    //require_once('../../resources/library/azure.php');
-    ?>
-</head>
+<?php
+function test_input($data)
+{
+    $data = trim($data);
+    $data = stripslashes($data);
+    $data = htmlspecialchars($data);
+    return $data;
+}
+?>
 
-<body>
-    <?php
-    $id = $name = $city = $street = $contact = "";
+<?php
+$id = $name = $city = $street = $contact = "";
 
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    if( $_POST["id"] != "")
+    {
         $id = test_input($_POST["id"]);
-        if (!is_numeric($id)) $id=0;
+        if (!is_numeric($id)) $id = 1;
         $sql = "SELECT * FROM customers WHERE Id=$id";
         $customer = $legacyPDO->query($sql);
         $info = $customer->fetchAll(PDO::FETCH_ASSOC);
-        //tableBody($info);
+        if(!empty($info))
+        {
         $name = $info[0]["name"];
         $city = $info[0]["city"];
         $street = $info[0]["street"];
         $contact = $info[0]["contact"];
+        }
     }
-    ?>
+}
+?>
 
-    <h1>Quote Tracking</h1>
+<head>
+    <link rel="stylesheet" href="tracking.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
 
-    <a href="CustomerList.php" target="_self">Show Customer Information</a>
+<body>
+    <div class="jumbotron">
+        <h1>Quote Tracking</h1>
+        <p>Create a new Quote for your Customer</p>
+    </div>
+
+    <a href="CustomerList.php" class="btn btn-info" role="button" target="_self">Select Customer Info For Quote</a>
 
     <form action="confirm.php" method="post">
         <fieldset>
             <legend>Create New Quote</legend>
-            <h3>Customer Information:</h3><br>
-            <div>
-                <label for="name">Customer Name</label>
-                <input readonly=true class="lineitem" type="text" value="<? echo $name ?>" name="name" placeholder="Customer Name"><br>
-                <label for="city">City</label>
-                <input readonly=true class="lineitem" type="text" value="<? echo $city ?>" name="city" placeholder="City"><br>
-                <label for="street">Street</label>
-                <input readonly=true class="lineitem" type="text" value="<? echo $street ?>" name="street" placeholder="Street"><br>
-                <label for="contact">Contact</label>
-                <input readonly=true class="lineitem" type="text" value="<? echo $contact ?>" name="contact" placeholder="Contact"><br>
-            </div>
-            <div class="container1">
-                <button class="add_form_field">Add New Field+</button>
-                <div>
-                    <input class="lineitem" placeholder="Line Item" type="text" name="lineitem[]">
-                    <input class="price" placeholder="Price" type="text" name="price[]" />
+            <div class="form-group">
+                <div class="row">
+                    <div class="col">
+                        <label for="name">Customer Name</label>
+                        <input readonly=true class="form-control" type="text" value="<?php echo $name ?>" name="name" placeholder="Customer Name"><br>
+                    </div>
+                    <div class="col">
+                        <label for="contact">Contact</label>
+                        <input readonly=true class="form-control" type="text" value="<?php echo $contact ?>" name="contact" placeholder="Contact"><br>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <label for="street">Street</label>
+                        <input readonly=true class="form-control" type="text" value="<?php echo $street ?>" name="street" placeholder="Street"><br>
+                    </div>
+                    <div class="col">
+                        <label for="city">City</label>
+                        <input readonly=true class="form-control" type="text" value="<?php echo $city ?>" name="city" placeholder="City"><br>
+                    </div>
                 </div>
             </div>
 
-            <textarea name="message" placeholder="Secret Notes" rows="5" cols="60"></textarea><br>
-            <input class="submit" type="submit" value="Submit">
+            <div class="freeform">
+                <button type="button" id="addField" class="btn btn-info">Add New Field+</button>
+            </div>
+
+            <textarea name="message" class="form-control" placeholder="Secret Notes" rows="5"></textarea><br>
+            <input class="btn btn-success" type="submit" value="Submit">
 
 
         </fieldset>
     </form>
-
-    <?php
-    function test_input($data)
-    {
-        $data = trim($data);
-        $data = stripslashes($data);
-        $data = htmlspecialchars($data);
-        return $data;
-    }
-    ?>
-
 </body>
+
+<script type="text/javascript" src="javascript/tracking.js"></script>
 
 </html>

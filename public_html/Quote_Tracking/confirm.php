@@ -1,4 +1,50 @@
+<?php
+require_once('../../resources/library/bootstrap.php');
+require_once('../../resources/library/tableformat.php');
+require_once('../../resources/library/legacy.php');
+require_once('../../resources/library/azure.php');
+
+$name = $_POST["name"];
+$contact = $_POST["contact"];
+$street = $_POST["street"];
+$city = $_POST["city"];
+$message = $_POST["message"];
+$lineitem = $_POST["lineitem"];
+$price = $_POST["price"];
+$Line_Price = array_combine($lineitem, $price);
+
+try 
+{
+    $sql = "INSERT INTO quotes (customer_name, contact, street, city, secret_notes, status, discount)
+    VALUES ('$name', '$contact', '$street', '$city', '$message', '0', '0')";
+    $devPdo->exec($sql);
+
+    $last_id = $devPdo->lastInsertId();
+
+    $LineNumber = 1;
+    foreach ($Line_Price as $Line => $Price) 
+    {
+        $sql = "INSERT INTO line_item (line_number, description, price, quote_id)
+                VALUES ($LineNumber, '$Line', $Price, $last_id)";
+        $devPdo->exec($sql);
+        $LineNumber++;
+    }
+
+    echo "New Quote created successfully" . $last_id;
+}
+catch(PDOException $e)
+{
+    echo $sql . "<br>" . $e->getMessage();
+}
+
+$conn = null;
+
+
+?>
+
 <a href="tracking.php" target="_self">Back To Quote Creation</a>
+
+
 <table>
 <?php 
     foreach ($_POST as $key => $value) {
@@ -27,7 +73,5 @@
         echo "</tr>";
         }
     }
-
-
 ?>
 </table>

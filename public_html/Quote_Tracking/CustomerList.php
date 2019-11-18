@@ -5,22 +5,32 @@
     <?php
     require_once('../../resources/library/legacy.php');
     require_once('../../resources/library/tableformat.php');
+    require_once('../../resources/library/bootstrap.php');
     ?>
 </head>
 
 <body>
-    <div>
+    <div class="jumbotron">
         <h1>Customer Information List</h1>
-        <a href="tracking.php" target="_self">Back To Quote Without Selection</a>
-        <form action="tracking.php" method="post">
-        Select Customer ID for Quote: <input type="text" name="id">
-        <input type="submit">
-        </form>
+        <p>Select a Customer to use for Quote</p>
     </div>
 
-    <form action="CustomerList.php" method="post">
-        Search: <input type="text" name="search">
-        <input type="submit">
+    <a href="tracking.php" class="btn btn-danger" role="button" target="_self">Back To Quote Without Selection</a>
+    
+    <form class="form-inline" action="tracking.php" method="post">
+        <div class="form-group">
+            <label for="text">Customer ID to Use for Quote:</label>
+            <input type="text" class="form-control" name="id">
+            <input class="btn btn-success" type="submit">
+        </div>
+    </form>
+
+    <form class="form-inline" action="CustomerList.php" method="post">
+        <div class="form-group">
+            <label for="text">Search for Customer:</label>
+            <input type="text" class="form-control" name="search">
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
     </form>
 
     <?php
