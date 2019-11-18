@@ -10,16 +10,15 @@ $username = $config['db']['dev']['username'];
 $password = $config['db']['dev']['password'];
 $host = $config['db']['dev']['host'];
 
-// PHP Data Objects(PDO)
 try 
 {
-    $devPDO = new PDO("mysql:host={$host};dbname={$dbname}", "{$username}", "{$password}");
-	$devPDO->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-}
-catch (PDOException $e) 
+    $dsn = "mysql:host={$host};dbname={$dbname}";
+    $devPdo = new PDO($dsn, $username, $password);
+    $devPdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+}		
+catch(PDOexception $e)
 {
-    print("Error connecting to SQL Server.");
-    die(print_r($e));
+    echo "<div class=\"sqlFailure\">Connection to database failed: ".$e->getMessage();
 }
 
 ?>
