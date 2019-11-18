@@ -3,7 +3,7 @@
 require_once('../../resources/library/bootstrap.php');
 require_once('../../resources/library/tableformat.php');
 require_once('../../resources/library/legacy.php');
-require_once('../../resources/library/azure.php');
+require_once('../../resources/library/devDatabase.php');
 ?>
 
 <?php
