@@ -5,10 +5,10 @@
 $config = array(
     "db" => array(
         "dev" => array(
-            "dbname" => "DEV",
-            "username" => "website",
+            "dbname" => "prod",
+            "username" => "webserver",
             "password" => "CSCI467S3rverAuth2019",
-            "host" => "breadboi.database.windows.net"
+            "host" => "cnet.brettcarney.com"
         ),
         "legacy" => array(
             "dbname" => "b25oudnru9u3blk4",
