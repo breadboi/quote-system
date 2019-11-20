@@ -4,6 +4,8 @@ require_once('../../resources/library/tableformat.php');
 require_once('../../resources/library/legacy.php');
 require_once('../../resources/library/devDatabase.php');
 
+echo '<a href="tracking.php" class="btn btn-info" target="_self">Back To Quote Creation</a><br/>';
+
 $name = $_POST["name"];
 $contact = $_POST["contact"];
 $street = $_POST["street"];
@@ -30,7 +32,7 @@ try
         $LineNumber++;
     }
 
-    echo "New Quote created successfully" . $last_id;
+    echo "<strong>New Quote created successfully #<strong>" . $last_id . "<br/>";
 }
 catch(PDOException $e)
 {
@@ -41,9 +43,6 @@ $conn = null;
 
 
 ?>
-
-<a href="tracking.php" target="_self">Back To Quote Creation</a>
-
 
 <table>
 <?php 
