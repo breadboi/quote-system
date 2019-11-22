@@ -11,6 +11,9 @@
 <!-- MDBootstrap Datatables -->
 <link rel="stylesheet" href="https://cdn.datatables.net/1.10.18/css/dataTables.bootstrap4.min.css">
 
+<!-- CSS for daterangepicker -->
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+
 <!-- Styling for this page -->
 <link rel="stylesheet" href="css/admin.css">
 
@@ -20,16 +23,37 @@
 
         <!-- Search Type -->
         <div class="form-group">
-            <input id="salesassociate" type="radio" value="1" name="searchchoice" checked>
+            <input id="salesassociate" type="radio" value="0" name="searchChoice" checked>
             <label for="salesassociate">Sales Associate</label>
             <br>
-            <input id="quote" type="radio" value="2" name="searchchoice">
+            <input id="quote" type="radio" value="1" name="searchChoice">
             <label for="quote">Quote</label>
         </div>
+
+        <!-- Quote Search Checkboxes (Display when quote radio is selected) -->
+        <div class="form-group quoteFormItems hiddenControl">
+            <input id="finalizedstatus" type="checkbox" value="0" name="quoteStatus" />
+            <label for="finalizedstatus">Finalized</label>
+            <br>
+            <input id="sanctionedstatus" type="checkbox" value="1" name="quoteStatus" />
+            <label for="sanctionedstatus">Sanctioned</label>
+            <br>
+            <input id="orderedstatus" type="checkbox" value="2" name="quoteStatus" />
+            <label for="orderedstatus">Ordered</label>
+            <br>
+        </div>
+
+        <!-- Date range Selector -->
+        <div class="form-group quoteFormItems hiddenControl">
+            <input type="text" name="daterange" />
+        </div>
         
-        <!-- Search Field -->
+        <!-- Sales Associate Search Field -->
         <div class="form-group">
-            <input type="text" class="form-control adminsearch" name="searchstring" placeholder="Search Here...">
+            <input type="text" class="form-control" name="salesAssociateName" placeholder="Sales Associate Name">
+
+            <!-- Displayed when quote radio is selected -->
+            <input type="text" class="form-control quoteFormItems hiddenControl" name="customerName" placeholder="Customer Name">
         </div>        
 
         <button type="submit" class="btn btn-primary">Search</button>
@@ -49,14 +73,15 @@
 
             switch($searchChoice)
             {
-                case 1:
+                case 0:
                     $sql = "SELECT id AS ID, name AS Name, accumulated_commission AS 'Total Commission', address AS Address FROM sales_associates
                             WHERE id LIKE CONCAT('%', :searchString, '%')
                             OR name LIKE CONCAT('%', :searchString, '%');";
                     break;
-                case 2:
-                    $sql = "SELECT 
-                            WHERE SongName LIKE CONCAT('%', :searchString, '%');";
+                case 1:
+                    $sql = "SELECT id AS ID, customer_name AS Name, contact AS Contact, street AS Street, city AS City, secret_notes AS Notes, discount AS Discount
+                            WHERE id LIKE CONCAT('%', :searchString, '%')
+                            OR customer_name LIKE CONCAT('%', :searchString, '%');";
                     break;
             }
 
@@ -81,7 +106,7 @@
 <!-- jQuery library -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
-<!-- Latest compiled JavaScript -->
+<!-- CDN for Bootstrap-->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 
 <!-- CDN for DataTables jQuery -->
@@ -89,6 +114,12 @@
 
 <!-- CDN for DataTables javascript -->
 <script src="https://cdn.datatables.net/1.10.18/js/dataTables.bootstrap4.min.js"></script>
+
+<!-- CDN For moment javascript -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+
+<!-- CDN for daterangepicker javascript -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
 
 <!-- Javascript for the Forms -->
 <script type="text/javascript" src="javascript/admin.js"></script>
