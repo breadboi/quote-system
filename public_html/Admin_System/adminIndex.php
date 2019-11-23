@@ -47,14 +47,15 @@
         <div class="form-group quoteFormItems hiddenControl">
             <input type="text" name="daterange" />
         </div>
-        
+
         <!-- Sales Associate Search Field -->
         <div class="form-group">
             <input type="text" class="form-control" name="salesAssociateName" placeholder="Sales Associate Name">
 
             <!-- Displayed when quote radio is selected -->
-            <input type="text" class="form-control quoteFormItems hiddenControl" name="customerName" placeholder="Customer Name">
-        </div>        
+            <input type="text" class="form-control quoteFormItems hiddenControl" name="customerName"
+                placeholder="Customer Name">
+        </div>
 
         <button type="submit" class="btn btn-primary">Search</button>
     </form>
@@ -65,38 +66,61 @@
         require_once("../../resources/config.php");
         include("../../resources/library/devDatabase.php");
         require_once("../../resources/library/tableformat.php");
-        
-        if (isset($_POST["searchstring"]) && isset($_POST["searchchoice"]))
-        {
-            $searchString = $_POST["searchstring"];
-            $searchChoice = $_POST["searchchoice"];
 
+        if (isset($_POST["searchChoice"]))
+        {
+            $searchChoice = $_POST["searchChoice"];            
+            $sql = "";
+
+            // Set sql string
             switch($searchChoice)
             {
                 case 0:
                     $sql = "SELECT id AS ID, name AS Name, accumulated_commission AS 'Total Commission', address AS Address FROM sales_associates
-                            WHERE id LIKE CONCAT('%', :searchString, '%')
-                            OR name LIKE CONCAT('%', :searchString, '%');";
+                            WHERE name LIKE CONCAT('%', :salesAssociateName, '%');";
                     break;
                 case 1:
                     $sql = "SELECT id AS ID, customer_name AS Name, contact AS Contact, street AS Street, city AS City, secret_notes AS Notes, discount AS Discount
-                            WHERE id LIKE CONCAT('%', :searchString, '%')
-                            OR customer_name LIKE CONCAT('%', :searchString, '%');";
+                            WHERE customer_name LIKE CONCAT('%', :customerName, '%');";
                     break;
             }
 
+            // Prepare pdo
             $prepared = $devPdo->prepare($sql, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
-            $success = $prepared->execute(array(':searchString' => $searchString));
 
-            if ($success)
+            // Perform respective query
+            switch($searchChoice)
             {
-                $rows = $prepared->fetchAll(PDO::FETCH_ASSOC);
-                tableHead($rows);
-                tableBody($rows);
-            }
-            else
-            {
-                echo "<div class=\"failure\">An Error Occured... Please double check your search text</div>";
+                case 0:
+                    $salesAssociateName = $_POST["salesAssociateName"];
+                    $success = $prepared->execute(array(':salesAssociateName' => $salesAssociateName));
+
+                    if ($success)
+                    {
+                        $rows = $prepared->fetchAll(PDO::FETCH_ASSOC);
+                        tableHead($rows);
+                        tableBody($rows);
+                    }
+                    else
+                    {
+                        echo "<div class=\"failure\">An Error Occured... Please double check your search text</div>";
+                    }
+                break;
+                case 1:
+                    $customerName = $_POST["customerName"];
+                    $success = $prepared->execute(array(':customerName' => $customerName));
+
+                    if ($success)
+                    {
+                        $rows = $prepared->fetchAll(PDO::FETCH_ASSOC);
+                        tableHead($rows);
+                        tableBody($rows);
+                    }
+                    else
+                    {
+                        echo "<div class=\"failure\">An Error Occured... Please double check your search text</div>";
+                    }
+                break;
             }
         }
     ?>
