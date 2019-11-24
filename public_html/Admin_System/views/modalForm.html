@@ -15,7 +15,21 @@
             </div>
             <div class="modal-body">
                 <form method="POST">
-                    
+
+                    <!-- Input Fields for Sales Associates -->
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="associateId" id="associateFieldId" readonly>
+                        <input type="text" class="form-control" name="associateAssociateName" id="associateFieldName">
+                        <input type="text" class="form-control" name="associateCommission" id="associateFieldCommission">
+                        <input type="text" class="form-control" name="associateAddress" id="associateFieldAddress">
+                    </div>
+
+                    <!-- Editing or adding an associate -->
+                    <div class="form-control hiddenControl">
+                        <input id="addAssociate" type="radio" value=0 name="choice">
+                        <input id="editAssociate" type="radio" value=1 name="choice">
+                    </div>
+
                     <button id="customerform" type="submit" class="btn btn-primary hiddenControl">Yes</button>
                 </form>
             </div>

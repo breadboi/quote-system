@@ -18,6 +18,7 @@ $(function() {
     $('input[name="daterange"]').daterangepicker({ startDate: moment(), endDate: moment().add(2, 'day')});
 })
 
+// Toggles form controls
 function toggleQuoteFormItems(context) {
     if (context.value == 0) 
     {
@@ -31,9 +32,9 @@ function toggleQuoteFormItems(context) {
     }
 }
 
+// On click event for tables
 $("td").on("click", function(e) { 
     e.preventDefault();
-    //alert(this);
 
     // Remove previous highlighting
     $("tr").removeClass("cellselect");
@@ -55,9 +56,9 @@ $("td").on("click", function(e) {
 
     $(this).parent().addClass("cellselect");
 
-    // set the field to the row value
-    $("#associateIdField").attr("value", selectionId);
-    $("#associateNameField").attr("value", selectionName);
-    $("#associateCommissionField").attr("value", selectionCommission);
-    $("#associateAddressField").attr("value", selectionAddress);
+    // Set the field to the cell value
+    $("#associateFieldId").attr("value", selectionId);
+    $("#associateFieldName").attr("value", selectionName);
+    $("#associateFieldCommission").attr("value", selectionCommission);
+    $("#associateFieldAddress").attr("value", selectionAddress);
 });
