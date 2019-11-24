@@ -36,9 +36,7 @@ $("td").on("click", function(e) {
     //alert(this);
 
     // Remove previous highlighting
-    $("tr").removeClass("cellselect");    
-
-    alert($(this).parents('tr')[0].text());
+    $("tr").removeClass("cellselect");
 
     // Create row array variable
     var rowArray = [];
@@ -50,10 +48,10 @@ $("td").on("click", function(e) {
     });
 
     // Assign each row cell to a variable
-    var selectionId = rowArray[0];
-    var selectionName = rowArray[1];
-    var selectionCommission = rowArray[2];
-    var selectionAddress = rowArray[3];
+    var selectionId = rowArray[0].text();
+    var selectionName = rowArray[1].text();
+    var selectionCommission = rowArray[2].text();
+    var selectionAddress = rowArray[3].text();
 
     $(this).parent().addClass("cellselect");
 
