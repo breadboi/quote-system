@@ -33,34 +33,38 @@ function toggleQuoteFormItems(context) {
 }
 
 // On click event for tables
-$("td").on("click", function(e) { 
-    e.preventDefault();
+$("td").on("click", function(e) {
+    // Ensure the radio is checked so we aren't checking quotes
+    if ($("#salesassociate").prop("checked"))
+    {
+        e.preventDefault();
 
-    // Remove previous highlighting
-    $("tr").removeClass("cellselect");
+        // Remove previous highlighting
+        $("tr").removeClass("cellselect");
 
-    // Create row array variable
-    var rowArray = [];
+        // Create row array variable
+        var rowArray = [];
 
-    // For each cell, we push to an array
-    $(this).parents('tr').find('td').each(function() {
-        // For each cell
-        rowArray.push($(this));
-    });
+        // For each cell, we push to an array
+        $(this).parents('tr').find('td').each(function() {
+            // For each cell
+            rowArray.push($(this));
+        });
 
-    // Assign each row cell to a variable
-    var selectionId = rowArray[0].text();
-    var selectionName = rowArray[1].text();
-    var selectionCommission = rowArray[2].text();
-    var selectionAddress = rowArray[3].text();
+        // Assign each row cell to a variable
+        var selectionId = rowArray[0].text();
+        var selectionName = rowArray[1].text();
+        var selectionCommission = rowArray[2].text();
+        var selectionAddress = rowArray[3].text();
 
-    $(this).parent().addClass("cellselect");
+        $(this).parent().addClass("cellselect");
 
-    // Set the field to the cell value
-    $("#associateFieldId").attr("value", selectionId);
-    $("#associateFieldName").attr("value", selectionName);
-    $("#associateFieldCommission").attr("value", selectionCommission);
-    $("#associateFieldAddress").attr("value", selectionAddress);
+        // Set the field to the cell value
+        $("#associateFieldId").attr("value", selectionId);
+        $("#associateFieldName").attr("value", selectionName);
+        $("#associateFieldCommission").attr("value", selectionCommission);
+        $("#associateFieldAddress").attr("value", selectionAddress);
+    }    
 });
 
 // Used for Modal form submission
