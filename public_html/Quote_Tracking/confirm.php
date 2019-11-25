@@ -10,7 +10,7 @@ require_once('../../resources/library/devDatabase.php');
 
 <body>
 
-<div style="text-align:center" class="jumbotron jumbotron-fluid p-2 m-1 bg-dark text-white rounded">
+<div style="text-align:center" class="jumbotron jumbotron-fluid p-2 m-1 bg-info text-white rounded">
         <h1>Quote Submition</h1>
 </div>
 
@@ -24,13 +24,13 @@ function test_input($data)
     $data = trim($data);
     $data = stripslashes($data);
     $data = htmlspecialchars($data);
+    $data = htmlentities($data);
     return $data;
 }
 
 $message = test_input($_POST["message"]);
 $lineitem = $_POST["lineitem"];
 $price = $_POST["price"];
-$Line_Price = array_combine($lineitem, $price);
 
 $quotevalidation = "<br>";
 $valid = true;
@@ -79,6 +79,7 @@ foreach ($lineitem as $L)
         $valid = false;
     }
     $lineNumber++;
+    $L = test_input($L);
 }
 $lineNumber = 1;
 foreach ($price as $P)
@@ -89,16 +90,18 @@ foreach ($price as $P)
         $valid = false;
     }
     $lineNumber++;
+    $P = test_input($P);
 }
 
+$Line_Price = array_combine($lineitem, $price);
 
 
 if($valid)
 {
     try 
     {
-        $insertQuote = $devPdo->prepare("INSERT INTO quotes (customer_name, contact, street, city, email ,secret_notes)
-        VALUES (:name, :contact, :street, :city, :email, :message)");
+        $insertQuote = $devPdo->prepare("INSERT INTO quotes (customer_name, contact, street, city, email ,secret_notes, date_created)
+        VALUES (:name, :contact, :street, :city, :email, :message, CURDATE())");
         $insertQuote->bindParam(':name', $name);
         $insertQuote->bindParam(':contact', $contact);
         $insertQuote->bindParam(':street', $street);
@@ -141,6 +144,10 @@ else
 ?>
 
 
+
+
+
+<!--
 <table class="table col-4">
     <?php
     foreach ($_POST as $key => $value) {
@@ -168,6 +175,7 @@ else
     }
     ?>
 </table>
+-->
 
 </body>
 

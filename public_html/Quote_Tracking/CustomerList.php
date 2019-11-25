@@ -12,7 +12,7 @@
 </head>
 
 <body>
-    <div style="text-align:center" class="jumbotron jumbotron-fluid p-2 m-1 bg-dark text-white rounded">
+    <div style="text-align:center" class="jumbotron jumbotron-fluid p-2 m-1 bg-info text-white rounded">
         <h1>Customer Information List</h1>
         <p>Select a Customer to use for Quote</p>
     </div>
@@ -23,21 +23,20 @@
 
     <form action="tracking.php" class="m-2 p-2" method="post">
         <div class="form-row input-group">
-            <input type="text" class="form-control" name="id" placeholder="Customer ID to Use for Quote:">
-            <input class="btn btn-success" type="submit">
+            <input onkeydown="event.preventDefault()" type="text" class="form-control" name="id" id="id" required placeholder="Click On Table To Select Customer">
+            <input class="btn btn-success" id="id" type="submit">
         </div>
     </form>
 
     <form action="CustomerList.php" class=" m-2 p-2" method="post">
         <div class="form-row input-group">
-             <input type="text" class="form-control" placeholder="Search Customers" name="search">
+            <input type="text" class="form-control" placeholder="Search Customers" name="search">
             <button class="btn btn-primary" type="submit" class="">Search</button>
         </div>
     </form>
 
     <?php
-    if (isset($_POST["search"]))
-    {
+    if (isset($_POST["search"])) {
         $searchString = $_POST["search"];
         $sql = "SELECT * FROM customers 
         WHERE (name LIKE '%$searchString%')
@@ -46,16 +45,45 @@
         OR (street LIKE '%$searchString%')
         OR (contact LIKE '%$searchString%')
         ";
-    }
-    else
-    {
-    $sql = "SELECT * FROM customers";
+    } else {
+        $sql = "SELECT * FROM customers";
     }
     $AllCustomers = $legacyPDO->query($sql);
     $rows = $AllCustomers->fetchAll(PDO::FETCH_ASSOC);
     echo '<div class="m-2 p-2">', tableHead($rows), tableBody($rows), "</div>";
-    ?> 
+    ?>
 
 </body>
+
+<script>
+    var previousrow;
+
+    function addRowHandlers() {
+        var table = document.getElementsByClassName("datatbl");
+        var rows = table[0].getElementsByTagName("tr");
+        for (i = 0; i < rows.length; i++) {
+            var currentRow = table[0].rows[i];
+            var createClickHandler =
+                function(row)
+                {
+                    return function() 
+                    {
+                        if(previousrow != undefined)
+                        {
+                        previousrow.setAttribute("style", "");
+                        }
+                        var cell = row.getElementsByTagName("td")[0];
+                        var id = cell.innerHTML;
+                        document.getElementById("id").setAttribute("value", id);
+                        this.setAttribute("style", "background-color: #4CAF50");
+                        previousrow = row;
+                    };
+                };
+
+            currentRow.onclick = createClickHandler(currentRow);
+        }
+    }
+    window.onload = addRowHandlers();
+</script>
 
 </html>

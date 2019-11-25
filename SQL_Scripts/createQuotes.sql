@@ -11,6 +11,9 @@ CREATE TABLE quotes (
     secret_notes varchar(500) NULL DEFAULT NULL,
     status int NULL DEFAULT NULL,
     discount FLOAT(16) NULL DEFAULT NULL,
+    date_created DATE NULL DEFAULT NULL,
+    sales_associate_id varchar(50) NULL DEFAULT NULL,
+    FOREIGN KEY (sales_associate_id) REFERENCES sales_associates (id),
     PRIMARY KEY (id)
 );
 
@@ -25,8 +28,8 @@ CREATE TABLE line_item (
 );
 
 
-INSERT INTO quotes (customer_name, contact, street, city, email, secret_notes, status, discount)
-VALUES ('IBM', '847-630-244', 'Swag Lane', 'FlavorTown', 'Email@me.net' ,'Testing Secrete Notes', '0', '0');
+INSERT INTO quotes (customer_name, contact, street, city, email, secret_notes, status, discount, sales_associate_id, date_created)
+VALUES ('IBM', '847-630-244', 'Swag Lane', 'FlavorTown', 'Email@me.net' ,'Testing Secrete Notes', '0', '0', "4b570be2-09af-11ea-957f-1c872c422ccb", CURDATE());
 
 #SELECT @last:=LAST_INSERT_ID();
 
