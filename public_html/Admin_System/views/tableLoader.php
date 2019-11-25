@@ -17,7 +17,7 @@
                         WHERE name LIKE CONCAT('%', :salesAssociateName, '%');";
                 break;
             case 1:
-                $sql = "SELECT id AS ID, customer_name AS Name, contact AS Contact, street AS Street, city AS City, secret_notes AS Notes, discount AS Discount
+                $sql = "SELECT id AS ID, customer_name AS Name, contact AS Contact, street AS Street, city AS City, secret_notes AS Notes, discount AS Discount FROM quotes
                         WHERE customer_name LIKE CONCAT('%', :customerName, '%');";
                 break;
         }
