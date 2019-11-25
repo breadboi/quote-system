@@ -7,8 +7,9 @@ CREATE TABLE quotes (
     contact varchar(50) NULL DEFAULT NULL,
     street varchar(50) NULL DEFAULT NULL,
     city varchar(50) NULL DEFAULT NULL,
+    email varchar(50) NULL DEFAULT NULL,
     secret_notes varchar(500) NULL DEFAULT NULL,
-    status BOOL NULL DEFAULT NULL,
+    status int NULL DEFAULT NULL,
     discount FLOAT(16) NULL DEFAULT NULL,
     PRIMARY KEY (id)
 );
@@ -24,13 +25,13 @@ CREATE TABLE line_item (
 );
 
 
-INSERT INTO quotes (customer_name, contact, street, city, secret_notes, status, discount)
-VALUES ('IBM', '847-630-244', 'Swag Lane', 'FlavorTown', 'Testing Secrete Notes', '0', '0');
+INSERT INTO quotes (customer_name, contact, street, city, email, secret_notes, status, discount)
+VALUES ('IBM', '847-630-244', 'Swag Lane', 'FlavorTown', 'Email@me.net' ,'Testing Secrete Notes', '0', '0');
 
-SELECT @last:=LAST_INSERT_ID();
+#SELECT @last:=LAST_INSERT_ID();
 
 INSERT INTO line_item (line_number, description, price, quote_id)
-VALUES (1, 'This is a test decription for the line', 50.23, @last);
+VALUES (1, 'This is a test decription for the line', 50.23, 1);
 
 /*
 CREATE TABLE quotes (

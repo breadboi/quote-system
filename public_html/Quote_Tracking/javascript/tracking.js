@@ -4,11 +4,11 @@ $(document).ready(function() {
     var add_button = $("#addField");
     var add_line = '<div class="input-group">';
     add_line += '<div class="col-7 px-1">';
-    add_line += '<input class="form-control" placeholder="Line Item" type="text" name="lineitem[]" required />';
+    add_line += '<input class="form-control" placeholder="Line Item" type="text" name="lineitem[]"/>';
     add_line += '</div>';
     add_line += '<div class="col-3 px-1 input-group">';
     add_line += '<div class="input-group-prepend"><span class="input-group-text">$</span></div>';
-    add_line += '<input class="form-control" placeholder="Price" type="text" name="price[]" required />';
+    add_line += '<input class="form-control" pattern="^\\d+\\.?\\d*$" placeholder="Price" type="text" name="price[]"/>';
     add_line += '</div>';
     var first = add_line + '</div>';
     add_line += '<div class="col-2 pl-1">';
@@ -84,4 +84,3 @@ function empty()
         }, false);
     })();
 
-    

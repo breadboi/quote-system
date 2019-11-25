@@ -38,13 +38,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <head>
     <link rel="stylesheet" href="tracking.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/vendors/formvalidation/dist/css/formValidation.min.css">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 
 <body>
-    <div class="jumbotron jumbotron-fluid p-2 m-1 bg-info text-white rounded">
+    <div style="text-align:center" class="jumbotron jumbotron-fluid p-2 m-1 bg-info text-white rounded">
         <h1>Quote Tracking</h1>
-        <p>Create a new Quote for your Customer</p>
+        <h5>Create a new Quote for your Customer</h5>
     </div>
 
     <div id="CustomerSelection">
@@ -52,7 +55,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <a href="CustomerList.php" class="btn btn-primary" role="button" id="CustomerSelect" target="_self">Select Customer Info For Quote</a>
         </div>
     </div>
-    <form action="confirm.php" class="needs-validation border border-primary rounded mx-1 px-2" method="post">
+    <form id="QuoteForm" action="confirm.php" class="border border-primary rounded mx-1 px-2" method="post">
         <fieldset>
             <h4 class=".bg-info">Create New Quote</h4>
             <div class="form-group">
@@ -76,6 +79,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <input onkeydown="event.preventDefault()" class="form-control" type="text" value="<?php echo $city ?>" name="city" placeholder="City"><br>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col">
+                        <label for="email">Email</label>
+                        <input class="form-control" type="text" name="email" placeholder="Email">
+                    </div>
+                </div>
             </div>
 
             <div id="QuoteContent">
@@ -86,20 +95,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             <textarea name="message" class="form-control mt-2" placeholder="Secret Notes" rows="5"></textarea><br>
             <div class="btn-group d-flex">
-                <input class="btn btn-success m-1" type="submit" id="QuoteSubmit" value="Submit">
+                <button class="btn btn-success m-1" type="submit">Submit Quote</button>
             </div>
 
         </fieldset>
     </form>
+
+
+    <script type="text/javascript" src="javascript/tracking.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/es6-shim/0.35.3/es6-shim.min.js"></script>
+    <script src="/vendors/formvalidation/dist/js/FormValidation.min.js"></script>
+    <script src="/vendors/formvalidation/dist/js/plugins/Bootstrap.min.js"></script>
 </body>
-
-
-<script type="text/javascript">
-</script>
-
-<script type="text/javascript" src="javascript/tracking.js"></script>
-
-<script>
-</script>
-
 </html>
