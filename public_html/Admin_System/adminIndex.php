@@ -64,10 +64,7 @@
     <!-- Table Loader -->
     <?php
         require_once("views/tableLoader.php");
-        
-        // Only show for the desired choice
-        if ($_POST["searchChoice"] == 0)
-            require_once("views/modalForm.html");
+        require_once("views/modalForm.html");
     ?>
 
 </body>

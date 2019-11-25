@@ -18,17 +18,17 @@ $(function() {
     $('input[name="daterange"]').daterangepicker({ startDate: moment(), endDate: moment().add(2, 'day')});
 })
 
-// Toggles form controls
+// Toggles form controls (0=SalesAssociate, 1=Quote)
 function toggleQuoteFormItems(context) {
     if (context.value == 0) 
     {
         $(".quoteFormItems").addClass("hiddenControl");
-        $(".quoteFormItems").prop('required',false);
+        $(".associateButtons").removeClass("hiddenControl");
     }
     else if (context.value == 1)
     {
         $(".quoteFormItems").removeClass("hiddenControl");
-        $(".quoteFormItems").prop('required',true);
+        $(".associateButtons").addClass("hiddenControl");
     }
 }
 
@@ -61,4 +61,60 @@ $("td").on("click", function(e) {
     $("#associateFieldName").attr("value", selectionName);
     $("#associateFieldCommission").attr("value", selectionCommission);
     $("#associateFieldAddress").attr("value", selectionAddress);
+});
+
+// Used for Modal form submission
+$("#confirmSubmission").on("click", function() {
+    $("#associateForm").trigger("click");
+});
+
+// Add Associate Click event
+$("#addAssociateButton").on("click", function() {
+    // Enable editing (if previously disabled)
+    $("#associateFieldName").attr("disabled", false);
+    $("#associateFieldPassword").attr("disabled", false);
+    $("#associateFieldCommission").attr("disabled", false);
+    $("#associateFieldAddress").attr("disabled", false);
+
+    // Remove existing values
+    $("#associateFieldId").attr("value", "");
+    $("#associateFieldName").attr("value", "");
+    $("#associateFieldCommission").attr("value", "");
+    $("#associateFieldAddress").attr("value", "");
+
+    // Define what the form is for
+    $("#addAssociate").attr("checked", true);
+
+    // Set title
+    $("#associateModalTitle").text("Add a new Sales Associate");
+});
+
+// Edit Associate Click event
+$("#editAssociateButton").on("click", function() {
+    // Enable editing (if previously disabled)
+    $("#associateFieldName").attr("disabled", false);
+    $("#associateFieldPassword").attr("disabled", false);
+    $("#associateFieldCommission").attr("disabled", false);
+    $("#associateFieldAddress").attr("disabled", false);
+
+    // Define what the form is for
+    $("#editAssociate").attr("checked", true);
+
+    // Set title
+    $("#associateModalTitle").text("Edit Selected Sales Associate");
+});
+
+// Delete Associate Click event
+$("#deleteAssociateButton").on("click", function() {
+    // Define what the form is for
+    $("#deleteAssociate").attr("checked", true);
+
+    // Set title
+    $("#associateModalTitle").text("Delete Selected Sales Associate with the Following Information?");
+
+    // Prevent editing
+    $("#associateFieldName").attr("disabled", true);
+    $("#associateFieldPassword").attr("disabled", true);
+    $("#associateFieldCommission").attr("disabled", true);
+    $("#associateFieldAddress").attr("disabled", true);
 });

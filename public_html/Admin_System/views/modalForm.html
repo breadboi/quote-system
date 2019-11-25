@@ -1,14 +1,25 @@
-<!-- Button to trigger user adjustment modal -->
-<button type="button" class="btn btn-primary modalview" data-toggle="modal" data-target="#confirmationModal">
-    Adjust Highlighted User
+<!-- Button to trigger modal -->
+<button id="addAssociateButton" type="button" class="btn btn-primary modalview associateButtons" data-toggle="modal" data-target="#confirmationModal">
+    Add User
 </button>
+
+<!-- Button to trigger modal -->
+<button id="editAssociateButton" type="button" class="btn btn-primary modalview associateButtons" data-toggle="modal" data-target="#confirmationModal">
+    Edit Highlighted User
+</button>
+
+<!-- Button to trigger modal -->
+<button id="deleteAssociateButton" type="button" class="btn btn-primary modalview associateButtons" data-toggle="modal" data-target="#confirmationModal">
+    Delete Highlighted User
+</button>
+
 <!-- Modal Form -->
 <div class="modal fade" id="confirmationModal" tabindex="-1" role="dialog"
     aria-labelledby="confirmationModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Sales Associate Asjustment</h5>
+                <h5 id="associateModalTitle" class="modal-title">Sales Associate Asjustment</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -18,23 +29,30 @@
 
                     <!-- Input Fields for Sales Associates -->
                     <div class="form-group">
+                        <label for="associateFieldId">ID</label>
                         <input type="text" class="form-control" name="associateId" id="associateFieldId" readonly>
-                        <input type="text" class="form-control" name="associateAssociateName" id="associateFieldName">
+                        <label for="associateFieldName">Name</label>
+                        <input type="text" class="form-control" name="associateName" id="associateFieldName">
+                        <label for="associateFieldPassword">Password</label>
+                        <input type="password" class="form-control" name="associatePassword" id="associateFieldPassword">
+                        <label for="associateFieldCommission">Commission</label>
                         <input type="text" class="form-control" name="associateCommission" id="associateFieldCommission">
-                        <input type="text" class="form-control" name="associateAddress" id="associateFieldAddress">
+                        <label for="associateFieldAddress">Address</label>
+                        <input type="text" class="form-control" name="associateAddress" id="associateFieldAddress">                        
                     </div>
 
-                    <!-- Editing or adding an associate -->
+                    <!-- Action Being Performed -->
                     <div class="form-control hiddenControl">
-                        <input id="addAssociate" type="radio" value=0 name="choice">
-                        <input id="editAssociate" type="radio" value=1 name="choice">
+                        <input id="addAssociate" type="radio" value=0 name="associateChoice">
+                        <input id="editAssociate" type="radio" value=1 name="associateChoice">
+                        <input id="deleteAssociate" type="radio" value=2 name="associateChoice">
                     </div>
 
-                    <button id="customerform" type="submit" class="btn btn-primary hiddenControl">Yes</button>
+                    <button id="associateForm" type="submit" class="btn btn-primary hiddenControl">Yes</button>
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-                <button id="confirmsubmission" type="button" class="btn btn-primary">Yes</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <button id="confirmSubmission" type="button" class="btn btn-primary">Confirm</button>
             </div>
         </div>

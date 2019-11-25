@@ -56,4 +56,89 @@
             break;
         }
     }
+
+    if (isset($_POST["associateChoice"]))
+    {
+        $searchChoice = $_POST["associateChoice"];            
+        $sql = "";
+
+        // 0 = Add, 1 = Edit, 2 = Delete
+        switch($searchChoice)
+        {
+            case 0:
+                $sql = "INSERT INTO sales_associates (name, password, accumulated_commission, address)
+                        VALUES (:associateName, MD5(:associatePassword), :associateCommission, :associateAddress)";
+            break;
+            case 1:                
+                if($_POST["associatePassword"] != "")
+                {
+                    $sql = "UPDATE sales_associates
+                            SET name=:associateName, password=:associatePassword, accumulated_commission=:associateCommission, address=:associateAddress
+                            WHERE id=:associateId;";
+                }
+                else
+                {
+                    $sql = "UPDATE sales_associates
+                            SET name=:associateName, accumulated_commission=:associateCommission, address=:associateAddress
+                            WHERE id=:associateId;";
+                }
+                
+            break;
+            case 2:
+                $sql = "DELETE FROM sales_associates
+                        WHERE id=:associateId;";
+            break;
+        }
+
+        // Prepare pdo
+        $prepared = $devPdo->prepare($sql, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+
+        // 0 = Add, 1 = Edit, 2 = Delete
+        switch($searchChoice)
+        {
+            case 0:
+                // Setup variables
+                $associateName = $_POST["associateName"];
+                $associatePassword = $_POST["associatePassword"];
+                $associateCommission = $_POST["associateCommission"];
+                $associateAddress = $_POST["associateAddress"];
+
+                $prepared->execute(array(':associateName' => $associateName,
+                                         ':associatePassword' => $associatePassword,
+                                         ':associateCommission' => $associateCommission,
+                                         ':associateAddress' => $associateAddress));
+            break;
+            case 1:
+                // Setup variables
+                $associateId = $_POST["associateId"];
+                $associateName = $_POST["associateName"];                
+                $associateCommission = $_POST["associateCommission"];
+                $associateAddress = $_POST["associateAddress"];
+
+                // Execute based on if password is provided
+                if($_POST["associatePassword"] != "")
+                {
+                    $associatePassword = $_POST["associatePassword"];
+                    $prepared->execute(array(':associateId' => $associateId,
+                                         ':associateName' => $associateName,
+                                         ':password' => $associatePassword,
+                                         ':associateCommission' => $associateCommission,
+                                         ':associateAddress' => $associateAddress));
+                }
+                else
+                {
+                    $prepared->execute(array(':associateId' => $associateId,
+                                         ':associateName' => $associateName,
+                                         ':associateCommission' => $associateCommission,
+                                         ':associateAddress' => $associateAddress));
+                }                
+                
+            break;
+            case 2:
+                // Setup variables
+                $associateId = $_POST["associateId"];
+                $prepared->execute(array(':associateId' => $associateId));
+            break;
+        }
+    }
 ?>
