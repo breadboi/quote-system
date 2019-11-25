@@ -46,7 +46,10 @@
 
         <!-- Date range Selector -->
         <div class="form-group quoteFormItems hiddenControl">
-            <input type="text" name="daterange" />
+            <input type="text" name="daterange" id="daterange">
+            <i class="fa fa-calendar"></i>&nbsp;
+            <span></span> <i class="fa fa-caret-down"></i>
+            </input>
         </div>
 
         <!-- Sales Associate Search Field -->
