@@ -6,8 +6,8 @@
 
 <body>
     <div style="text-align:center" class="jumbotron jumbotron-fluid p-2 m-1 bg-info text-white rounded">
-        <h1>Customer Information List</h1>
-        <p>Select a Customer to use for Quote</p>
+        <h1>Conversion Interface</h1>
+        <p>Select a Quote to Convert</p>
     </div>
 
     
@@ -25,36 +25,7 @@
 
 </body>
 
-<script>
-    var previousrow;
 
-    function addRowHandlers() {
-        var table = document.getElementsByClassName("datatbl");
-        var rows = table[0].getElementsByTagName("tr");
-        for (i = 0; i < rows.length; i++) {
-            var currentRow = table[0].rows[i];
-            var createClickHandler =
-                function(row)
-                {
-                    return function() 
-                    {
-                        if(previousrow != undefined)
-                        {
-                        previousrow.setAttribute("style", "");
-                        }
-                        var cell = row.getElementsByTagName("td")[0];
-                        var id = cell.innerHTML;
-                        document.getElementById("id").setAttribute("value", id);
-                        this.setAttribute("style", "background-color: #4CAF50");
-                        previousrow = row;
-                    };
-                };
-
-            currentRow.onclick = createClickHandler(currentRow);
-        }
-    }
-    window.onload = addRowHandlers();
-</script>
 
 </html>
 
