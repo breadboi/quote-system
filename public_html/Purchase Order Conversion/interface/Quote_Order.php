@@ -15,7 +15,7 @@
     //require_once("../../../resources/config.php");
     require_once('../../../resources/library/tableformat.php');
     require_once('../../../resources/library/bootstrap.php');
-    include("../../../resources/library/devDatabase.php");
+    require_once("../../../resources/library/devDatabase.php");
 
     $sql = "SELECT * FROM quotes";
     $AllQuotes = $devPdo->query($sql);
