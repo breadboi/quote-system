@@ -1,16 +1,7 @@
 <html>
 
 <head>
-    <link rel="stylesheet" href="tracking.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <?php
-    require_once('../../resources/library/legacy.php');
-    require_once('../../resources/library/tableformat.php');
-    require_once('../../resources/library/bootstrap.php');
-    include("../../resources/library/devDatabase.php");
-    require_once("resources\config.php");
-    ?>
-
 </head>
 
 <body>
@@ -21,7 +12,12 @@
 
     
     <?php
-    $sql = "SELECT * FROM `prod`.`quotes`";
+    //require_once("../../../resources/config.php");
+    require_once('../../../resources/library/tableformat.php');
+    require_once('../../../resources/library/bootstrap.php');
+    include("../../../resources/library/devDatabase.php");
+
+    $sql = "SELECT * FROM quotes";
     $AllQuotes = $devPdo->query($sql);
     $rows = $AllQuotes->fetchAll(PDO::FETCH_ASSOC);
     echo "<div>", tableHead($rows), tableBody($rows), "</div>";

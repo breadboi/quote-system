@@ -12,16 +12,11 @@
 <!-- CSS for daterangepicker -->
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 
-<!-- Styling for this page -->
-<link rel="stylesheet" href="css/admin.css">
-
-
-
 <!-- Table Loader -->
 <?php
-        require_once("Quote_Order.php");
-        require_once("modal.html");
-    ?>
+    require_once("Quote_Order.php");
+    require_once("modal.html");
+?>
 
 </body>
 
