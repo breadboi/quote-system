@@ -1,8 +1,9 @@
 <html>
 
 <head>
-    <link rel="stylesheet" href="tracking.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <?php
     require_once('../../resources/library/legacy.php');
     require_once('../../resources/library/tableformat.php');
@@ -23,8 +24,8 @@
 
     <form action="tracking.php" class="m-2 p-2" method="post">
         <div class="form-row input-group">
-            <input onkeydown="event.preventDefault()" type="text" class="form-control" name="id" id="id" required placeholder="Click On Table To Select Customer">
-            <input class="btn btn-success" id="id" type="submit">
+            <input onkeydown="event.preventDefault()" type="text" class="form-control" id="selectCust" name="selectCust" required placeholder="Click On Table To Select Customer">
+            <input class="btn btn-success" type="submit">
         </div>
     </form>
 
@@ -36,32 +37,38 @@
     </form>
 
     <?php
-    if (isset($_POST["search"])) {
+    if (isset($_POST["search"])) 
+    {
         $searchString = $_POST["search"];
-        $sql = "SELECT * FROM customers 
-        WHERE (name LIKE '%$searchString%')
-        OR (id LIKE '%$searchString%')
-        OR (city LIKE '%$searchString%')
-        OR (street LIKE '%$searchString%')
-        OR (contact LIKE '%$searchString%')
-        ";
-    } else {
-        $sql = "SELECT * FROM customers";
+        $customerSearch = $legacyPDO->prepare(
+        "SELECT name, contact FROM customers 
+        WHERE (name LIKE CONCAT('%', :string, '%'))
+        OR (id LIKE CONCAT('%', :string, '%'))
+        OR (city LIKE CONCAT('%', :string, '%'))
+        OR (street LIKE CONCAT('%', :string, '%'))
+        OR (contact LIKE CONCAT('%', :string, '%'))"
+        );
+        $customerSearch->execute(array(':string' => $searchString));
+    } 
+    else 
+    {
+        $customerSearch = $legacyPDO->prepare("SELECT name, contact FROM customers");
+        $customerSearch->execute();
     }
-    $AllCustomers = $legacyPDO->query($sql);
-    $rows = $AllCustomers->fetchAll(PDO::FETCH_ASSOC);
-    echo '<div class="m-2 p-2">', tableHead($rows), tableBody($rows), "</div>";
+    $rows = $customerSearch->fetchAll(PDO::FETCH_ASSOC);
+    echo '<div class="row m-2 p-2">', tableHead($rows), tableBody($rows), "</div>";
     ?>
 
 </body>
 
 <script>
     var previousrow;
-
-    function addRowHandlers() {
+    function addRowHandlers() 
+    {
         var table = document.getElementsByClassName("datatbl");
         var rows = table[0].getElementsByTagName("tr");
-        for (i = 0; i < rows.length; i++) {
+        for (i = 0; i < rows.length; i++) 
+        {
             var currentRow = table[0].rows[i];
             var createClickHandler =
                 function(row)
@@ -70,20 +77,21 @@
                     {
                         if(previousrow != undefined)
                         {
-                        previousrow.setAttribute("style", "");
+                            previousrow.setAttribute("style", "");
                         }
                         var cell = row.getElementsByTagName("td")[0];
-                        var id = cell.innerHTML;
-                        document.getElementById("id").setAttribute("value", id);
-                        this.setAttribute("style", "background-color: #4CAF50");
+                        var selection = cell.innerHTML;
+                        document.getElementById("selectCust").setAttribute("value", selection);
+                        this.setAttribute("style", "background-color: #e8e8e8; color: #000000 ");
                         previousrow = row;
                     };
                 };
-
             currentRow.onclick = createClickHandler(currentRow);
         }
     }
     window.onload = addRowHandlers();
+
+    
 </script>
 
 </html>

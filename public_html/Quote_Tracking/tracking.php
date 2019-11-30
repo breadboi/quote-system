@@ -1,4 +1,4 @@
-<html>
+
 <?php
 require_once('../../resources/library/bootstrap.php');
 require_once('../../resources/library/tableformat.php');
@@ -6,6 +6,8 @@ require_once('../../resources/library/legacy.php');
 require_once('../../resources/library/devDatabase.php');
 ?>
 
+<!DOCTYPE html>
+<html>
 <?php
 function test_input($data)
 {
@@ -19,11 +21,12 @@ function test_input($data)
 <?php
 $id = $name = $city = $street = $contact = "";
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    if ($_POST["id"] != "") {
-        $id = test_input($_POST["id"]);
-        if (!is_numeric($id)) $id = 1;
-        $sql = "SELECT * FROM customers WHERE Id=$id";
+if ($_SERVER["REQUEST_METHOD"] == "POST") 
+{
+    if ($_POST["selectCust"] != "") 
+    {
+        $customerSelection = test_input($_POST["selectCust"]);
+        $sql = "SELECT * FROM customers WHERE name='$customerSelection'";
         $customer = $legacyPDO->query($sql);
         $info = $customer->fetchAll(PDO::FETCH_ASSOC);
         if (!empty($info)) {
@@ -40,11 +43,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <link rel="stylesheet" href="tracking.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/vendors/formvalidation/dist/css/formValidation.min.css">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 
 <body>
+    <div class="p-1 btn-group">
+        <a href="../index.php" class="btn btn-dark" role="button">Back To Home Page</a>
+     </div>
+
     <div style="text-align:center" class="jumbotron jumbotron-fluid p-2 m-1 bg-info text-white rounded">
         <h1>Quote Tracking</h1>
         <h5>Create a new Quote for your Customer</h5>
@@ -66,17 +72,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     </div>
                     <div class="col">
                         <label for="contact">Contact</label>
-                        <input onkeydown="event.preventDefault()" class="form-control" type="text" value="<?php echo $contact ?>" name="contact" placeholder="Contact"><br>
+                        <input onkeydown="event.preventDefault()" class="form-control" type="text" value="<?php echo $contact ?>" name="contact" id="contact" placeholder="Contact"><br>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col">
                         <label for="street">Street</label>
-                        <input onkeydown="event.preventDefault()" class="form-control" type="text" value="<?php echo $street ?>" name="street" placeholder="Street"><br>
+                        <input onkeydown="event.preventDefault()" class="form-control" type="text" value="<?php echo $street ?>" name="street" id="street" placeholder="Street"><br>
                     </div>
                     <div class="col">
                         <label for="city">City</label>
-                        <input onkeydown="event.preventDefault()" class="form-control" type="text" value="<?php echo $city ?>" name="city" placeholder="City"><br>
+                        <input onkeydown="event.preventDefault()" class="form-control" type="text" value="<?php echo $city ?>" name="city" id="city" placeholder="City"><br>
                     </div>
                 </div>
                 <div class="row">
@@ -100,11 +106,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         </fieldset>
     </form>
-
-
     <script type="text/javascript" src="javascript/tracking.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/es6-shim/0.35.3/es6-shim.min.js"></script>
-    <script src="/vendors/formvalidation/dist/js/FormValidation.min.js"></script>
-    <script src="/vendors/formvalidation/dist/js/plugins/Bootstrap.min.js"></script>
 </body>
 </html>

@@ -70,6 +70,7 @@ if (empty($_POST["email"])) {
         $valid = false;
     }
 }
+
 $lineNumber = 1;
 foreach ($lineitem as $L)
 {
@@ -81,10 +82,11 @@ foreach ($lineitem as $L)
     $lineNumber++;
     $L = test_input($L);
 }
+
 $lineNumber = 1;
 foreach ($price as $P)
 {
-    if(!preg_match("/^\d+\.?\d*$/",$P) || empty($P)) 
+    if(!preg_match("/^\d+\.?\d\d$/",$P) || empty($P)) 
     { 
         $quotevalidation = $quotevalidation . "Price on Line #$lineNumber is Invalid<br>";
         $valid = false;
@@ -142,9 +144,6 @@ else
     echo '</div>';
 }
 ?>
-
-
-
 
 
 <!--
