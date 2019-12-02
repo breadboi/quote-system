@@ -77,8 +77,8 @@ $("td").on("click", function(e) {
         var selectionId = rowArray[0].text();
         var selectionNumber = rowArray[1].text();
         var selectionDescription = rowArray[2].text();
-        var selectionCommission = rowArray[2].text();
-        var selectionAddress = rowArray[3].text();
+        var selectionPrice = rowArray[3].text();
+        var selectionAddress = rowArray[4].text();
 
         $(this).parent().addClass("cellselect");
 
@@ -86,15 +86,14 @@ $("td").on("click", function(e) {
         $("#lineItemFieldId").attr("value", selectionId);
         $("#lineItemFieldNumber").attr("value", selectionNumber);
         $("#lineItemFieldDescription").attr("value", selectionDescription);
-
-        $("#associateFieldCommission").attr("value", selectionCommission);
-        $("#associateFieldAddress").attr("value", selectionAddress);
+        $("#lineItemFieldPrice").attr("value", selectionPrice);
+        $("#lineItemFieldQuoteId").attr("value", selectionAddress);
     }    
 });
 
 // Used for Modal form submission
 $("#confirmSubmission").on("click", function() {
-    $("#associateForm").trigger("click");
+    $("#LineItemForm").trigger("click");
 });
 
 // Add Associate Click event
@@ -102,15 +101,14 @@ $("#addAssociateButton").on("click", function() {
     // Enable editing (if previously disabled)
     $("#lineItemFieldNumber").attr("disabled", false);
     $("#lineItemFieldDescription").attr("disabled", false);
-
-    $("#associateFieldCommission").attr("disabled", false);
-    $("#associateFieldAddress").attr("disabled", false);
+    $("#lineItemFieldPrice").attr("disabled", false);
+    $("#lineItemFieldQuoteId").attr("disabled", false);
 
     // Remove existing values
     $("#lineItemFieldId").attr("value", "");
     $("#lineItemFieldNumber").attr("value", "");
-    $("#associateFieldCommission").attr("value", "");
-    $("#associateFieldAddress").attr("value", "");
+    $("#lineItemFieldPrice").attr("value", "");
+    $("#lineItemFieldQuoteId").attr("value", "");
 
     // Define what the form is for
     $("#addAssociate").attr("checked", true);
@@ -124,9 +122,8 @@ $("#editAssociateButton").on("click", function() {
     // Enable editing (if previously disabled)
     $("#lineItemFieldNumber").attr("disabled", false);
     $("#lineItemFieldDescription").attr("disabled", false);
-
-    $("#associateFieldCommission").attr("disabled", false);
-    $("#associateFieldAddress").attr("disabled", false);
+    $("#lineItemFieldPrice").attr("disabled", false);
+    $("#lineItemFieldQuoteId").attr("disabled", false);
 
     // Define what the form is for
     $("#editAssociate").attr("checked", true);
@@ -146,7 +143,6 @@ $("#deleteAssociateButton").on("click", function() {
     // Prevent editing
     $("#lineItemFieldNumber").attr("disabled", true);
     $("#lineItemFieldDescription").attr("disabled", true);
-    
-    $("#associateFieldCommission").attr("disabled", true);
-    $("#associateFieldAddress").attr("disabled", true);
+    $("#lineItemFieldPrice").attr("disabled", true);
+    $("#lineItemFieldQuoteId").attr("disabled", true);
 });
