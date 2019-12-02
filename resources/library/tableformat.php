@@ -15,7 +15,7 @@
         }
         echo "</thead>";
     }
-    
+
     function tableBody($rows)
     {
         echo "<tbody>";
