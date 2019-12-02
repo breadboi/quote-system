@@ -42,8 +42,6 @@
         <div class="p-1 m-1 btn-group d-flex">
             <a href="login.php" class="btn btn-primary" role="button" target="_self">Click Here To Login</a>
         </div>
-    </div>
-    <div>
         <div class="p-1 m-1 btn-group d-flex">
             <a href="logout.php" class="btn btn-danger" role="button" target="_self">Click Here To Logout</a>
         </div>
