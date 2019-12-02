@@ -105,9 +105,9 @@
     }
 
     // Logic for Modal Form Submission
-    if (isset($_POST["associateChoice"]))
+    if (isset($_POST["lineItemChoice"]))
     {
-        $searchChoice = $_POST["associateChoice"];            
+        $searchChoice = $_POST["lineItemChoice"];            
         $sql = "";
 
         // 0 = Add, 1 = Edit, 2 = Delete
