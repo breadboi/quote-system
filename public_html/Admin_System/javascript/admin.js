@@ -107,6 +107,7 @@ $("#addLineItemButton").on("click", function() {
     // Remove existing values
     $("#lineItemFieldId").attr("value", "");
     $("#lineItemFieldNumber").attr("value", "");
+    $("#lineItemFieldDescription").attr("value", "");
     $("#lineItemFieldPrice").attr("value", "");
     $("#lineItemFieldQuoteId").attr("value", "");
 

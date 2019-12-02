@@ -114,26 +114,21 @@
         switch($searchChoice)
         {
             case 0:
-                $sql = "INSERT INTO sales_associates (name, password, accumulated_commission, address)
-                        VALUES (:lineItemNumber, MD5(:associatePassword), :associateCommission, :associateAddress)";
+                // $sql = "INSERT INTO sales_associates (name, password, accumulated_commission, address)
+                //         VALUES (:lineItemNumber, MD5(:associatePassword), :lineItemPrice, :lineItemQuoteId)";
+                $sql = "INSERT INTO line_item (line_number, description, price, quote_id)
+                        VALUES (:lineItemNumber, :lineItemDescription, :lineItemPrice, :lineItemQuoteId)";
             break;
             case 1:                
-                if($_POST["associatePassword"] != "")
-                {
-                    $sql = "UPDATE sales_associates
-                            SET name=:lineItemNumber, password=:associatePassword, accumulated_commission=:associateCommission, address=:associateAddress
-                            WHERE id=:lineItemId;";
-                }
-                else
-                {
-                    $sql = "UPDATE sales_associates
-                            SET name=:lineItemNumber, accumulated_commission=:associateCommission, address=:associateAddress
-                            WHERE id=:lineItemId;";
-                }
-                
+                // $sql = "UPDATE sales_associates
+                //         SET name=:lineItemNumber, accumulated_commission=:lineItemPrice, address=:lineItemQuoteId
+                //         WHERE id=:lineItemId;";
+                $sql = "UPDATE line_item
+                        SET line_number=:lineItemNumber, description=:lineItemDescription, price=:lineItemPrice, quote_id=:lineItemQuoteId
+                        WHERE id=:lineItemId;";
             break;
             case 2:
-                $sql = "DELETE FROM sales_associates
+                $sql = "DELETE FROM line_item
                         WHERE id=:lineItemId;";
             break;
         }
@@ -147,39 +142,29 @@
             case 0:
                 // Setup variables
                 $lineItemNumber = $_POST["lineItemNumber"];
-                $associatePassword = $_POST["associatePassword"];
-                $associateCommission = $_POST["associateCommission"];
-                $associateAddress = $_POST["associateAddress"];
+                $lineItemDescription = $_POST["lineItemDescription"];
+                $lineItemPrice = $_POST["lineItemPrice"];
+                $lineItemQuoteId = $_POST["lineItemQuoteId"];
 
                 $prepared->execute(array(':lineItemNumber' => $lineItemNumber,
-                                         ':associatePassword' => $associatePassword,
-                                         ':associateCommission' => $associateCommission,
-                                         ':associateAddress' => $associateAddress));
+                                         ':lineItemDescription' => $lineItemDescription,
+                                         ':lineItemPrice' => $lineItemPrice,
+                                         ':lineItemQuoteId' => $lineItemQuoteId));
             break;
             case 1:
                 // Setup variables
                 $lineItemId = $_POST["lineItemId"];
-                $lineItemNumber = $_POST["lineItemNumber"];                
-                $associateCommission = $_POST["associateCommission"];
-                $associateAddress = $_POST["associateAddress"];
+                $lineItemNumber = $_POST["lineItemNumber"];   
+                $lineItemDescription = $_POST["lineItemDescription"];             
+                $lineItemPrice = $_POST["lineItemPrice"];
+                $lineItemQuoteId = $_POST["lineItemQuoteId"];
 
-                // Execute based on if password is provided
-                if($_POST["associatePassword"] != "")
-                {
-                    $associatePassword = $_POST["associatePassword"];
-                    $prepared->execute(array(':lineItemId' => $lineItemId,
-                                         ':lineItemNumber' => $lineItemNumber,
-                                         ':password' => $associatePassword,
-                                         ':associateCommission' => $associateCommission,
-                                         ':associateAddress' => $associateAddress));
-                }
-                else
-                {
-                    $prepared->execute(array(':lineItemId' => $lineItemId,
-                                         ':lineItemNumber' => $lineItemNumber,
-                                         ':associateCommission' => $associateCommission,
-                                         ':associateAddress' => $associateAddress));
-                }                
+                $lineItemDescription = $_POST["lineItemDescription"];
+                $prepared->execute(array(':lineItemId' => $lineItemId,
+                                        ':lineItemNumber' => $lineItemNumber,
+                                        ':lineItemDescription' => $lineItemDescription,
+                                        ':lineItemPrice' => $lineItemPrice,
+                                        ':lineItemQuoteId' => $lineItemQuoteId));           
                 
             break;
             case 2:
