@@ -15,12 +15,12 @@
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 
 <!-- Styling for this page -->
-<link rel="stylesheet" href="css/admin.css">
+<link rel="stylesheet" href="css/inhouse.css">
 
 <body>
 
     <!-- Search Form -->
-    <form method="POST" name="adminsearch">
+    <form method="POST" name="inhousesearch">
 
         <!-- Search Type -->
         <div class="form-group">
@@ -91,6 +91,6 @@
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
 
 <!-- Javascript for the Forms -->
-<script type="text/javascript" src="javascript/admin.js"></script>
+<script type="text/javascript" src="javascript/inhouse.js"></script>
 
 </html>
