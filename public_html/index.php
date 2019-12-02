@@ -4,14 +4,19 @@
     require_once($_SERVER["DOCUMENT_ROOT"] . "/resources/library/devDatabase.php");
     require_once('../resources/library/tableformat.php');
     session_start();
-
+    //Show if user is logged in or not
     if ( isset( $_SESSION['user_id'] ) ) 
     {
-        echo '<div style="text-align:center" class="alert alert-success">';
-        echo '<strong>Logged In As: </strong>' . $_SESSION['user_id'];
-        echo '</div>';
+        $loggedIn = '<p style="text-align:center" class="bg-success text-white">Logged In As: ' . $_SESSION["user_id"] . '</p>';
+        echo $loggedIn;
+    }
+    else 
+    {
+        $loggedOut = '<p style="text-align:center" class="bg-danger text-white">Please Login To Access System</p>';
+        echo $loggedOut;
     }
     ?>
+    
 <head>
     <title>Home Page</title>
 </head>

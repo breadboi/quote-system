@@ -16,6 +16,7 @@ if (!empty($_POST)) {
     $stmt->bindParam(':user', $usernameInput);
     $stmt->execute();
     $found = $stmt->fetch();
+    //Check if no user found
     if (empty($found)) {
       echo '<div style="text-align:center" class="alert alert-danger">';
       echo '<strong>No User Found Under that Username: ' . $usernameInput;
@@ -35,8 +36,12 @@ if (!empty($_POST)) {
   }
 }
 
+//if user is logged in then redirect to index
 if (isset($_SESSION['user_id'])) {
   header("Location: index.php");
+} else {
+  $loggedOut = '<p style="text-align:center" class="bg-danger text-white">Please Login To Access System</p>';
+  echo $loggedOut;
 }
 ?>
 
@@ -69,7 +74,7 @@ if (isset($_SESSION['user_id'])) {
       <div class="invalid-feedback">Please fill out this field.</div>
     </div>
     <div class="p-1 m-1 btn-group d-flex">
-      <button type="submit" class="btn btn-primary">Submit</button>
+      <button type="submit" class="btn btn-primary">Login</button>
     </div>
   </form>
 </body>

@@ -1,21 +1,9 @@
 <?php
+require_once('../../resources/library/loginSession.php');
 require_once('../../resources/library/bootstrap.php');
 require_once('../../resources/library/tableformat.php');
 require_once('../../resources/library/legacy.php');
 require_once('../../resources/library/devDatabase.php');
-
-session_start();
-
-if ( isset( $_SESSION['user_id'] ) ) 
-{
-    echo '<div style="text-align:center" class="alert alert-success">';
-    echo '<strong>Logged In As: </strong>' . $_SESSION['user_id'];
-    echo '</div>';
-}
-else 
-{
-    header("Location: ../login.php");
-}
 ?>
 
 <!DOCTYPE html>

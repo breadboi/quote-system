@@ -1,3 +1,6 @@
+<?php
+require_once('../../resources/library/loginSession.php');
+?>
 <html>
 
 <head>
