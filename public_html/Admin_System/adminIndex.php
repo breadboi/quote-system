@@ -33,14 +33,14 @@
 
         <!-- Quote Search Checkboxes (Display when quote radio is selected) -->
         <div class="form-group quoteFormItems hiddenControl">
-            <input id="finalizedstatus" type="checkbox" value="0" name="quoteStatus" />
-            <label for="finalizedstatus">Finalized</label>
+            <input id="finalizedStatus" type="checkbox" value="0" name="finalizedStatus" />
+            <label for="finalizedStatus">Finalized</label>
             <br>
-            <input id="sanctionedstatus" type="checkbox" value="1" name="quoteStatus" />
-            <label for="sanctionedstatus">Sanctioned</label>
+            <input id="sanctionedStatus" type="checkbox" value="1" name="sanctionedStatus" />
+            <label for="sanctionedStatus">Sanctioned</label>
             <br>
-            <input id="orderedstatus" type="checkbox" value="2" name="quoteStatus" />
-            <label for="orderedstatus">Ordered</label>
+            <input id="orderedStatus" type="checkbox" value="2" name="orderedStatus" />
+            <label for="orderedStatus">Ordered</label>
             <br>
         </div>
 
