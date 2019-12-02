@@ -1,6 +1,6 @@
 <head>
     <title>Conversion Quotes</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!--<meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
 </head>
 
 <!-- Latest compiled and minified CSS -->
@@ -11,6 +11,8 @@
 
 <!-- CSS for daterangepicker -->
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+
+
 
 <!-- Table Loader -->
 <?php
@@ -39,6 +41,9 @@
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
 
 <!-- Javascript for the Forms -->
-<script type="text/javascript" src="javascript/convert.js"></script>
+ <script type="text/javascript" src="javascript/convert.js"></script> 
+
+
+
 
 </html>
