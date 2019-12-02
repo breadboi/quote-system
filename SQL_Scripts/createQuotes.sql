@@ -36,6 +36,9 @@ VALUES ('IBM', '847-630-244', 'Swag Lane', 'FlavorTown', 'Email@me.net' ,'Testin
 INSERT INTO line_item (line_number, description, price, quote_id)
 VALUES (1, 'This is a test decription for the line', 50.23, 1);
 
+INSERT INTO quotes (customer_name, contact, street, city, email, secret_notes, status, discount, sales_associate_id, date_created)
+VALUES ('APPLE', '847-610-244', 'New Hampshire', 'FlavorTown', 'Email@me.com' ,'Testing Secret Notes again', '1', '0', "3ed47645-149f-11ea-953b-1c872c422ccb", CURDATE());
+
 /*
 CREATE TABLE quotes (
     id varchar(50) NOT NULL DEFAULT uuid(),
