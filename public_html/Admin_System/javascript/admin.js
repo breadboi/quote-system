@@ -75,15 +75,15 @@ $("td").on("click", function(e) {
 
         // Assign each row cell to a variable
         var selectionId = rowArray[0].text();
-        var selectionName = rowArray[1].text();
+        var selectionNumber = rowArray[1].text();
         var selectionCommission = rowArray[2].text();
         var selectionAddress = rowArray[3].text();
 
         $(this).parent().addClass("cellselect");
 
         // Set the field to the cell value
-        $("#associateFieldId").attr("value", selectionId);
-        $("#associateFieldName").attr("value", selectionName);
+        $("#lineItemFieldId").attr("value", selectionId);
+        $("#lineItemFieldNumber").attr("value", selectionNumber);
         $("#associateFieldCommission").attr("value", selectionCommission);
         $("#associateFieldAddress").attr("value", selectionAddress);
     }    
@@ -97,14 +97,14 @@ $("#confirmSubmission").on("click", function() {
 // Add Associate Click event
 $("#addAssociateButton").on("click", function() {
     // Enable editing (if previously disabled)
-    $("#associateFieldName").attr("disabled", false);
+    $("#lineItemFieldNumber").attr("disabled", false);
     $("#associateFieldPassword").attr("disabled", false);
     $("#associateFieldCommission").attr("disabled", false);
     $("#associateFieldAddress").attr("disabled", false);
 
     // Remove existing values
-    $("#associateFieldId").attr("value", "");
-    $("#associateFieldName").attr("value", "");
+    $("#lineItemFieldId").attr("value", "");
+    $("#lineItemFieldNumber").attr("value", "");
     $("#associateFieldCommission").attr("value", "");
     $("#associateFieldAddress").attr("value", "");
 
@@ -118,7 +118,7 @@ $("#addAssociateButton").on("click", function() {
 // Edit Associate Click event
 $("#editAssociateButton").on("click", function() {
     // Enable editing (if previously disabled)
-    $("#associateFieldName").attr("disabled", false);
+    $("#lineItemFieldNumber").attr("disabled", false);
     $("#associateFieldPassword").attr("disabled", false);
     $("#associateFieldCommission").attr("disabled", false);
     $("#associateFieldAddress").attr("disabled", false);
@@ -139,7 +139,7 @@ $("#deleteAssociateButton").on("click", function() {
     $("#associateModalTitle").text("Delete Selected Sales Associate with the Following Information?");
 
     // Prevent editing
-    $("#associateFieldName").attr("disabled", true);
+    $("#lineItemFieldNumber").attr("disabled", true);
     $("#associateFieldPassword").attr("disabled", true);
     $("#associateFieldCommission").attr("disabled", true);
     $("#associateFieldAddress").attr("disabled", true);

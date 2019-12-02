@@ -115,26 +115,26 @@
         {
             case 0:
                 $sql = "INSERT INTO sales_associates (name, password, accumulated_commission, address)
-                        VALUES (:associateName, MD5(:associatePassword), :associateCommission, :associateAddress)";
+                        VALUES (:lineItemNumber, MD5(:associatePassword), :associateCommission, :associateAddress)";
             break;
             case 1:                
                 if($_POST["associatePassword"] != "")
                 {
                     $sql = "UPDATE sales_associates
-                            SET name=:associateName, password=:associatePassword, accumulated_commission=:associateCommission, address=:associateAddress
-                            WHERE id=:associateId;";
+                            SET name=:lineItemNumber, password=:associatePassword, accumulated_commission=:associateCommission, address=:associateAddress
+                            WHERE id=:lineItemId;";
                 }
                 else
                 {
                     $sql = "UPDATE sales_associates
-                            SET name=:associateName, accumulated_commission=:associateCommission, address=:associateAddress
-                            WHERE id=:associateId;";
+                            SET name=:lineItemNumber, accumulated_commission=:associateCommission, address=:associateAddress
+                            WHERE id=:lineItemId;";
                 }
                 
             break;
             case 2:
                 $sql = "DELETE FROM sales_associates
-                        WHERE id=:associateId;";
+                        WHERE id=:lineItemId;";
             break;
         }
 
@@ -146,20 +146,20 @@
         {
             case 0:
                 // Setup variables
-                $associateName = $_POST["associateName"];
+                $lineItemNumber = $_POST["lineItemNumber"];
                 $associatePassword = $_POST["associatePassword"];
                 $associateCommission = $_POST["associateCommission"];
                 $associateAddress = $_POST["associateAddress"];
 
-                $prepared->execute(array(':associateName' => $associateName,
+                $prepared->execute(array(':lineItemNumber' => $lineItemNumber,
                                          ':associatePassword' => $associatePassword,
                                          ':associateCommission' => $associateCommission,
                                          ':associateAddress' => $associateAddress));
             break;
             case 1:
                 // Setup variables
-                $associateId = $_POST["associateId"];
-                $associateName = $_POST["associateName"];                
+                $lineItemId = $_POST["lineItemId"];
+                $lineItemNumber = $_POST["lineItemNumber"];                
                 $associateCommission = $_POST["associateCommission"];
                 $associateAddress = $_POST["associateAddress"];
 
@@ -167,16 +167,16 @@
                 if($_POST["associatePassword"] != "")
                 {
                     $associatePassword = $_POST["associatePassword"];
-                    $prepared->execute(array(':associateId' => $associateId,
-                                         ':associateName' => $associateName,
+                    $prepared->execute(array(':lineItemId' => $lineItemId,
+                                         ':lineItemNumber' => $lineItemNumber,
                                          ':password' => $associatePassword,
                                          ':associateCommission' => $associateCommission,
                                          ':associateAddress' => $associateAddress));
                 }
                 else
                 {
-                    $prepared->execute(array(':associateId' => $associateId,
-                                         ':associateName' => $associateName,
+                    $prepared->execute(array(':lineItemId' => $lineItemId,
+                                         ':lineItemNumber' => $lineItemNumber,
                                          ':associateCommission' => $associateCommission,
                                          ':associateAddress' => $associateAddress));
                 }                
@@ -184,8 +184,8 @@
             break;
             case 2:
                 // Setup variables
-                $associateId = $_POST["associateId"];
-                $prepared->execute(array(':associateId' => $associateId));
+                $lineItemId = $_POST["lineItemId"];
+                $prepared->execute(array(':lineItemId' => $lineItemId));
             break;
         }
     }
