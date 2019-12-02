@@ -3,6 +3,19 @@ require_once('../../resources/library/bootstrap.php');
 require_once('../../resources/library/tableformat.php');
 require_once('../../resources/library/legacy.php');
 require_once('../../resources/library/devDatabase.php');
+
+session_start();
+
+if ( isset( $_SESSION['user_id'] ) ) 
+{
+    echo '<div style="text-align:center" class="alert alert-success">';
+    echo '<strong>Logged In As: </strong>' . $_SESSION['user_id'];
+    echo '</div>';
+}
+else 
+{
+    header("Location: ../../login.php");
+}
 ?>
 
 <!DOCTYPE html>
@@ -33,8 +46,6 @@ require_once('../../resources/library/devDatabase.php');
         $data = htmlentities($data);
         return $data;
     }
-
-    $message = test_input($_POST["message"]);
     //Arrays of line items and prices
     $lineitem = $_POST["lineitem"];
     $price = $_POST["price"];
@@ -79,6 +90,13 @@ require_once('../../resources/library/devDatabase.php');
             $valid = false;
         }
     }
+    if (empty($_POST["message"])) {
+        $message = "";
+    } 
+    else 
+    {
+        $message = test_input($_POST["message"]);
+    }
 
     $lineNumber = 1;
     foreach ($lineitem as $L) {
@@ -102,18 +120,29 @@ require_once('../../resources/library/devDatabase.php');
     //If all lines Are valid then combine Line and Price into associative array
     $Line_Price = array_combine($lineitem, $price);
 
-
     //Insert information into database
-    if ($valid) {
+    if ($valid) 
+    {
         try {
-            $insertQuote = $devPdo->prepare("INSERT INTO quotes (customer_name, contact, street, city, email ,secret_notes, date_created)
-        VALUES (:name, :contact, :street, :city, :email, :message, CURDATE())");
+            $salesassociate = $_SESSION['user_id'];
+            $SA = $devPdo->prepare("SELECT * FROM sales_associates WHERE name = :user");
+            $SA->bindParam(':user', $salesassociate);
+            $SA->execute();
+            $found = $SA->fetch();
+
+            $nullable = 0;
+
+            $insertQuote = $devPdo->prepare("INSERT INTO quotes (customer_name, contact, street, city, email ,secret_notes, status, discount, date_created, sales_associate_id)
+        VALUES (:name, :contact, :street, :city, :email, :message, :status, :discount, CURDATE(), :salesassociate)");
             $insertQuote->bindParam(':name', $name);
             $insertQuote->bindParam(':contact', $contact);
             $insertQuote->bindParam(':street', $street);
             $insertQuote->bindParam(':city', $city);
             $insertQuote->bindParam(':email', $email);
             $insertQuote->bindParam(':message', $message);
+            $insertQuote->bindParam(':status', $nullable);
+            $insertQuote->bindParam(':discount', $nullable);
+            $insertQuote->bindParam(':salesassociate', $found[0]);
             $insertQuote->execute();
 
             $last_id = $devPdo->lastInsertId();

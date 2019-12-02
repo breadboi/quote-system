@@ -18,6 +18,10 @@
 <link rel="stylesheet" href="css/admin.css">
 
 <body>
+    <!-- Return To Index Page -->
+    <div class="p-1 btn-group">
+        <a href="../index.php" class="btn btn-dark" role="button">Back To Home Page</a>
+     </div>
 
     <!-- Search Form -->
     <form method="POST" name="adminsearch">

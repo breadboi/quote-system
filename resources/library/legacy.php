@@ -15,7 +15,7 @@ try
 {
     $legacyPDO = new PDO("mysql:host={$host};dbname={$dbname}", "{$username}", "{$password}");
     $legacyPDO->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    echo "Connection Successful!<br>";
+    //echo "Connection Successful!<br>";
 }
 catch (PDOException $e) 
 {
