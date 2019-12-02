@@ -76,6 +76,7 @@ $("td").on("click", function(e) {
         // Assign each row cell to a variable
         var selectionId = rowArray[0].text();
         var selectionNumber = rowArray[1].text();
+        var selectionDescription = rowArray[2].text();
         var selectionCommission = rowArray[2].text();
         var selectionAddress = rowArray[3].text();
 
@@ -84,6 +85,8 @@ $("td").on("click", function(e) {
         // Set the field to the cell value
         $("#lineItemFieldId").attr("value", selectionId);
         $("#lineItemFieldNumber").attr("value", selectionNumber);
+        $("#lineItemFieldDescription").attr("value", selectionDescription);
+
         $("#associateFieldCommission").attr("value", selectionCommission);
         $("#associateFieldAddress").attr("value", selectionAddress);
     }    
@@ -98,7 +101,8 @@ $("#confirmSubmission").on("click", function() {
 $("#addAssociateButton").on("click", function() {
     // Enable editing (if previously disabled)
     $("#lineItemFieldNumber").attr("disabled", false);
-    $("#associateFieldPassword").attr("disabled", false);
+    $("#lineItemFieldDescription").attr("disabled", false);
+
     $("#associateFieldCommission").attr("disabled", false);
     $("#associateFieldAddress").attr("disabled", false);
 
@@ -119,7 +123,8 @@ $("#addAssociateButton").on("click", function() {
 $("#editAssociateButton").on("click", function() {
     // Enable editing (if previously disabled)
     $("#lineItemFieldNumber").attr("disabled", false);
-    $("#associateFieldPassword").attr("disabled", false);
+    $("#lineItemFieldDescription").attr("disabled", false);
+
     $("#associateFieldCommission").attr("disabled", false);
     $("#associateFieldAddress").attr("disabled", false);
 
@@ -140,7 +145,8 @@ $("#deleteAssociateButton").on("click", function() {
 
     // Prevent editing
     $("#lineItemFieldNumber").attr("disabled", true);
-    $("#associateFieldPassword").attr("disabled", true);
+    $("#lineItemFieldDescription").attr("disabled", true);
+    
     $("#associateFieldCommission").attr("disabled", true);
     $("#associateFieldAddress").attr("disabled", true);
 });
