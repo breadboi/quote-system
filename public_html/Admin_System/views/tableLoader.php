@@ -19,7 +19,7 @@
             break;
             // Quote
             case 1:
-                $sql = "SELECT sales_associates.name AS 'Sales Associate Name', customer_name AS Name, contact AS Contact, street AS Street, city AS City, secret_notes AS Notes, discount AS Discount, line_number AS 'Line Number', description AS Description, price AS Price, status AS Status, date_created AS Date FROM quotes
+                $sql = "SELECT quotes.id AS 'Quote ID', sales_associates.name AS 'Sales Associate Name', customer_name AS Name, contact AS Contact, street AS Street, city AS City, secret_notes AS Notes, discount AS Discount, line_number AS 'Line Number', description AS Description, price AS Price, status AS Status, date_created AS Date FROM quotes
                         INNER JOIN sales_associates ON sales_associates.id = quotes.sales_associate_id
                         INNER JOIN line_item ON line_item.quote_id = quotes.id
                         WHERE customer_name LIKE CONCAT('%', :customerName, '%')
