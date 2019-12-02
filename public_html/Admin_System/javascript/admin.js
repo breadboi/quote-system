@@ -40,7 +40,7 @@ $(function() {
 
 });
 
-// Toggles form controls (0=SalesAssociate, 1=Quote)
+// Toggles form controls (0=lineitem, 1=Quote)
 function toggleQuoteFormItems(context) {
     if (context.value == 0) 
     {
@@ -57,7 +57,7 @@ function toggleQuoteFormItems(context) {
 // On click event for tables
 $("td").on("click", function(e) {
     // Ensure the radio is checked so we aren't checking quotes
-    if ($("#salesassociate").prop("checked"))
+    if ($("#lineitem").prop("checked"))
     {
         e.preventDefault();
 

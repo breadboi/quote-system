@@ -1,7 +1,7 @@
 <html>
 
 <head>
-    <title>Admin Interface</title>
+    <title>In House Interface</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
@@ -24,8 +24,8 @@
 
         <!-- Search Type -->
         <div class="form-group">
-            <input id="salesassociate" type="radio" value="0" name="searchChoice" checked>
-            <label for="salesassociate">Sales Associate</label>
+            <input id="lineitem" type="radio" value="0" name="searchChoice" checked>
+            <label for="lineitem">Line Item</label>
             <br>
             <input id="quote" type="radio" value="1" name="searchChoice">
             <label for="quote">Quote</label>
