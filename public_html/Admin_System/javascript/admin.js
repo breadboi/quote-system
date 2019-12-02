@@ -8,7 +8,7 @@ $(document).ready(function () {
     $('table').DataTable(params);
 });
 
-// Change in radio button selection for quote and sales associate search
+// Change in radio button selection for quote and Line Item search
 $('input[type=radio][name=searchChoice]').change(function() {
     toggleQuoteFormItems(this);
 });
@@ -45,12 +45,12 @@ function toggleQuoteFormItems(context) {
     if (context.value == 0) 
     {
         $(".quoteFormItems").addClass("hiddenControl");
-        $(".associateButtons").removeClass("hiddenControl");
+        $(".lineItemButtons").removeClass("hiddenControl");
     }
     else if (context.value == 1)
     {
         $(".quoteFormItems").removeClass("hiddenControl");
-        $(".associateButtons").addClass("hiddenControl");
+        $(".lineItemButtons").addClass("hiddenControl");
     }
 }
 
@@ -96,8 +96,8 @@ $("#confirmSubmission").on("click", function() {
     $("#LineItemForm").trigger("click");
 });
 
-// Add Associate Click event
-$("#addAssociateButton").on("click", function() {
+// Add LineItem Click event
+$("#addLineItemButton").on("click", function() {
     // Enable editing (if previously disabled)
     $("#lineItemFieldNumber").attr("disabled", false);
     $("#lineItemFieldDescription").attr("disabled", false);
@@ -111,14 +111,14 @@ $("#addAssociateButton").on("click", function() {
     $("#lineItemFieldQuoteId").attr("value", "");
 
     // Define what the form is for
-    $("#addAssociate").attr("checked", true);
+    $("#addLineItem").attr("checked", true);
 
     // Set title
-    $("#associateModalTitle").text("Add a new Sales Associate");
+    $("#LineItemModalTitle").text("Add a new Line Item");
 });
 
-// Edit Associate Click event
-$("#editAssociateButton").on("click", function() {
+// Edit LineItem Click event
+$("#editLineItemButton").on("click", function() {
     // Enable editing (if previously disabled)
     $("#lineItemFieldNumber").attr("disabled", false);
     $("#lineItemFieldDescription").attr("disabled", false);
@@ -126,19 +126,19 @@ $("#editAssociateButton").on("click", function() {
     $("#lineItemFieldQuoteId").attr("disabled", false);
 
     // Define what the form is for
-    $("#editAssociate").attr("checked", true);
+    $("#editLineItem").attr("checked", true);
 
     // Set title
-    $("#associateModalTitle").text("Edit Selected Sales Associate");
+    $("#LineItemModalTitle").text("Edit Selected Line Item");
 });
 
-// Delete Associate Click event
-$("#deleteAssociateButton").on("click", function() {
+// Delete LineItem Click event
+$("#deleteLineItemButton").on("click", function() {
     // Define what the form is for
-    $("#deleteAssociate").attr("checked", true);
+    $("#deleteLineItem").attr("checked", true);
 
     // Set title
-    $("#associateModalTitle").text("Delete Selected Sales Associate with the Following Information?");
+    $("#LineItemModalTitle").text("Delete Selected Line Item with the Following Information?");
 
     // Prevent editing
     $("#lineItemFieldNumber").attr("disabled", true);
