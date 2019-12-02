@@ -54,7 +54,7 @@
 
         <!-- Sales Associate Search Field -->
         <div class="form-group">
-            <input type="text" class="form-control" name="salesAssociateName" placeholder="Sales Associate Name">
+            <input type="text" class="form-control" name="lineItemNumber" placeholder="Line Item Number">
 
             <!-- Displayed when quote radio is selected -->
             <input type="text" class="form-control quoteFormItems hiddenControl" name="customerName"

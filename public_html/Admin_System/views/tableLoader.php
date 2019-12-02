@@ -14,16 +14,16 @@
         {
             // Sales Associate
             case 0:
-                $sql = "SELECT id AS ID, name AS Name, accumulated_commission AS 'Total Commission', address AS Address FROM sales_associates
-                        WHERE name LIKE CONCAT('%', :salesAssociateName, '%');";
+                $sql = "SELECT id AS ID, line_number as 'Line Number', description as 'Description', price as Price, quote_id as 'Quote ID' FROM line_item
+                        WHERE line_number LIKE CONCAT('%', :lineItemNumber, '%');";
             break;
             // Quote
             case 1:
-                $sql = "SELECT quotes.id AS 'Quote ID', sales_associates.name AS 'Sales Associate Name', customer_name AS Name, contact AS Contact, street AS Street, city AS City, secret_notes AS Notes, discount AS Discount, line_number AS 'Line Number', description AS Description, price AS Price, status AS Status, date_created AS Date FROM quotes
+                $sql = "SELECT quotes.id AS 'Quote ID', sales_associates.name AS 'Line Item Number', customer_name AS Name, contact AS Contact, street AS Street, city AS City, secret_notes AS Notes, discount AS Discount, line_number AS 'Line Number', description AS Description, price AS Price, status AS Status, date_created AS Date FROM quotes
                         INNER JOIN sales_associates ON sales_associates.id = quotes.sales_associate_id
                         INNER JOIN line_item ON line_item.quote_id = quotes.id
                         WHERE customer_name LIKE CONCAT('%', :customerName, '%')
-                        AND sales_associates.name LIKE CONCAT('%', :salesAssociateName, '%')
+                        AND sales_associates.name LIKE CONCAT('%', :lineItemNumber, '%')
                         AND (status = :finalizedStatus
                         OR status = :sanctionedStatus
                         OR status = :orderedStatus
@@ -38,8 +38,8 @@
         {
             // Sales Associate
             case 0:
-                $salesAssociateName = $_POST["salesAssociateName"];
-                $success = $prepared->execute(array(':salesAssociateName' => $salesAssociateName));
+                $lineItemNumber = $_POST["lineItemNumber"];
+                $success = $prepared->execute(array(':lineItemNumber' => $lineItemNumber));
                 if ($success)
                 {
                     $rows = $prepared->fetchAll(PDO::FETCH_ASSOC);
@@ -53,7 +53,7 @@
             break;
             // Quote
             case 1:
-                $salesAssociateName = $_POST["salesAssociateName"];
+                $lineItemNumber = $_POST["lineItemNumber"];
                 $customerName = $_POST["customerName"];
 
                 // Handle date range
@@ -83,7 +83,7 @@
                     $orderedStatus = 2;
                 }
 
-                $success = $prepared->execute(array(':salesAssociateName' => $salesAssociateName,
+                $success = $prepared->execute(array(':lineItemNumber' => $lineItemNumber,
                                                     ':customerName' => $customerName,
                                                     ':startDate' => $startDate,
                                                     ':endDate' => $endDate,
