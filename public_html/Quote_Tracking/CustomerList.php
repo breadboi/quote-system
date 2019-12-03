@@ -1,4 +1,5 @@
 <?php
+require_once('../../resources/library/loginSession.php');
 require_once('../../resources/library/legacy.php');
 require_once('../../resources/library/tableformat.php');
 require_once('../../resources/library/bootstrap.php');
