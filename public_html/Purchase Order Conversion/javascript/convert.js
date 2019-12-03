@@ -1,11 +1,11 @@
-$(document).ready(function() {
+/* $(document).ready(function() {
     $("#convertForm").submit(function(event) {
         submitForm();
         return false;
     });
-});
+}); */
 
-function submitForm() {
+/* function submitForm() {
     $.ajax({
         type: "POST",
         url: "Quote_Order.php",
@@ -19,4 +19,9 @@ function submitForm() {
             alert("Error");
         }
     });
-}
+} */
+
+// Used for Modal form submission
+$("#confirmSubmission").on("click", function() {
+    $("#submitModal").trigger("click");
+});

@@ -1,6 +1,7 @@
+<html>
 <head>
     <title>Conversion Quotes</title>
-<!--<meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+    <!--<meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
 </head>
 
 <!-- Latest compiled and minified CSS -->
@@ -16,8 +17,8 @@
 
 <!-- Table Loader -->
 <?php
-    require_once("Quote_Order.php");
-    require_once("modal.html");
+require_once("Quote_Order.php");
+require_once("modal.html");
 ?>
 
 </body>
@@ -41,9 +42,6 @@
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
 
 <!-- Javascript for the Forms -->
- <script type="text/javascript" src="javascript/convert.js"></script> 
-
-
-
+<script type="text/javascript" src="../javascript/convert.js"></script>
 
 </html>

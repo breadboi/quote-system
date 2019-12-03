@@ -1,10 +1,10 @@
-<html>
+<!-- <html>
 
 <head>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
-<body>
+<body> -->
     <div style="text-align:center" class="jumbotron jumbotron-fluid p-2 m-1 bg-info text-white rounded">
         <h1>Conversion Interface</h1>
         <p>Select a Quote to Convert</p>
@@ -18,26 +18,33 @@
     require_once('../../../resources/library/bootstrap.php');
     require_once("../../../resources/library/devDatabase.php");
 
+    if (isset($_POST['discount'])) 
+    {
+        $id = $_POST['id'];
+        $status = $_POST['status'];
+        $discount = $_POST['discount'];
+        //$message = strip_tags($_POST['message']);
 
+        $sql = "UPDATE quotes
+                SET status=:status, discount=:discount
+                WHERE id=:id;";
+
+        // Prepare pdo
+        $prepared = $devPdo->prepare($sql, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+
+        $success = $prepared->execute(array(':id' => $id,
+                                            ':status' => $status,
+                                            ':discount' => $discount));
+    }
 
     $sql = "SELECT * FROM quotes";
     $AllQuotes = $devPdo->query($sql);
     $rows = $AllQuotes->fetchAll(PDO::FETCH_ASSOC);
     echo "<div>", tableHead($rows), tableBody($rows), "</div>";
 
-
-    if (isset($_POST['discount'])) {
-        $status = strip_tags($_POST['status']);
-        $discount = strip_tags($_POST['discount']);
-        //$message = strip_tags($_POST['message']);
-
-        $sql = "INSERT INTO quotes (status, discount)
-                        VALUES ($status, $discount";
-    }
-
     ?>
 
-</body>
+<!-- </body> -->
 
 <!-- JavaScript For Selection of Customer Name -->
 <script>
@@ -83,4 +90,4 @@
     window.onload = addRowHandlers();
 </script>
 
-</html>
+<!-- </html> -->
