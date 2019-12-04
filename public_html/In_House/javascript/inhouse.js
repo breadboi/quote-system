@@ -241,8 +241,6 @@ function editLineItem(lineItemId) {
     });
 }
 
-
-
 function loadInsertPage() {
     jQuery.ajax({
         url: "/public_html/In_House/views/ajaxInsertRow.php",
@@ -251,6 +249,35 @@ function loadInsertPage() {
         dataType: "html",
         success: function (data) {
             $('#tableTarget').html(data);
+        }
+    });
+}
+
+function loadEditQuote(id) {
+    $('#tableTarget').html('<img src="https://icon-library.net/images/loading-icon-transparent-background/loading-icon-transparent-background-3.jpg" style=\"width:50px;height:50px;text-align:center;\"  />');
+
+    jQuery.ajax({
+        url: "/public_html/In_House/views/ajaxEditQuote.php",
+        data: 'quoteId=' + id,
+        type: "POST",
+        dataType: "html",
+        success: function (data) {
+            $('#tableTarget').html(data);
+        }
+    });
+}
+
+function editQuoteItem() {
+    var quoteDiscount = $("#quoteDiscount").val();
+    var quoteNotes = $("#lineItemDescription").val();
+
+    jQuery.ajax({
+        url: "/public_html/In_House/views/editQuoteItem.php",
+        data: 'quoteId=' + CURRENT_ROW_ID + '&quoteDiscount=' + quoteDiscount + '&quoteNotes=' + quoteNotes,
+        type: "POST",
+        dataType: "html",
+        success: function () {
+            $("#confirmationModal").modal("hide");
         }
     });
 }
