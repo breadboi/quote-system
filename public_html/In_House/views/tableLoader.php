@@ -14,8 +14,11 @@
         {
             // Sales Associate
             case 0:
-                $sql = "SELECT id AS ID, line_number as 'Line Number', description as 'Description', price as Price, quote_id as 'Quote ID' FROM line_item
-                        WHERE line_number LIKE CONCAT('%', :lineItemNumber, '%');";
+                // $sql = "SELECT id AS ID, line_number as 'Line Number', description as 'Description', price as Price, quote_id as 'Quote ID' FROM line_item
+                //         WHERE line_number LIKE CONCAT('%', :lineItemNumber, '%');";
+            $sql = "SELECT quotes.id as 'Quote ID', quotes.customer_name as 'Customer Name', sales_associates.name AS 'Associate Name', discount as Discount, quotes.secret_notes as 'Notes' FROM quotes
+            INNER JOIN sales_associates ON sales_associates.id = quotes.sales_associate_id
+            WHERE status=1";
             break;
             // Quote
             case 1:
@@ -32,74 +35,16 @@
             break;
         }
         // Prepare pdo
-        $prepared = $devPdo->prepare($sql, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+        $query = $devPdo->query($sql);
         // Perform respective query
         switch($searchChoice)
         {
             // Sales Associate
             case 0:
                 $lineItemNumber = $_POST["lineItemNumber"];
-                $success = $prepared->execute(array(':lineItemNumber' => $lineItemNumber));
-                if ($success)
-                {
-                    $rows = $prepared->fetchAll(PDO::FETCH_ASSOC);
-                    tableHead($rows);
-                    tableBody($rows);
-                }
-                else
-                {
-                    echo "<div class=\"failure\">An Error Occured... Please double check your search text</div>";
-                }
-            break;
-            // Quote
-            case 1:
-                $lineItemNumber = $_POST["lineItemNumber"];
-                $customerName = $_POST["customerName"];
-
-                // Handle date range
-                $startDate = date("Y-m-d",strtotime(substr($_POST["daterange"], 0, 10)));
-                $endDate = date("Y-m-d",strtotime(substr($_POST["daterange"], 13)));
-                // finalizedStatus=0&sanctionedStatus=1&orderedStatus=2
-
-                // Handle all checkbox options
-                if(isset($_POST["finalizedStatus"]))
-                    $finalizedStatus = $_POST["finalizedStatus"];
-                else
-                    $finalizedStatus = NULL;
-                if(isset($_POST["sanctionedStatus"]))
-                    $sanctionedStatus = $_POST["sanctionedStatus"];
-                else
-                    $sanctionedStatus = NULL;
-                if(isset($_POST["orderedStatus"]))
-                    $orderedStatus = $_POST["orderedStatus"];
-                else
-                    $orderedStatus = NULL;
-
-                // If all of the above are NULL, we default to all set to search for all
-                if ($finalizedStatus == NULL && $sanctionedStatus == NULL && $orderedStatus == NULL)
-                {
-                    $finalizedStatus = 0;
-                    $sanctionedStatus = 1;
-                    $orderedStatus = 2;
-                }
-
-                $success = $prepared->execute(array(':lineItemNumber' => $lineItemNumber,
-                                                    ':customerName' => $customerName,
-                                                    ':startDate' => $startDate,
-                                                    ':endDate' => $endDate,
-                                                    ':finalizedStatus' => $finalizedStatus,
-                                                    ':sanctionedStatus' => $sanctionedStatus,
-                                                    ':orderedStatus' => $orderedStatus));
-                if ($success)
-                {
-                    $rows = $prepared->fetchAll(PDO::FETCH_ASSOC);
-                    tableHead($rows);
-                    tableBody($rows);
-                }
-                else
-                {
-                    echo "<div class=\"failure\">An Error Occured... Please double check your search text</div>";
-                }
+                $rows = $query->fetchAll(PDO::FETCH_ASSOC);
+                tableHead($rows);
+                tableBody($rows);
             break;
         }
     }
