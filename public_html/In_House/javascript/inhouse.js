@@ -1,3 +1,5 @@
+var CURRENT_ROW_ID;
+
 // DataTable Functionality
 $(document).ready(function () {
     var params = {
@@ -88,6 +90,8 @@ $("td").on("click", function(e) {
         $("#lineItemFieldDescription").attr("value", selectionDescription);
         $("#lineItemFieldPrice").attr("value", selectionPrice);
         $("#lineItemFieldQuoteId").attr("value", selectionAddress);
+
+        CURRENT_ROW_ID = selectionId;
     }    
 });
 
@@ -116,6 +120,8 @@ $("#addLineItemButton").on("click", function() {
 
     // Set title
     $("#LineItemModalTitle").text("Add a new Line Item");
+
+    getPage(CURRENT_ROW_ID);
 });
 
 // Edit LineItem Click event
@@ -147,3 +153,14 @@ $("#deleteLineItemButton").on("click", function() {
     $("#lineItemFieldPrice").attr("disabled", true);
     $("#lineItemFieldQuoteId").attr("disabled", true);
 });
+
+function getPage(id) {
+    //$('#tableTarget').html('<img src="LoaderIcon.gif" />');
+	jQuery.ajax({
+		url: "/public_html/In_House/views/ajaxModalTable.php",
+		data:'id='+id,
+        type: "POST",
+        dataType: "html",
+		success:function(data){$('#tableTarget').html(data);}
+	});
+}
