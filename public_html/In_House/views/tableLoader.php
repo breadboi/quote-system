@@ -4,50 +4,19 @@
     include("../../resources/library/devDatabase.php");
     require_once("../../resources/library/tableformat.php");
 
-    if (isset($_POST["searchChoice"]))
-    {
-        $searchChoice = $_POST["searchChoice"];            
-        $sql = "";            
+    //$searchChoice = $_POST["searchChoice"];                      
 
-        // Set sql string
-        switch($searchChoice)
-        {
-            // Sales Associate
-            case 0:
-                // $sql = "SELECT id AS ID, line_number as 'Line Number', description as 'Description', price as Price, quote_id as 'Quote ID' FROM line_item
-                //         WHERE line_number LIKE CONCAT('%', :lineItemNumber, '%');";
-            $sql = "SELECT quotes.id as 'Quote ID', quotes.customer_name as 'Customer Name', sales_associates.name AS 'Associate Name', discount as Discount, quotes.secret_notes as 'Notes' FROM quotes
-            INNER JOIN sales_associates ON sales_associates.id = quotes.sales_associate_id
-            WHERE status=1";
-            break;
-            // Quote
-            case 1:
-                $sql = "SELECT quotes.id AS 'Quote ID', sales_associates.name AS 'Line Item Number', customer_name AS Name, contact AS Contact, street AS Street, city AS City, secret_notes AS Notes, discount AS Discount, line_number AS 'Line Number', description AS Description, price AS Price, status AS Status, date_created AS Date FROM quotes
-                        INNER JOIN sales_associates ON sales_associates.id = quotes.sales_associate_id
-                        INNER JOIN line_item ON line_item.quote_id = quotes.id
-                        WHERE customer_name LIKE CONCAT('%', :customerName, '%')
-                        AND sales_associates.name LIKE CONCAT('%', :lineItemNumber, '%')
-                        AND (status = :finalizedStatus
-                        OR status = :sanctionedStatus
-                        OR status = :orderedStatus
-                        )
-                        AND date_created BETWEEN :startDate AND :endDate;";
-            break;
-        }
-        // Prepare pdo
-        $query = $devPdo->query($sql);
-        // Perform respective query
-        switch($searchChoice)
-        {
-            // Sales Associate
-            case 0:
-                $lineItemNumber = $_POST["lineItemNumber"];
-                $rows = $query->fetchAll(PDO::FETCH_ASSOC);
-                tableHead($rows);
-                tableBody($rows);
-            break;
-        }
-    }
+    $sql = "SELECT quotes.id as 'Quote ID', quotes.customer_name as 'Customer Name', sales_associates.name AS 'Associate Name', discount as Discount, quotes.secret_notes as 'Notes' FROM quotes
+    INNER JOIN sales_associates ON sales_associates.id = quotes.sales_associate_id
+    WHERE status=1";
+
+    // Prepare pdo
+    $query = $devPdo->query($sql);
+
+    $lineItemNumber = $_POST["lineItemNumber"];
+    $rows = $query->fetchAll(PDO::FETCH_ASSOC);
+    tableHead($rows);
+    tableBody($rows);
 
     // Logic for Modal Form Submission
     if (isset($_POST["lineItemChoice"]))
@@ -119,4 +88,5 @@
             break;
         }
     }
+
 ?>
