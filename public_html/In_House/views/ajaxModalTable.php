@@ -10,4 +10,8 @@ $query = $devPdo->query($sql);
 $rows = $query->fetchAll(PDO::FETCH_ASSOC);
 modalTableHead($rows);
 modalTableBody($rows);
+
+echo "<div class=\"form-group\">";
+echo "<button id=\"addLineItemButton\" type=\"button\" class=\"btn btn-success\" onclick=\"loadInsertPage()\">Add Line Item</button>";
+echo "</div>";
 ?>

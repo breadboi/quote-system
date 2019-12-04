@@ -207,3 +207,34 @@ function deleteLineItem(lineId) {
         }
     });
 }
+
+function addLineItem() {
+    var lineNumber = $("#lineItemNumber").val();
+    var description = $("#lineItemDescription").val();
+    var price = $("#lineItemPrice").val();
+    var quoteId = $("#lineItemQuoteId").val();
+    
+    alert(lineNumber+description+price+quoteId);
+
+    jQuery.ajax({
+        url: "/public_html/In_House/views/insertLineItem.php",
+        data: 'lineItemNumber=' + lineNumber + '&lineItemDescription=' + description + '&lineItemPrice=' + price + '&lineItemQuoteId=' + quoteId,
+        type: "POST",
+        dataType: "html",
+        success: function () {
+            getPage(CURRENT_ROW_ID);
+        }
+    });
+}
+
+function loadInsertPage() {
+    jQuery.ajax({
+        url: "/public_html/In_House/views/ajaxInsertRow.php",
+        data: 'quoteId=' + CURRENT_ROW_ID,
+        type: "POST",
+        dataType: "html",
+        success: function (data) {
+            $('#tableTarget').html(data);
+        }
+    });
+}
