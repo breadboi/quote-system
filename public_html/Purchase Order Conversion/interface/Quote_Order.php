@@ -48,6 +48,33 @@
         $quoteId = $rows["Customer ID"];
         $customerId = $rows["Associate ID"];
         $calculatedAmount = $rows["Total Price"];
+
+        $QuoteId = $_POST['id'];
+        
+
+
+
+        $url = 'http://blitz.cs.niu.edu/PurchaseOrder/';
+        $data = array(
+	    'order' => $QuoteId, 
+	    'associate' => $customerId,
+	    'custid' => $QuoteId, 
+	    'amount' => $calculatedAmount);
+		
+        $options = array(
+         'http' => array(
+         'header' => array('Content-type: application/json', 'Accept: application/json'),
+         'method'  => 'POST',
+         'content' => json_encode($data)
+    )
+);
+
+        $context  = stream_context_create($options);
+        $result = file_get_contents($url, false, $context);
+        echo($result);
+
+
+
     }
 
     $sql = "SELECT * FROM quotes
