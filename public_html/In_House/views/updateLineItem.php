@@ -14,9 +14,9 @@ WHERE id=:lineItemId;";
 $prepared = $devPdo->prepare($sql, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 
 $prepared->execute(array(':lineItemId' => $lineItemId,
-                        ':lineItemNumber' => $lineItemNumber,
-                        ':lineItemDescription' => $lineItemDescription,
-                        ':lineItemPrice' => $lineItemPrice,
-                        ':lineItemQuoteId' => $lineItemQuoteId)); 
+                         ':lineItemNumber' => $lineItemNumber,
+                         ':lineItemDescription' => $lineItemDescription,
+                         ':lineItemPrice' => $lineItemPrice,
+                         ':lineItemQuoteId' => $lineItemQuoteId)); 
 
 ?>
