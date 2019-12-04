@@ -155,8 +155,8 @@ $("#deleteLineItemButton").on("click", function() {
 });
 
 function getPage(id) {
-    //$('#tableTarget').html('<img src="LoaderIcon.gif" />');
-    alert(id);
+    $('#tableTarget').html('<img src="https://icon-library.net/images/loading-icon-transparent-background/loading-icon-transparent-background-3.jpg" style=\"width:50px;height:50px;text-align:center;\"  />');
+    //alert(id);
 	jQuery.ajax({
 		url: "/public_html/In_House/views/ajaxModalTable.php",
 		data:'id='+id,
