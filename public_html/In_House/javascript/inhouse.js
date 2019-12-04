@@ -156,6 +156,7 @@ $("#deleteLineItemButton").on("click", function() {
 
 function getPage(id) {
     //$('#tableTarget').html('<img src="LoaderIcon.gif" />');
+    alert(id);
 	jQuery.ajax({
 		url: "/public_html/In_House/views/ajaxModalTable.php",
 		data:'id='+id,

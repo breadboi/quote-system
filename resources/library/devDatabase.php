@@ -2,7 +2,7 @@
 // File responsible for setting up our DEV database PDO
 
 // Include our configuration file
-require_once("../../resources/config.php");
+require_once($_SERVER['DOCUMENT_ROOT']."/resources/config.php");
 
 // Get our connection info from the config file
 $dbname = $config['db']['dev']['dbname'];
