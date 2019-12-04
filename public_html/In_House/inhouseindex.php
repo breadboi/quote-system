@@ -19,56 +19,11 @@
 
 <body>
 
-    <!-- Search Form -->
-    <form method="POST" name="inhousesearch">
-
-        <!-- Search Type -->
-        <div class="form-group">
-            <input id="lineitem" type="radio" value="0" name="searchChoice" checked>
-            <label for="lineitem">Line Item</label>
-            <br>
-            <input id="quote" type="radio" value="1" name="searchChoice">
-            <label for="quote">Quote</label>
-        </div>
-
-        <!-- Quote Search Checkboxes (Display when quote radio is selected) -->
-        <div class="form-group quoteFormItems hiddenControl">
-            <input id="finalizedStatus" type="checkbox" value="0" name="finalizedStatus" />
-            <label for="finalizedStatus">Finalized</label>
-            <br>
-            <input id="sanctionedStatus" type="checkbox" value="1" name="sanctionedStatus" />
-            <label for="sanctionedStatus">Sanctioned</label>
-            <br>
-            <input id="orderedStatus" type="checkbox" value="2" name="orderedStatus" />
-            <label for="orderedStatus">Ordered</label>
-            <br>
-        </div>
-
-        <!-- Date range Selector -->
-        <div class="form-group quoteFormItems hiddenControl">
-            <input type="text" name="daterange" id="daterange">
-            <i class="fa fa-calendar"></i>&nbsp;
-            <span></span> <i class="fa fa-caret-down"></i>
-            </input>
-        </div>
-
-        <!-- Sales Associate Search Field -->
-        <div class="form-group">
-            <input type="text" class="form-control" name="lineItemNumber" placeholder="Line Item Number">
-
-            <!-- Displayed when quote radio is selected -->
-            <input type="text" class="form-control quoteFormItems hiddenControl" name="customerName"
-                placeholder="Customer Name">
-        </div>
-
-        <button type="submit" class="btn btn-primary">Search</button>
-    </form>
-
-    <!-- Table Loader -->
-    <?php
-        require_once("views/tableLoader.php");
-        require_once("views/modalForm.html");
-    ?>
+<!-- Table Loader -->
+<?php
+    require_once("views/tableLoader.php");
+    require_once("views/modalForm.html");
+?>
 
 </body>
 
