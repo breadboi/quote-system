@@ -20,5 +20,6 @@ echo "</div>";
 
 echo "<div class=\"form-group\">";
 echo "<button id=\"deleteLineItemButton\" type=\"button\" class=\"btn btn-danger\" onclick=\"deleteLineItem($lineItemId)\">Delete Line Item</button>";
+echo "<button id=\"editLineItemButton\" type=\"button\" class=\"btn btn-success\" onclick=\"editLineItem($lineItemId)\">Save Changes</button>";
 echo "</div>";
 ?>
