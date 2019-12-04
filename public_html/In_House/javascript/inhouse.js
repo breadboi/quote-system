@@ -199,7 +199,7 @@ function getRowEdit(lineId, lineNumber, description, price) {
 function deleteLineItem(lineId) {
     jQuery.ajax({
         url: "/public_html/In_House/views/deleteLineItem.php",
-        data: 'lineId=' + lineId,
+        data: 'lineItemId=' + lineId,
         type: "POST",
         dataType: "html",
         success: function () {
