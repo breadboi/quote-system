@@ -121,13 +121,14 @@ function highlightModalRow(context)
     });
 
     // Assign each row cell to a variable
-    var lineNumber = rowArray[0].text();
-    var description = rowArray[1].text();
-    var price = rowArray[2].text();
+    var lineId = rowArray[0].text();
+    var lineNumber = rowArray[1].text();
+    var description = rowArray[2].text();
+    var price = rowArray[3].text();
     $(context).parent().addClass("cellselect");
 
     // Send these values to ajaxEditRow.php using ajax
-    getRowEdit(lineNumber, description, price);
+    getRowEdit(lineId, lineNumber, description, price);
 }
 
 // Used for Modal form submission
@@ -173,16 +174,17 @@ function getPage(id) {
 
 /**
  * 
+ * @param {"int"} lineId
  * @param {"int"} lineNumber 
  * @param {"string"} description 
  * @param {"float"} price 
  */
-function getRowEdit(lineNumber, description, price) {
+function getRowEdit(lineId, lineNumber, description, price) {
     $('#tableTarget').html('<img src="https://icon-library.net/images/loading-icon-transparent-background/loading-icon-transparent-background-3.jpg" style=\"width:50px;height:50px;text-align:center;\"  />');
     
 	jQuery.ajax({
 		url: "/public_html/In_House/views/ajaxEditRow.php",
-		data:'lineNumber='+lineNumber+'&description='+description+'&price='+price,
+		data:'lineId='+lineId+'&lineNumber='+lineNumber+'&description='+description+'&price='+price,
         type: "POST",
         dataType: "html",
 		success:function(data){$('#tableTarget').html(data);}
