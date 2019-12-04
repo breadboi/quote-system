@@ -56,44 +56,79 @@ function toggleQuoteFormItems(context) {
     }
 }
 
-// On click event for tables
+// On click event for tables not dynamically generated
 $("td").on("click", function(e) {
-    // Ensure the radio is checked so we aren't checking quotes
-    if ($("#lineitem").prop("checked"))
-    {
-        e.preventDefault();
-
-        // Remove previous highlighting
-        $("tr").removeClass("cellselect");
-
-        // Create row array variable
-        var rowArray = [];
-
-        // For each cell, we push to an array
-        $(this).parents('tr').find('td').each(function() {
-            // For each cell
-            rowArray.push($(this));
-        });
-
-        // Assign each row cell to a variable
-        var selectionId = rowArray[0].text();
-        var selectionNumber = rowArray[1].text();
-        var selectionDescription = rowArray[2].text();
-        var selectionPrice = rowArray[3].text();
-        var selectionAddress = rowArray[4].text();
-
-        $(this).parent().addClass("cellselect");
-
-        // Set the field to the cell value
-        $("#lineItemFieldId").attr("value", selectionId);
-        $("#lineItemFieldNumber").attr("value", selectionNumber);
-        $("#lineItemFieldDescription").attr("value", selectionDescription);
-        $("#lineItemFieldPrice").attr("value", selectionPrice);
-        $("#lineItemFieldQuoteId").attr("value", selectionAddress);
-
-        CURRENT_ROW_ID = selectionId;
-    }    
+    highlightRow(this, e);
 });
+
+/**
+ * Used for highlighting rows
+ * @param {"this"} context 
+ * @param {"event"} e 
+ */
+function highlightRow(context, e)
+{
+    // Ensure the radio is checked so we aren't checking quotes
+    e.preventDefault();
+
+    // Remove previous highlighting
+    $("tr").removeClass("cellselect");
+
+    // Create row array variable
+    var rowArray = [];
+
+    // For each cell, we push to an array
+    $(context).parents('tr').find('td').each(function() {
+        // For each cell
+        rowArray.push($(context));
+    });
+
+    // Assign each row cell to a variable
+    var selectionId = rowArray[0].text();
+    var selectionNumber = rowArray[1].text();
+    var selectionDescription = rowArray[2].text();
+    var selectionPrice = rowArray[3].text();
+    var selectionAddress = rowArray[4].text();
+    $(context).parent().addClass("cellselect");
+
+    // Set the field to the cell value
+    $("#lineItemFieldId").attr("value", selectionId);
+    $("#lineItemFieldNumber").attr("value", selectionNumber);
+    $("#lineItemFieldDescription").attr("value", selectionDescription);
+    $("#lineItemFieldPrice").attr("value", selectionPrice);
+    $("#lineItemFieldQuoteId").attr("value", selectionAddress);
+    
+    CURRENT_ROW_ID = selectionId;
+}
+
+/**
+ * Used for highlighting rows in modals and calling
+ * ajax function
+ * @param {"this"} context 
+ */
+function highlightModalRow(context)
+{
+    // Remove previous highlighting
+    $("tr").removeClass("cellselect");
+
+    // Create row array variable
+    var rowArray = [];
+
+    // For each cell, we push to an array
+    $(context).parents('tr').find('td').each(function() {
+        // For each cell
+        rowArray.push($(this));
+    });
+
+    // Assign each row cell to a variable
+    var lineNumber = rowArray[0].text();
+    var description = rowArray[1].text();
+    var price = rowArray[2].text();
+    $(context).parent().addClass("cellselect");
+
+    // Send these values to ajaxEditRow.php using ajax
+    getRowEdit(lineNumber, description, price);
+}
 
 // Used for Modal form submission
 $("#confirmSubmission").on("click", function() {
@@ -124,42 +159,30 @@ $("#addLineItemButton").on("click", function() {
     getPage(CURRENT_ROW_ID);
 });
 
-// Edit LineItem Click event
-$("#editLineItemButton").on("click", function() {
-    // Enable editing (if previously disabled)
-    $("#lineItemFieldNumber").attr("disabled", false);
-    $("#lineItemFieldDescription").attr("disabled", false);
-    $("#lineItemFieldPrice").attr("disabled", false);
-    $("#lineItemFieldQuoteId").attr("disabled", false);
-
-    // Define what the form is for
-    $("#editLineItem").attr("checked", true);
-
-    // Set title
-    $("#LineItemModalTitle").text("Edit Selected Line Item");
-});
-
-// Delete LineItem Click event
-$("#deleteLineItemButton").on("click", function() {
-    // Define what the form is for
-    $("#deleteLineItem").attr("checked", true);
-
-    // Set title
-    $("#LineItemModalTitle").text("Delete Selected Line Item with the Following Information?");
-
-    // Prevent editing
-    $("#lineItemFieldNumber").attr("disabled", true);
-    $("#lineItemFieldDescription").attr("disabled", true);
-    $("#lineItemFieldPrice").attr("disabled", true);
-    $("#lineItemFieldQuoteId").attr("disabled", true);
-});
-
 function getPage(id) {
     $('#tableTarget').html('<img src="https://icon-library.net/images/loading-icon-transparent-background/loading-icon-transparent-background-3.jpg" style=\"width:50px;height:50px;text-align:center;\"  />');
-    //alert(id);
+    
 	jQuery.ajax({
 		url: "/public_html/In_House/views/ajaxModalTable.php",
 		data:'id='+id,
+        type: "POST",
+        dataType: "html",
+		success:function(data){$('#tableTarget').html(data);}
+	});
+}
+
+/**
+ * 
+ * @param {"int"} lineNumber 
+ * @param {"string"} description 
+ * @param {"float"} price 
+ */
+function getRowEdit(lineNumber, description, price) {
+    $('#tableTarget').html('<img src="https://icon-library.net/images/loading-icon-transparent-background/loading-icon-transparent-background-3.jpg" style=\"width:50px;height:50px;text-align:center;\"  />');
+    
+	jQuery.ajax({
+		url: "/public_html/In_House/views/ajaxEditRow.php",
+		data:'lineNumber='+lineNumber+'&description='+description+'&price='+price,
         type: "POST",
         dataType: "html",
 		success:function(data){$('#tableTarget').html(data);}
