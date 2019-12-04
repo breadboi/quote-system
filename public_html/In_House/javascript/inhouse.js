@@ -11,12 +11,12 @@ $(document).ready(function () {
 });
 
 // Change in radio button selection for quote and Line Item search
-$('input[type=radio][name=searchChoice]').change(function() {
+$('input[type=radio][name=searchChoice]').change(function () {
     toggleQuoteFormItems(this);
 });
 
 // Date Range Picker
-$(function() {
+$(function () {
 
     var start = moment().subtract(29, 'days');
     var end = moment();
@@ -29,12 +29,12 @@ $(function() {
         startDate: start,
         endDate: end,
         ranges: {
-           'Today': [moment(), moment()],
-           'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-           'Last 7 Days': [moment().subtract(6, 'days'), moment()],
-           'Last 30 Days': [moment().subtract(29, 'days'), moment()],
-           'This Month': [moment().startOf('month'), moment().endOf('month')],
-           'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+            'Today': [moment(), moment()],
+            'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+            'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+            'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+            'This Month': [moment().startOf('month'), moment().endOf('month')],
+            'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
         }
     }, cb);
 
@@ -44,20 +44,17 @@ $(function() {
 
 // Toggles form controls (0=lineitem, 1=Quote)
 function toggleQuoteFormItems(context) {
-    if (context.value == 0) 
-    {
+    if (context.value == 0) {
         $(".quoteFormItems").addClass("hiddenControl");
         $(".lineItemButtons").removeClass("hiddenControl");
-    }
-    else if (context.value == 1)
-    {
+    } else if (context.value == 1) {
         $(".quoteFormItems").removeClass("hiddenControl");
         $(".lineItemButtons").addClass("hiddenControl");
     }
 }
 
 // On click event for tables not dynamically generated
-$("td").on("click", function(e) {
+$("td").on("click", function (e) {
     highlightRow(this, e);
 });
 
@@ -66,8 +63,7 @@ $("td").on("click", function(e) {
  * @param {"this"} context 
  * @param {"event"} e 
  */
-function highlightRow(context, e)
-{
+function highlightRow(context, e) {
     // Ensure the radio is checked so we aren't checking quotes
     e.preventDefault();
 
@@ -78,7 +74,7 @@ function highlightRow(context, e)
     var rowArray = [];
 
     // For each cell, we push to an array
-    $(context).parents('tr').find('td').each(function() {
+    $(context).parents('tr').find('td').each(function () {
         // For each cell
         rowArray.push($(context));
     });
@@ -97,7 +93,7 @@ function highlightRow(context, e)
     $("#lineItemFieldDescription").attr("value", selectionDescription);
     $("#lineItemFieldPrice").attr("value", selectionPrice);
     $("#lineItemFieldQuoteId").attr("value", selectionAddress);
-    
+
     CURRENT_ROW_ID = selectionId;
 }
 
@@ -106,8 +102,7 @@ function highlightRow(context, e)
  * ajax function
  * @param {"this"} context 
  */
-function highlightModalRow(context)
-{
+function highlightModalRow(context) {
     // Remove previous highlighting
     $("tr").removeClass("cellselect");
 
@@ -115,7 +110,7 @@ function highlightModalRow(context)
     var rowArray = [];
 
     // For each cell, we push to an array
-    $(context).parents('tr').find('td').each(function() {
+    $(context).parents('tr').find('td').each(function () {
         // For each cell
         rowArray.push($(this));
     });
@@ -132,12 +127,12 @@ function highlightModalRow(context)
 }
 
 // Used for Modal form submission
-$("#confirmSubmission").on("click", function() {
+$("#confirmSubmission").on("click", function () {
     $("#LineItemForm").trigger("click");
 });
 
 // Add LineItem Click event
-$("#addLineItemButton").on("click", function() {
+$("#addLineItemButton").on("click", function () {
     // Enable editing (if previously disabled)
     $("#lineItemFieldNumber").attr("disabled", false);
     $("#lineItemFieldDescription").attr("disabled", false);
@@ -162,14 +157,16 @@ $("#addLineItemButton").on("click", function() {
 
 function getPage(id) {
     $('#tableTarget').html('<img src="https://icon-library.net/images/loading-icon-transparent-background/loading-icon-transparent-background-3.jpg" style=\"width:50px;height:50px;text-align:center;\"  />');
-    
-	jQuery.ajax({
-		url: "/public_html/In_House/views/ajaxModalTable.php",
-		data:'id='+id,
+
+    jQuery.ajax({
+        url: "/public_html/In_House/views/ajaxModalTable.php",
+        data: 'id=' + id,
         type: "POST",
         dataType: "html",
-		success:function(data){$('#tableTarget').html(data);}
-	});
+        success: function (data) {
+            $('#tableTarget').html(data);
+        }
+    });
 }
 
 /**
@@ -181,12 +178,32 @@ function getPage(id) {
  */
 function getRowEdit(lineId, lineNumber, description, price) {
     $('#tableTarget').html('<img src="https://icon-library.net/images/loading-icon-transparent-background/loading-icon-transparent-background-3.jpg" style=\"width:50px;height:50px;text-align:center;\"  />');
-    
-	jQuery.ajax({
-		url: "/public_html/In_House/views/ajaxEditRow.php",
-		data:'lineId='+lineId+'&lineNumber='+lineNumber+'&description='+description+'&price='+price,
+
+    jQuery.ajax({
+        url: "/public_html/In_House/views/ajaxEditRow.php",
+        data: 'lineId=' + lineId + '&lineNumber=' + lineNumber + '&description=' + description + '&price=' + price,
         type: "POST",
         dataType: "html",
-		success:function(data){$('#tableTarget').html(data);}
-	});
+        success: function (data) {
+            $('#tableTarget').html(data);
+        }
+    });
+}
+
+/**
+ * Utilizes ajax to call deleteLineItem.php
+ * and remove line item with lineId arg. 
+ * On success
+ * @param {"int"} lineId 
+ */
+function deleteLineItem(lineId) {
+    jQuery.ajax({
+        url: "/public_html/In_House/views/deleteLineItem.php",
+        data: 'lineId=' + lineId,
+        type: "POST",
+        dataType: "html",
+        success: function () {
+            getPage(CURRENT_ROW_ID);
+        }
+    });
 }
