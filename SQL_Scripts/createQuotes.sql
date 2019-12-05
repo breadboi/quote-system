@@ -28,6 +28,15 @@ CREATE TABLE line_item (
 );
 
 
+
+INSERT INTO quotes (customer_name, contact, street, city, secret_notes, status, discount)
+VALUES ('IBM', '847-630-244', 'Swag Lane', 'FlavorTown', 'Testing Secrete Notes', '0', '0');
+
+SELECT @last:=LAST_INSERT_ID();
+
+INSERT INTO line_item (line_number, description, price, quote_id)
+VALUES (1, 'This is a test decription for the line', 50.23, @last);
+
 INSERT INTO quotes (customer_name, contact, street, city, email, secret_notes, status, discount, sales_associate_id, date_created)
 VALUES ('IBM', '847-630-244', 'Swag Lane', 'FlavorTown', 'Email@me.net' ,'Testing Secrete Notes', '0', '0', "4b570be2-09af-11ea-957f-1c872c422ccb", CURDATE());
 
