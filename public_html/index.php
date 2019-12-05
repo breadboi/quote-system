@@ -34,11 +34,11 @@
             <li class="nav-item active">
                 <a class="nav-link" href="Quote_Tracking/tracking.php">Quote Tracking</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link disabled" href="#">In House System</a>
+            <li class="nav-item active">
+                <a class="nav-link" href="In_House/inhouseindex.php">In House System</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link disabled" href="#">Purchase Order Conversion</a>
+            <li class="nav-item active">
+                <a class="nav-link" href="Purchase_Order_Conversion/interface/conversionIndex.php">Purchase Order Conversion</a>
             </li>
         </ul>
     </nav>

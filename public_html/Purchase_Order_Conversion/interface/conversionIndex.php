@@ -1,3 +1,7 @@
+<?php
+require_once($_SERVER["DOCUMENT_ROOT"] . '/resources/library/loginSession.php');
+?>
+
 <html>
     <head>
         <title>Conversion Quotes</title>
