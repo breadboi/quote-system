@@ -121,7 +121,7 @@
                 if($_POST["associatePassword"] != "")
                 {
                     $sql = "UPDATE sales_associates
-                            SET name=:associateName, password=:associatePassword, accumulated_commission=:associateCommission, address=:associateAddress
+                            SET name=:associateName, password=MD5(:associatePassword), accumulated_commission=:associateCommission, address=:associateAddress
                             WHERE id=:associateId;";
                 }
                 else
@@ -169,7 +169,7 @@
                     $associatePassword = $_POST["associatePassword"];
                     $prepared->execute(array(':associateId' => $associateId,
                                          ':associateName' => $associateName,
-                                         ':password' => $associatePassword,
+                                         ':associatePassword' => $associatePassword,
                                          ':associateCommission' => $associateCommission,
                                          ':associateAddress' => $associateAddress));
                 }
