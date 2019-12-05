@@ -1,5 +1,5 @@
 <?php
-require_once($_SERVER["DOCUMENT_ROOT"] . "/resources/library/devDatabase.php");
+require_once(__DIR__ . "/../resources/library/devDatabase.php");
 
 $lineItemNumber = $_POST["lineItemNumber"];
 $lineItemDescription = $_POST["lineItemDescription"];
