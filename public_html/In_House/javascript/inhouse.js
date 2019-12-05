@@ -268,3 +268,31 @@ function editQuoteItem() {
         }
     });
 }
+
+function loadModalRow() {
+    $('#tableTarget').html('<img src="https://icon-library.net/images/loading-icon-transparent-background/loading-icon-transparent-background-3.jpg" style=\"width:50px;height:50px;text-align:center;\"  />');
+
+    jQuery.ajax({
+        url: "/public_html/In_House/views/ajaxModalRow.php",
+        data: 'id=' + CURRENT_ROW_ID,
+        type: "POST",
+        dataType: "html",
+        success: function (data) {
+            $('#tableTarget').html(data);
+        }
+    });
+}
+
+function sanctionQuote(id) {
+    $('#tableTarget').html('<img src="https://icon-library.net/images/loading-icon-transparent-background/loading-icon-transparent-background-3.jpg" style=\"width:50px;height:50px;text-align:center;\"  />');
+
+    jQuery.ajax({
+        url: "/public_html/In_House/views/sanctionQuote.php",
+        data: 'id=' + id,
+        type: "POST",
+        dataType: "html",
+        success: function (data) {
+            $('#tableTarget').html(data);
+        }
+    });
+}
