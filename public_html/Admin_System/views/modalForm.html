@@ -1,17 +1,23 @@
-<!-- Button to trigger modal -->
-<button id="addAssociateButton" type="button" class="btn btn-primary modalview associateButtons" data-toggle="modal" data-target="#confirmationModal">
-    Add User
-</button>
+<div class="container">
+    <!-- Button to trigger modal -->
+    <button id="addAssociateButton" type="button" class="btn btn-primary modalview associateButtons" data-toggle="modal"
+        data-target="#confirmationModal">
+        Add User
+    </button>
 
-<!-- Button to trigger modal -->
-<button id="editAssociateButton" type="button" class="btn btn-primary modalview associateButtons" data-toggle="modal" data-target="#confirmationModal">
-    Edit Highlighted User
-</button>
+    <!-- Button to trigger modal -->
+    <button id="editAssociateButton" type="button" class="btn btn-primary modalview associateButtons"
+        data-toggle="modal" data-target="#confirmationModal">
+        Edit Highlighted User
+    </button>
 
-<!-- Button to trigger modal -->
-<button id="deleteAssociateButton" type="button" class="btn btn-primary modalview associateButtons" data-toggle="modal" data-target="#confirmationModal">
-    Delete Highlighted User
-</button>
+    <!-- Button to trigger modal -->
+    <button id="deleteAssociateButton" type="button" class="btn btn-primary modalview associateButtons"
+        data-toggle="modal" data-target="#confirmationModal">
+        Delete Highlighted User
+    </button>
+</div>
+
 
 <!-- Modal Form -->
 <div class="modal fade" id="confirmationModal" tabindex="-1" role="dialog"
@@ -30,13 +36,15 @@
                     <!-- Input Fields for Sales Associates -->
                     <div class="form-group">
                         <label for="associateFieldId">ID</label>
-                        <input type="text" class="form-control" name="associateId" id="associateFieldId"readonly>
+                        <input type="text" class="form-control" name="associateId" id="associateFieldId" readonly>
                         <label for="associateFieldName">Name</label>
                         <input type="text" class="form-control" name="associateName" id="associateFieldName">
                         <label for="associateFieldPassword">Password</label>
-                        <input type="password" class="form-control" name="associatePassword" id="associateFieldPassword">
+                        <input type="password" class="form-control" name="associatePassword"
+                            id="associateFieldPassword">
                         <label for="associateFieldCommission">Commission</label>
-                        <input type="text" class="form-control" name="associateCommission" id="associateFieldCommission">
+                        <input type="text" class="form-control" name="associateCommission"
+                            id="associateFieldCommission">
                         <label for="associateFieldAddress">Address</label>
                         <input type="text" class="form-control" name="associateAddress" id="associateFieldAddress">
                     </div>

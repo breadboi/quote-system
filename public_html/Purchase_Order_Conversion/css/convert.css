@@ -10,3 +10,7 @@
 .hiddenControl {
     display: none;
 }
+
+.modalChoiceButtons {
+    margin: 3;
+}

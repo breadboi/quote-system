@@ -1,5 +1,6 @@
 <?php
 require_once($_SERVER["DOCUMENT_ROOT"] . '/resources/library/loginSession.php');
+require_once($_SERVER["DOCUMENT_ROOT"] . '/resources/library/bootstrap.php');
 ?>
 <html>
 
@@ -21,12 +22,21 @@ require_once($_SERVER["DOCUMENT_ROOT"] . '/resources/library/loginSession.php');
 <link rel="stylesheet" href="css/inhouse.css">
 
 <body>
+    <!-- Return To Index Page -->
+    <div class="p-1 btn-group">
+        <a href="../index.php" class="btn btn-dark" role="button">Back To Home Page</a>
+    </div>
 
-<!-- Table Loader -->
-<?php
-    require_once("views/tableLoader.php");
-    require_once("views/modalForm.html");
-?>
+    <div style="text-align:center" class="jumbotron jumbotron-fluid p-2 m-1 bg-info text-white rounded">
+        <h1>Quote Sanction System</h1>
+        <h5>Manage Line Items, Quote Notes, and Sanction Quotes</h5>
+    </div>
+
+    <!-- Table Loader -->
+    <?php
+        require_once("views/tableLoader.php");
+        require_once("views/modalForm.html");
+    ?>
 
 </body>
 

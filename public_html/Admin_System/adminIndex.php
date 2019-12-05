@@ -1,5 +1,6 @@
 <?php
 require_once($_SERVER["DOCUMENT_ROOT"] . '/resources/library/loginSession.php');
+require_once($_SERVER["DOCUMENT_ROOT"] . '/resources/library/bootstrap.php');
 ?>
 <html>
 
@@ -24,55 +25,64 @@ require_once($_SERVER["DOCUMENT_ROOT"] . '/resources/library/loginSession.php');
     <!-- Return To Index Page -->
     <div class="p-1 btn-group">
         <a href="../index.php" class="btn btn-dark" role="button">Back To Home Page</a>
-     </div>
+    </div>
+
+    <div style="text-align:center" class="jumbotron jumbotron-fluid p-2 m-1 bg-info text-white rounded">
+        <h1>Admin Interface</h1>
+        <h5>Manage Sales Associates and View Quotes/Line Items</h5>
+    </div>
 
     <!-- Search Form -->
-    <form method="POST" name="adminsearch">
+    <div class="container">
+        <form method="POST" class="form border border-primary rounded col-md-12 col-lg-12" name="adminsearch">
 
-        <!-- Search Type -->
-        <div class="form-group">
-            <input id="salesassociate" type="radio" value="0" name="searchChoice" checked>
-            <label for="salesassociate">Sales Associate</label>
-            <br>
-            <input id="quote" type="radio" value="1" name="searchChoice">
-            <label for="quote">Quote</label>
-        </div>
+            <!-- Search Type -->
+            <div class="form-group">                
+                <label><input id="salesassociate" type="radio" value="0" name="searchChoice" checked>Sales Associate</label>
+                
+                <label><input id="quote" type="radio" value="1" name="searchChoice">Quote</label>
 
-        <!-- Quote Search Checkboxes (Display when quote radio is selected) -->
-        <div class="form-group quoteFormItems hiddenControl">
-            <input id="unresolvedStatus" type="checkbox" value="0" name="unresolvedStatus" />
-            <label for="unresolvedStatus">Unresolved</label>
-            <input id="finalizedStatus" type="checkbox" value="1" name="finalizedStatus" />
-            <label for="finalizedStatus">Finalized</label>
-            <br>
-            <input id="sanctionedStatus" type="checkbox" value="2" name="sanctionedStatus" />
-            <label for="sanctionedStatus">Sanctioned</label>
-            <br>
-            <input id="orderedStatus" type="checkbox" value="3" name="orderedStatus" />
-            <label for="orderedStatus">Ordered</label>
-            <br>
-        </div>
+                <!-- Sales Associate Search Field -->
+                <input type="text" class="form-control" name="salesAssociateName" placeholder="Sales Associate Name">
+                <br>
+                <!-- Displayed when quote radio is selected -->
+                <input type="text" class="form-control quoteFormItems hiddenControl" name="customerName" placeholder="Customer Name">
+            </div>
 
-        <!-- Date range Selector -->
-        <div class="form-group quoteFormItems hiddenControl">
-            <input type="text" name="daterange" id="daterange">
-            <i class="fa fa-calendar"></i>&nbsp;
-            <span></span> <i class="fa fa-caret-down"></i>
-            </input>
-        </div>
+            <!-- Quote Search Checkboxes (Display when quote radio is selected) -->
+            <div class="form-group quoteFormItems hiddenControl">
+                <input id="unresolvedStatus" type="checkbox" value="0" name="unresolvedStatus" />
+                <label for="unresolvedStatus">Unresolved</label>
+                <input id="finalizedStatus" type="checkbox" value="1" name="finalizedStatus" />
+                <label for="finalizedStatus">Finalized</label>
+            </div>
 
-        <!-- Sales Associate Search Field -->
-        <div class="form-group">
-            <input type="text" class="form-control" name="salesAssociateName" placeholder="Sales Associate Name">
+            <!-- Quote Search Checkboxes (Display when quote radio is selected) -->
+            <div class="form-group quoteFormItems hiddenControl">
+                <input id="sanctionedStatus" type="checkbox" value="2" name="sanctionedStatus" />
+                <label for="sanctionedStatus">Sanctioned</label>
+                <input id="orderedStatus" type="checkbox" value="3" name="orderedStatus" />
+                <label for="orderedStatus">Ordered</label>
+            </div>
 
-            <!-- Displayed when quote radio is selected -->
-            <input type="text" class="form-control quoteFormItems hiddenControl" name="customerName"
-                placeholder="Customer Name">
-        </div>
+            <!-- Date range Selector -->
+            <div class="form-group quoteFormItems hiddenControl">
+                <input type="text" name="daterange" id="daterange">
+                <i class="fa fa-calendar"></i>&nbsp;
+                <span></span> <i class="fa fa-caret-down"></i>
+                </input>
+            </div>
 
-        <button type="submit" class="btn btn-primary">Search</button>
-    </form>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Search</button>
+            </div>
 
+            <div class="form-group">
+
+            </div>
+
+        </form>
+    </div>
     <!-- Table Loader -->
     <?php
         require_once("views/tableLoader.php");

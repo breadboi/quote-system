@@ -10,7 +10,7 @@ $notes = $_POST["quoteNotes"];
 echo "<div class=\"form-group\">";
 echo "<label for=\"quoteDiscount\">Discount</label>";
 echo "<input type=\"text\" class=\"form-control\" name=\"quoteDiscount\" id=\"quoteDiscount\" value=\"$discount\">";
-echo "<label for=\"quoteNotes\">Price</label>";
+echo "<label for=\"quoteNotes\">Notes</label>";
 echo "<input type=\"text\" class=\"form-control\" name=\"quoteNotes\" id=\"quoteNotes\" value=\"$notes\">";
 echo "</div>";
 
