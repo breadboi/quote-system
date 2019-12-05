@@ -57,7 +57,7 @@ function toggleQuoteFormItems(context) {
 
 // On click event for tables not dynamically generated
 $("td").on("click", function (e) {
-    highlightRow(this, e);
+    highlightQuoteRow(this, e);
 });
 
 /**
@@ -65,7 +65,7 @@ $("td").on("click", function (e) {
  * @param {"this"} context 
  * @param {"event"} e 
  */
-function highlightRow(context, e) {
+function highlightQuoteRow(context, e) {
     // Ensure the radio is checked so we aren't checking quotes
     e.preventDefault();
 
