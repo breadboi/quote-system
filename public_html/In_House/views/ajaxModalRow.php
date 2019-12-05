@@ -10,8 +10,8 @@ WHERE id = $quoteId;";
 
 $query = $devPdo->query($sql);
 $rows = $query->fetchAll(PDO::FETCH_ASSOC);
-modalTableHead($rows);
-modalTableBody($rows);
+tableHead($rows);
+tableBody($rows);
 
 echo "<div class=\"form-group\">";
 echo "<button id=\"sanctionQuoteButton\" type=\"button\" class=\"btn btn-success\" onclick=\"sanctionQuote($quoteId)\">Sanction Quote</button>";
