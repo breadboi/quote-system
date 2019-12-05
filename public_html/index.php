@@ -1,7 +1,7 @@
 <html>
     <?php
     require_once('../resources/library/bootstrap.php');
-    require_once($_SERVER["DOCUMENT_ROOT"] . "/resources/library/devDatabase.php");
+    require_once('../resources/library/devDatabase.php');
     require_once('../resources/library/tableformat.php');
     session_start();
     //Show if user is logged in or not
