@@ -8,6 +8,6 @@ if ( isset( $_SESSION['user_id'] ) )
 }
 else 
 {
-    header("Location: ../../public_html/login.php");
+    header("Location: /public_html/login.php");
 }
 ?>
