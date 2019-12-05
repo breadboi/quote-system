@@ -1,17 +1,20 @@
-<!-- Button to trigger user adjustment modal -->
-<button type="button" class="btn btn-primary modalview" data-toggle="modal" data-target="#confirmationModal">
+<div class="modalChoiceButtons">
+    <!-- Button to trigger user adjustment modal -->
+    <button type="button" class="btn btn-primary modalview" data-toggle="modal" data-target="#confirmationModal">
         Adjust Highlighted User
-</button>
+    </button>
+</div>
 
 <!-- Modal Form -->
-<div class="modal fade" id="confirmationModal" tabindex="-1" role="dialog" aria-labelledby="confirmationModalCenterTitle" aria-hidden="true">
+<div class="modal fade" id="confirmationModal" tabindex="-1" role="dialog"
+    aria-labelledby="confirmationModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">Quote Conversion</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
 
             <div class="modal-body">
@@ -32,17 +35,15 @@
                         <input type="text" class="form-control" name="email" id="quoteEmail" readonly>
                         <label for="quoteSecretnotes">Secretnotes</label>
                         <input type="text" class="form-control" name="secretNotes" id="quoteSecretnotes" readonly>
-                        <!--<label for="quoteStatus">Status</label> -->
-                        <!-- <input type="text" class="form-control" name="status" id="quoteStatus"> -->
                         <label for="quoteDiscount">Discount</label>
                         <input type="text" class="form-control" name="discount" id="quoteDiscount">
 
                     </div>
-                    <button id="submitModal" type="submit" class="btn btn-primary hiddenControl">UPDATE</button>
+                    <button id="submitModal" type="submit" class="btn btn-primary hiddenControl">Update</button>
                 </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                <button id="confirmSubmission" type="button" class="btn btn-primary">UPDATE</button>
+                <button id="confirmSubmission" type="button" class="btn btn-primary">Update</button>
             </div>
         </div>

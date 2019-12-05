@@ -1,68 +1,39 @@
-/* $(document).ready(function() {
-    $("#convertForm").submit(function(event) {
-        submitForm();
-        return false;
-    });
-}); */
-
-/* function submitForm() {
-    $.ajax({
-        type: "POST",
-        url: "Quote_Order.php",
-        cache: false,
-        data: $('form#convertForm').serialize(),
-        success: function(response) {
-            $("#modal").html(response)
-            $("#confirmationModal").modal('hide');
-        },
-        error: function() {
-            alert("Error");
-        }
-    });
-} */
-
 // Used for Modal form submission
 $("#confirmSubmission").on("click", function() {
     $("#submitModal").trigger("click");
 });
 
-var previousrow;
-function addRowHandlers() {
-    var table = document.getElementsByClassName("datatbl");
-    var rows = table[0].getElementsByTagName("tr");
-    for (i = 0; i < rows.length; i++) {
-        var currentRow = table[0].rows[i];
-        var createClickHandler =
-            function(row) {
-                return function() {
-                    if (previousrow != undefined) {
-                        previousrow.setAttribute("style", "");
-                    }
-                    var cell = row.getElementsByTagName("td")[0];
-                    var selection = cell.innerHTML;
-                    var selection = row.getElementsByTagName("td")[0].innerHTML
-                    document.getElementById("quoteId").setAttribute("value", selection);
-                    var selection = row.getElementsByTagName("td")[1].innerHTML
-                    document.getElementById("quoteCustomername").setAttribute("value", selection);
-                    var selection = row.getElementsByTagName("td")[2].innerHTML
-                    document.getElementById("quoteContact").setAttribute("value", selection);
-                    var selection = row.getElementsByTagName("td")[3].innerHTML
-                    document.getElementById("quoteStreet").setAttribute("value", selection);
-                    var selection = row.getElementsByTagName("td")[4].innerHTML
-                    document.getElementById("quoteCity").setAttribute("value", selection);
-                    var selection = row.getElementsByTagName("td")[5].innerHTML
-                    document.getElementById("quoteEmail").setAttribute("value", selection);
-                    var selection = row.getElementsByTagName("td")[6].innerHTML
-                    document.getElementById("quoteSecretnotes").setAttribute("value", selection);
-                    var selection = row.getElementsByTagName("td")[7].innerHTML
-                    // document.getElementById("quoteStatus").setAttribute("value", selection);
-                    var selection = row.getElementsByTagName("td")[8].innerHTML
-                    document.getElementById("quoteDiscount").setAttribute("value", selection);
-                    this.setAttribute("style", "background-color: #e8e8e8; color: #000000 ");
-                    previousrow = row;
-                };
-            };
-        currentRow.onclick = createClickHandler(currentRow);
-    }
-}
-window.onload = addRowHandlers();
+// On click event for tables
+$("td").on("click", function(e) {
+    e.preventDefault();
+
+    // Remove previous highlighting
+    $("tr").removeClass("cellselect");
+    // Create row array variable
+    var rowArray = [];
+    // For each cell, we push to an array
+    $(this).parents('tr').find('td').each(function() {
+        // For each cell
+        rowArray.push($(this));
+    });
+    // Assign each row cell to a variable
+    var selectionId = rowArray[0].text();
+    var selectionName = rowArray[1].text();
+    var selectionCommission = rowArray[2].text();
+    var selectionAddress = rowArray[3].text();
+    var selectionCity = rowArray[4].text();
+    var selectionEmail = rowArray[5].text();
+    var selectionNotes = rowArray[6].text();
+    var selectionDiscount = rowArray[7].text();
+    $(this).parent().addClass("cellselect");
+
+    // Set the field to the cell value
+    $("#quoteId").attr("value", selectionId);
+    $("#quoteCustomername").attr("value", selectionName);
+    $("#quoteContact").attr("value", selectionCommission);
+    $("#quoteStreet").attr("value", selectionAddress);
+    $("#quoteCity").attr("value", selectionCity);
+    $("#quoteEmail").attr("value", selectionEmail);
+    $("#quoteSecretnotes").attr("value", selectionNotes);
+    $("#quoteDiscount").attr("value", selectionDiscount); 
+});

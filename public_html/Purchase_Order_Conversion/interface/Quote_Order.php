@@ -1,21 +1,7 @@
-<!-- <html>
-
-<head>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-</head>
-
-<body> -->
-    <div style="text-align:center" class="jumbotron jumbotron-fluid p-2 m-1 bg-info text-white rounded">
-        <h1>Conversion Interface</h1>
-        <p>Select a Quote to Convert</p>
-    </div>
-
 
     
-    <?php
-    //require_once("../../../resources/config.php");
+<?php
     require_once('../../../resources/library/tableformat.php');
-    require_once('../../../resources/library/bootstrap.php');
     require_once("../../../resources/library/devDatabase.php");
 
     if (isset($_POST['discount'])) 
@@ -48,13 +34,8 @@
         $quoteId = $rows["Customer ID"];
         $customerId = $rows["Associate ID"];
         $calculatedAmount = round($rows["Total Price"], 2);
-       // round($calculatedAmount);
 
         $QuoteId = $_POST['id'];
-        
-
-
-
         $url = 'http://blitz.cs.niu.edu/PurchaseOrder/';
         $data = array(
 	    'order' => $QuoteId, 
@@ -63,19 +44,16 @@
 	    'amount' => $calculatedAmount);
 		
         $options = array(
-         'http' => array(
+         'http' => array (
          'header' => array('Content-type: application/json', 'Accept: application/json'),
          'method'  => 'POST',
          'content' => json_encode($data)
-    )
-);
+         )
+        );
 
         $context  = stream_context_create($options);
         $result = file_get_contents($url, false, $context);
-        //echo($result);
 
-
-        
          // Set increment accumaleted by 1
          $sql3 = "UPDATE sales_associates
          SET accumulated_commission=accumulated_commission + 1
@@ -84,12 +62,7 @@
          // Prepare pdo
          $prepared1 = $devPdo->prepare($sql3, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 
-         $success1 = $prepared1->execute(array(':id' => $customerId));
-
-         
-
-
-
+         $success1 = $prepared1->execute(array(':id' => $customerId));    
     }
 
     $sql = "SELECT * FROM quotes
@@ -98,8 +71,4 @@
     $rows = $AllQuotes->fetchAll(PDO::FETCH_ASSOC);
     echo "<div>", tableHead($rows), tableBody($rows), "</div>";
 
-    ?>
-
-<!-- </body> -->
-
-<!-- </html> -->
+?>
