@@ -40,13 +40,15 @@ require_once($_SERVER["DOCUMENT_ROOT"] . '/resources/library/loginSession.php');
 
         <!-- Quote Search Checkboxes (Display when quote radio is selected) -->
         <div class="form-group quoteFormItems hiddenControl">
-            <input id="finalizedStatus" type="checkbox" value="0" name="finalizedStatus" />
+            <input id="unresolvedStatus" type="checkbox" value="0" name="unresolvedStatus" />
+            <label for="unresolvedStatus">Unresolved</label>
+            <input id="finalizedStatus" type="checkbox" value="1" name="finalizedStatus" />
             <label for="finalizedStatus">Finalized</label>
             <br>
-            <input id="sanctionedStatus" type="checkbox" value="1" name="sanctionedStatus" />
+            <input id="sanctionedStatus" type="checkbox" value="2" name="sanctionedStatus" />
             <label for="sanctionedStatus">Sanctioned</label>
             <br>
-            <input id="orderedStatus" type="checkbox" value="2" name="orderedStatus" />
+            <input id="orderedStatus" type="checkbox" value="3" name="orderedStatus" />
             <label for="orderedStatus">Ordered</label>
             <br>
         </div>
