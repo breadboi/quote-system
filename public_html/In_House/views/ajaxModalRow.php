@@ -3,10 +3,10 @@ require_once($_SERVER["DOCUMENT_ROOT"] . "/resources/library/devDatabase.php");
 require_once($_SERVER["DOCUMENT_ROOT"] ."/resources/library/tableformat.php");
 require_once($_SERVER["DOCUMENT_ROOT"] ."/resources/library/modalTableFormat.php");
 
-$quoteId = $_REQUEST['id'];
+$quoteId = $_REQUEST['quoteId'];
 
-$sql = "SELECT quotes.id AS 'Quote ID', customer_name AS Name, contact AS Contact, street AS Street, city AS City, discount AS Discount, line_number AS 'Line Number', description AS Description, price AS Price, status AS Status, date_created AS Date FROM quotes
-WHERE id = ".$_REQUEST['id'].";";
+$sql = "SELECT customer_name AS Name, email AS Email, discount AS Discount, date_created AS 'Date Created'FROM quotes
+WHERE id = $quoteId;";
 
 $query = $devPdo->query($sql);
 $rows = $query->fetchAll(PDO::FETCH_ASSOC);

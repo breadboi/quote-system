@@ -129,17 +129,25 @@ $("#confirmSubmission").on("click", function () {
 // Add LineItem Click event
 $("#viewLineItemButton").on("click", function () {
     // Set title
-    $("#LineItemModalTitle").text("Line Item Editor");
+    $("#associateModalTitle").text("Line Item Editor");
 
     getPage(CURRENT_ROW_ID);
 });
 
-// Add LineItem Click event
+// Add Quote Click event
 $("#editQuoteButton").on("click", function () {
     // Set title
-    $("#LineItemModalTitle").text("Quote Editor");
+    $("#associateModalTitle").text("Quote Editor");
 
     loadEditQuote(CURRENT_ROW_ID);
+});
+
+// Add Sanction Click event
+$("#sanctionQuoteButton").on("click", function () {
+    // Set title
+    $("#associateModalTitle").text("Sanction Quote");
+    
+    loadModalRow();
 });
 
 function getPage(id) {
@@ -265,16 +273,17 @@ function editQuoteItem() {
         dataType: "html",
         success: function () {
             $("#confirmationModal").modal("hide");
+            location.reload();
         }
     });
 }
 
 function loadModalRow() {
     $('#tableTarget').html('<img src="https://icon-library.net/images/loading-icon-transparent-background/loading-icon-transparent-background-3.jpg" style=\"width:50px;height:50px;text-align:center;\"  />');
-
+    
     jQuery.ajax({
         url: "/public_html/In_House/views/ajaxModalRow.php",
-        data: 'id=' + CURRENT_ROW_ID,
+        data: 'quoteId=' + CURRENT_ROW_ID,
         type: "POST",
         dataType: "html",
         success: function (data) {
@@ -283,16 +292,14 @@ function loadModalRow() {
     });
 }
 
-function sanctionQuote(id) {
-    $('#tableTarget').html('<img src="https://icon-library.net/images/loading-icon-transparent-background/loading-icon-transparent-background-3.jpg" style=\"width:50px;height:50px;text-align:center;\"  />');
-
+function sanctionQuote(id) {    
     jQuery.ajax({
         url: "/public_html/In_House/views/sanctionQuote.php",
-        data: 'id=' + id,
+        data: 'quoteId=' + id,
         type: "POST",
         dataType: "html",
         success: function (data) {
-            $('#tableTarget').html(data);
+            location.reload();
         }
     });
 }
