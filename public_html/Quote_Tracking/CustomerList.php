@@ -1,8 +1,8 @@
 <?php
-require_once($_SERVER["DOCUMENT_ROOT"] . '/resources/library/loginSession.php');
-require_once('../../resources/library/legacy.php');
-require_once('../../resources/library/tableformat.php');
-require_once('../../resources/library/bootstrap.php');
+require_once(__DIR__ . '/../../resources/library/loginSession.php');
+require_once(__DIR__ . '/../../resources/library/legacy.php');
+require_once(__DIR__ . '/../../resources/library/tableformat.php');
+require_once(__DIR__ . '/../../resources/library/bootstrap.php');
 ?>
 
 <!DOCTYPE html>
