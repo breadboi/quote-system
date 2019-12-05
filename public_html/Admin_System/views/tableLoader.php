@@ -24,7 +24,8 @@
                         INNER JOIN line_item ON line_item.quote_id = quotes.id
                         WHERE customer_name LIKE CONCAT('%', :customerName, '%')
                         AND sales_associates.name LIKE CONCAT('%', :salesAssociateName, '%')
-                        AND (status = :finalizedStatus
+                        AND (status = :unresolvedStatus
+                        OR status = :finalizedStatus
                         OR status = :sanctionedStatus
                         OR status = :orderedStatus
                         )
@@ -59,9 +60,12 @@
                 // Handle date range
                 $startDate = date("Y-m-d",strtotime(substr($_POST["daterange"], 0, 10)));
                 $endDate = date("Y-m-d",strtotime(substr($_POST["daterange"], 13)));
-                // finalizedStatus=0&sanctionedStatus=1&orderedStatus=2
-
+                
                 // Handle all checkbox options
+                if(isset($_POST["unresolvedStatus"]))
+                    $unresolvedStatus = $_POST["unresolvedStatus"];
+                else
+                    $unresolvedStatus = NULL;
                 if(isset($_POST["finalizedStatus"]))
                     $finalizedStatus = $_POST["finalizedStatus"];
                 else
@@ -76,17 +80,19 @@
                     $orderedStatus = NULL;
 
                 // If all of the above are NULL, we default to all set to search for all
-                if ($finalizedStatus == NULL && $sanctionedStatus == NULL && $orderedStatus == NULL)
+                if ($unresolvedStatus == NULL && $finalizedStatus == NULL && $sanctionedStatus == NULL && $orderedStatus == NULL)
                 {
-                    $finalizedStatus = 0;
-                    $sanctionedStatus = 1;
-                    $orderedStatus = 2;
+                    $unresolvedStatus = 0;
+                    $finalizedStatus = 1;
+                    $sanctionedStatus = 2;
+                    $orderedStatus = 3;
                 }
 
                 $success = $prepared->execute(array(':salesAssociateName' => $salesAssociateName,
                                                     ':customerName' => $customerName,
                                                     ':startDate' => $startDate,
                                                     ':endDate' => $endDate,
+                                                    ':unresolvedStatus' => $unresolvedStatus,
                                                     ':finalizedStatus' => $finalizedStatus,
                                                     ':sanctionedStatus' => $sanctionedStatus,
                                                     ':orderedStatus' => $orderedStatus));
