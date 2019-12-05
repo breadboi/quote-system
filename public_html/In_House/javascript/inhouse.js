@@ -1,4 +1,6 @@
 var CURRENT_ROW_ID;
+var CURRENT_ROW_DISCOUNT;
+var CURRENT_ROW_NOTES;
 
 // DataTable Functionality
 $(document).ready(function () {
@@ -76,25 +78,18 @@ function highlightRow(context, e) {
     // For each cell, we push to an array
     $(context).parents('tr').find('td').each(function () {
         // For each cell
-        rowArray.push($(context));
+        rowArray.push($(this));
     });
 
     // Assign each row cell to a variable
     var selectionId = rowArray[0].text();
-    var selectionNumber = rowArray[1].text();
-    var selectionDescription = rowArray[2].text();
-    var selectionPrice = rowArray[3].text();
-    var selectionAddress = rowArray[4].text();
+    var selectionDiscount = rowArray[3].text();
+    var selectionNotes = rowArray[4].text();
     $(context).parent().addClass("cellselect");
 
-    // Set the field to the cell value
-    $("#lineItemFieldId").attr("value", selectionId);
-    $("#lineItemFieldNumber").attr("value", selectionNumber);
-    $("#lineItemFieldDescription").attr("value", selectionDescription);
-    $("#lineItemFieldPrice").attr("value", selectionPrice);
-    $("#lineItemFieldQuoteId").attr("value", selectionAddress);
-
     CURRENT_ROW_ID = selectionId;
+    CURRENT_ROW_DISCOUNT = selectionDiscount;
+    CURRENT_ROW_NOTES = selectionNotes;
 }
 
 /**
@@ -132,27 +127,19 @@ $("#confirmSubmission").on("click", function () {
 });
 
 // Add LineItem Click event
-$("#addLineItemButton").on("click", function () {
-    // Enable editing (if previously disabled)
-    $("#lineItemFieldNumber").attr("disabled", false);
-    $("#lineItemFieldDescription").attr("disabled", false);
-    $("#lineItemFieldPrice").attr("disabled", false);
-    $("#lineItemFieldQuoteId").attr("disabled", false);
-
-    // Remove existing values
-    $("#lineItemFieldId").attr("value", "");
-    $("#lineItemFieldNumber").attr("value", "");
-    $("#lineItemFieldDescription").attr("value", "");
-    $("#lineItemFieldPrice").attr("value", "");
-    $("#lineItemFieldQuoteId").attr("value", "");
-
-    // Define what the form is for
-    $("#addLineItem").attr("checked", true);
-
+$("#viewLineItemButton").on("click", function () {
     // Set title
-    $("#LineItemModalTitle").text("Add a new Line Item");
+    $("#LineItemModalTitle").text("Line Item Editor");
 
     getPage(CURRENT_ROW_ID);
+});
+
+// Add LineItem Click event
+$("#editQuoteButton").on("click", function () {
+    // Set title
+    $("#LineItemModalTitle").text("Quote Editor");
+
+    loadEditQuote(CURRENT_ROW_ID);
 });
 
 function getPage(id) {
@@ -258,7 +245,7 @@ function loadEditQuote(id) {
 
     jQuery.ajax({
         url: "/public_html/In_House/views/ajaxEditQuote.php",
-        data: 'quoteId=' + id,
+        data: 'quoteId=' + id + '&quoteDiscount=' + CURRENT_ROW_DISCOUNT + '&quoteNotes=' + CURRENT_ROW_NOTES,
         type: "POST",
         dataType: "html",
         success: function (data) {
@@ -269,10 +256,10 @@ function loadEditQuote(id) {
 
 function editQuoteItem() {
     var quoteDiscount = $("#quoteDiscount").val();
-    var quoteNotes = $("#lineItemDescription").val();
+    var quoteNotes = $("#quoteNotes").val();
 
     jQuery.ajax({
-        url: "/public_html/In_House/views/editQuoteItem.php",
+        url: "/public_html/In_House/views/updateQuote.php",
         data: 'quoteId=' + CURRENT_ROW_ID + '&quoteDiscount=' + quoteDiscount + '&quoteNotes=' + quoteNotes,
         type: "POST",
         dataType: "html",

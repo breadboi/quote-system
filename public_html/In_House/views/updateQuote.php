@@ -1,7 +1,7 @@
 <?php
 require_once($_SERVER["DOCUMENT_ROOT"] . "/resources/library/devDatabase.php");
 
-$notes = $_POST["notes"];
+$notes = $_POST["quoteNotes"];
 $quoteDiscount = $_POST["quoteDiscount"];
 $quoteId = $_POST["quoteId"];
 
