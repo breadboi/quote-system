@@ -273,7 +273,6 @@ function editQuoteItem() {
         dataType: "html",
         success: function () {
             $("#confirmationModal").modal("hide");
-            location.reload();
         }
     });
 }
