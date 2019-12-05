@@ -1,0 +1,13 @@
+
+.cellfill {
+    background-color: #337ab7;
+    width: 5%
+}
+
+.cellselect {
+    background-color: #2a6394;
+}
+
+.hiddenControl {
+    display: none;
+}
