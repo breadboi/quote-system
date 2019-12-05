@@ -8,6 +8,6 @@ if ( isset( $_SESSION['user_id'] ) )
 }
 else 
 {
-    header("Location: /public_html/login.php");
+    header("Location: http://students.cs.niu.edu/~z1860518/Quote_System/public_html/login.php");
 }
 ?>
