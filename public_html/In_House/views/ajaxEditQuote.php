@@ -1,7 +1,7 @@
 <?php
-require_once(__DIR__ . "/../resources/library/devDatabase.php");
-require_once(__DIR__ . "/../resources/library/tableformat.php");
-require_once(__DIR__ . "/../resources/library/modalTableFormat.php");
+require_once(__DIR__ . "/../../../resources/library/devDatabase.php");
+require_once(__DIR__ . "/../../../resources/library/tableformat.php");
+require_once(__DIR__ . "/../../../resources/library/modalTableFormat.php");
 
 $quoteId = $_POST["quoteId"];
 $discount = $_POST["quoteDiscount"];

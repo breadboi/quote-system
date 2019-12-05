@@ -1,5 +1,5 @@
 <?php
-require_once(__DIR__ . "/../resources/library/devDatabase.php");
+require_once(__DIR__ . "/../../../resources/library/devDatabase.php");
 
 $notes = $_POST["quoteNotes"];
 $quoteDiscount = $_POST["quoteDiscount"];

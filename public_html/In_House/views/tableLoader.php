@@ -1,8 +1,8 @@
 <?php
     // Load config and functions
-    require_once("../../resources/config.php");
-    include("../../resources/library/devDatabase.php");
-    require_once("../../resources/library/tableformat.php");
+    require_once(__DIR__ . "/../../../resources/config.php");
+    include(__DIR__ . "/../../../resources/library/devDatabase.php");
+    require_once(__DIR__ . "/../../../resources/library/tableformat.php");
 
     //$searchChoice = $_POST["searchChoice"];                      
 
