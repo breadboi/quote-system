@@ -22,7 +22,7 @@
     {
         $id = $_POST['id'];
         $discount = $_POST['discount'];
-
+        
         // Set status
         $sql = "UPDATE quotes
                 SET status=:status, discount=:discount
@@ -47,7 +47,8 @@
         $rows = $query->fetch(PDO::FETCH_ASSOC);
         $quoteId = $rows["Customer ID"];
         $customerId = $rows["Associate ID"];
-        $calculatedAmount = $rows["Total Price"];
+        $calculatedAmount = round($rows["Total Price"], 2);
+       // round($calculatedAmount);
 
         $QuoteId = $_POST['id'];
         
@@ -71,7 +72,21 @@
 
         $context  = stream_context_create($options);
         $result = file_get_contents($url, false, $context);
-        echo($result);
+        //echo($result);
+
+
+        
+         // Set increment accumaleted by 1
+         $sql3 = "UPDATE sales_associates
+         SET accumulated_commission=accumulated_commission + 1
+         WHERE id=:id;";
+
+         // Prepare pdo
+         $prepared1 = $devPdo->prepare($sql3, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+
+         $success1 = $prepared1->execute(array(':id' => $customerId));
+
+         
 
 
 
