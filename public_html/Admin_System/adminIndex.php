@@ -1,12 +1,11 @@
 <?php
-require_once($_SERVER["DOCUMENT_ROOT"] . '/resources/library/loginSession.php');
-require_once($_SERVER["DOCUMENT_ROOT"] . '/resources/library/bootstrap.php');
+require_once(__DIR__ . '/../../resources/library/loginSession.php');
+require_once(__DIR__ . '/../../resources/library/bootstrap.php');
 
 if ($_SESSION['admin'] == false) 
 {
     header("Location: ../index.php");
 }
-
 ?>
 <html>
 

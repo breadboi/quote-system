@@ -66,7 +66,7 @@
     }
 
     $sql = "SELECT * FROM quotes
-            WHERE status != 3;";
+            WHERE status = 2;";
     $AllQuotes = $devPdo->query($sql);
     $rows = $AllQuotes->fetchAll(PDO::FETCH_ASSOC);
     echo "<div>", tableHead($rows), tableBody($rows), "</div>";

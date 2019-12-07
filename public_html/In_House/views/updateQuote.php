@@ -8,7 +8,7 @@ parameters:
 Updates the query based on the quoteId
  -->
 <?php
-require_once($_SERVER["DOCUMENT_ROOT"] . "/resources/library/devDatabase.php");
+require_once(__DIR__ . "/../../../resources/library/devDatabase.php");
 
 $notes = $_POST["quoteNotes"];
 $quoteDiscount = $_POST["quoteDiscount"];

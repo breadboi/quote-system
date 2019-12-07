@@ -159,7 +159,7 @@ function getPage(id) {
     $('#tableTarget').html('<img src="https://icon-library.net/images/loading-icon-transparent-background/loading-icon-transparent-background-3.jpg" style=\"width:50px;height:50px;text-align:center;\"  />');
 
     jQuery.ajax({
-        url: "/public_html/In_House/views/ajaxModalTable.php",
+        url: "http://students.cs.niu.edu/~z1860518/Quote_System/public_html/In_House/views/ajaxModalTable.php",
         data: 'id=' + id,
         type: "POST",
         dataType: "html",
@@ -180,7 +180,7 @@ function getRowEdit(lineId, lineNumber, description, price) {
     $('#tableTarget').html('<img src="https://icon-library.net/images/loading-icon-transparent-background/loading-icon-transparent-background-3.jpg" style=\"width:50px;height:50px;text-align:center;\"  />');
 
     jQuery.ajax({
-        url: "/public_html/In_House/views/ajaxEditRow.php",
+        url: "http://students.cs.niu.edu/~z1860518/Quote_System/public_html/In_House/views/ajaxEditRow.php",
         data: 'lineId=' + lineId + '&lineNumber=' + lineNumber + '&description=' + description + '&price=' + price,
         type: "POST",
         dataType: "html",
@@ -198,7 +198,7 @@ function getRowEdit(lineId, lineNumber, description, price) {
  */
 function deleteLineItem(lineId) {
     jQuery.ajax({
-        url: "/public_html/In_House/views/deleteLineItem.php",
+        url: "http://students.cs.niu.edu/~z1860518/Quote_System/public_html/In_House/views/deleteLineItem.php",
         data: 'lineItemId=' + lineId,
         type: "POST",
         dataType: "html",
@@ -218,7 +218,7 @@ function addLineItem() {
     var quoteId = $("#lineItemQuoteId").val();
 
     jQuery.ajax({
-        url: "/public_html/In_House/views/insertLineItem.php",
+        url: "http://students.cs.niu.edu/~z1860518/Quote_System/public_html/In_House/views/insertLineItem.php",
         data: 'lineItemNumber=' + lineNumber + '&lineItemDescription=' + description + '&lineItemPrice=' + price + '&lineItemQuoteId=' + quoteId,
         type: "POST",
         dataType: "html",
@@ -237,7 +237,7 @@ function editLineItem(lineItemId) {
     var price = $("#lineItemPrice").val();
 
     jQuery.ajax({
-        url: "/public_html/In_House/views/updateLineItem.php",
+        url: "http://students.cs.niu.edu/~z1860518/Quote_System/public_html/In_House/views/updateLineItem.php",
         data: 'lineItemId=' + lineItemId + '&lineItemNumber=' + lineNumber + '&lineItemDescription=' + description + '&lineItemPrice=' + price + '&lineItemQuoteId=' + CURRENT_ROW_ID,
         type: "POST",
         dataType: "html",
@@ -252,7 +252,7 @@ function editLineItem(lineItemId) {
  */
 function loadInsertPage() {
     jQuery.ajax({
-        url: "/public_html/In_House/views/ajaxInsertRow.php",
+        url: "http://students.cs.niu.edu/~z1860518/Quote_System/public_html/In_House/views/ajaxInsertRow.php",
         data: 'quoteId=' + CURRENT_ROW_ID,
         type: "POST",
         dataType: "html",
@@ -269,7 +269,7 @@ function loadEditQuote(id) {
     $('#tableTarget').html('<img src="https://icon-library.net/images/loading-icon-transparent-background/loading-icon-transparent-background-3.jpg" style=\"width:50px;height:50px;text-align:center;\"  />');
 
     jQuery.ajax({
-        url: "/public_html/In_House/views/ajaxEditQuote.php",
+        url: "http://students.cs.niu.edu/~z1860518/Quote_System/public_html/In_House/views/ajaxEditQuote.php",
         data: 'quoteId=' + id + '&quoteDiscount=' + CURRENT_ROW_DISCOUNT + '&quoteNotes=' + CURRENT_ROW_NOTES,
         type: "POST",
         dataType: "html",
@@ -287,13 +287,12 @@ function editQuoteItem() {
     var quoteNotes = $("#quoteNotes").val();
 
     jQuery.ajax({
-        url: "/public_html/In_House/views/updateQuote.php",
+        url: "http://students.cs.niu.edu/~z1860518/Quote_System/public_html/In_House/views/updateQuote.php",
         data: 'quoteId=' + CURRENT_ROW_ID + '&quoteDiscount=' + quoteDiscount + '&quoteNotes=' + quoteNotes,
         type: "POST",
         dataType: "html",
         success: function () {
             $("#confirmationModal").modal("hide");
-            location.reload();
         }
     });
 }
@@ -305,7 +304,7 @@ function loadModalRow() {
     $('#tableTarget').html('<img src="https://icon-library.net/images/loading-icon-transparent-background/loading-icon-transparent-background-3.jpg" style=\"width:50px;height:50px;text-align:center;\"  />');
     
     jQuery.ajax({
-        url: "/public_html/In_House/views/ajaxModalRow.php",
+        url: "http://students.cs.niu.edu/~z1860518/Quote_System/public_html/In_House/views/ajaxModalRow.php",
         data: 'quoteId=' + CURRENT_ROW_ID,
         type: "POST",
         dataType: "html",
@@ -321,7 +320,7 @@ function loadModalRow() {
  */
 function sanctionQuote(id) {    
     jQuery.ajax({
-        url: "/public_html/In_House/views/sanctionQuote.php",
+        url: "http://students.cs.niu.edu/~z1860518/Quote_System/public_html/In_House/views/sanctionQuote.php",
         data: 'quoteId=' + id,
         type: "POST",
         dataType: "html",

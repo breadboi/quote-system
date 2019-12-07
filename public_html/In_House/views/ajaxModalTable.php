@@ -4,10 +4,9 @@ parameters:
         Id
  -->
 <?php
-//Imports
-require_once($_SERVER["DOCUMENT_ROOT"] . "/resources/library/devDatabase.php");
-require_once($_SERVER["DOCUMENT_ROOT"] ."/resources/library/tableformat.php");
-require_once($_SERVER["DOCUMENT_ROOT"] ."/resources/library/modalTableFormat.php");
+require_once(__DIR__ . "/../../../resources/library/devDatabase.php");
+require_once(__DIR__ . "/../../../resources/library/tableformat.php");
+require_once(__DIR__ . "/../../../resources/library/modalTableFormat.php");
 
 //Variables
 $sql = "SELECT id AS ID, line_number as 'Line Number', description as 'Description', price as 'Price' FROM line_item

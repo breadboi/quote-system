@@ -10,7 +10,7 @@ parameters:
 Updates the query based on the lineItemId
  -->
 <?php
-require_once($_SERVER["DOCUMENT_ROOT"] . "/resources/library/devDatabase.php");
+require_once(__DIR__ . "/../../../resources/library/devDatabase.php");
 
 $lineItemId = $_POST["lineItemId"];
 $lineItemNumber = $_POST["lineItemNumber"];
