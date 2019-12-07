@@ -24,9 +24,11 @@ if (!empty($_POST)) {
     } else {
       $userSession = $found[1];
       $password = $found[2];
+      $admin = $found[5];
       // Verify user password and set $_SESSION
       if (md5($passwordInput) == $password) {
         $_SESSION['user_id'] = $userSession;
+        $_SESSION['admin'] = $admin;
       } else {
         echo '<div style="text-align:center" class="alert alert-danger">';
         echo '<strong>Incorrect Password</strong>';
