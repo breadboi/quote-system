@@ -1,3 +1,13 @@
+<!-- 
+Insert line_item
+parameters:       
+        lineItemNumber
+        lineItemDescription
+        lineItemPrice
+        lineItemQuoteId
+
+Inserts data into the database
+ -->
 <?php
 require_once($_SERVER["DOCUMENT_ROOT"] . "/resources/library/devDatabase.php");
 

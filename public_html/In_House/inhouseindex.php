@@ -1,9 +1,11 @@
+<!-- Import library recourses  -->
 <?php
 require_once($_SERVER["DOCUMENT_ROOT"] . '/resources/library/loginSession.php');
 require_once($_SERVER["DOCUMENT_ROOT"] . '/resources/library/bootstrap.php');
 ?>
 <html>
 
+<!-- Title of project function -->
 <head>
     <title>In House Interface</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">

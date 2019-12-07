@@ -1,3 +1,8 @@
+<!-- 
+Update quotes to Sanctioned
+parameters:       
+        quoteId
+ -->
 <?php
 require_once($_SERVER["DOCUMENT_ROOT"] . "/resources/library/devDatabase.php");
 

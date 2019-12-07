@@ -1,3 +1,9 @@
+<!-- 
+Delete line_item
+parameters:       
+        lineItemId
+Delete data from the database based on lineItemId
+ -->
 <?php
 require_once($_SERVER["DOCUMENT_ROOT"] . "/resources/library/devDatabase.php");
 

@@ -1,3 +1,12 @@
+<!-- 
+Update quotes query
+parameters:       
+        notes
+        quoteDiscount
+        quoteId
+
+Updates the query based on the quoteId
+ -->
 <?php
 require_once($_SERVER["DOCUMENT_ROOT"] . "/resources/library/devDatabase.php");
 

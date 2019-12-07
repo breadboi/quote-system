@@ -1,3 +1,4 @@
+//Global source control variables 
 var CURRENT_ROW_ID;
 var CURRENT_ROW_DISCOUNT;
 var CURRENT_ROW_NOTES;
@@ -150,6 +151,10 @@ $("#sanctionQuoteButton").on("click", function () {
     loadModalRow();
 });
 
+/**
+ * Get the pageId and send it to ajaxModalTable
+ * @param {"int"} id
+ * */
 function getPage(id) {
     $('#tableTarget').html('<img src="https://icon-library.net/images/loading-icon-transparent-background/loading-icon-transparent-background-3.jpg" style=\"width:50px;height:50px;text-align:center;\"  />');
 
@@ -165,7 +170,7 @@ function getPage(id) {
 }
 
 /**
- * 
+ * Use ajax to pop up modal and populate it with the variables 
  * @param {"int"} lineId
  * @param {"int"} lineNumber 
  * @param {"string"} description 
@@ -203,6 +208,9 @@ function deleteLineItem(lineId) {
     });
 }
 
+/*
+* Get the line item variables from the modal and call insertLineItem.php to add the new data into the database
+*/
 function addLineItem() {
     var lineNumber = $("#lineItemNumber").val();
     var description = $("#lineItemDescription").val();
@@ -220,6 +228,9 @@ function addLineItem() {
     });
 }
 
+/*
+* Get the line item variables from the modal and call updateLineItem.php to update the new data into the database
+*/
 function editLineItem(lineItemId) {
     var lineNumber = $("#lineItemNumber").val();
     var description = $("#lineItemDescription").val();
@@ -236,6 +247,9 @@ function editLineItem(lineItemId) {
     });
 }
 
+/**
+ * Function to use the global CURRENT_ROW_ID to pop up ajaxInsertRow.php modal
+ */
 function loadInsertPage() {
     jQuery.ajax({
         url: "/public_html/In_House/views/ajaxInsertRow.php",
@@ -248,6 +262,9 @@ function loadInsertPage() {
     });
 }
 
+/**
+ * Function to use the global CURRENT_ROW_ID and CURRENT_ROW_NOTES to pop up ajaxEditQuote.php modal for editing
+ */
 function loadEditQuote(id) {
     $('#tableTarget').html('<img src="https://icon-library.net/images/loading-icon-transparent-background/loading-icon-transparent-background-3.jpg" style=\"width:50px;height:50px;text-align:center;\"  />');
 
@@ -262,6 +279,9 @@ function loadEditQuote(id) {
     });
 }
 
+/**
+ * Function to use the global CURRENT_ROW_ID, and passed quoteDiscount, quoteNotes to edit Quote in Database 
+ */
 function editQuoteItem() {
     var quoteDiscount = $("#quoteDiscount").val();
     var quoteNotes = $("#quoteNotes").val();
@@ -278,6 +298,9 @@ function editQuoteItem() {
     });
 }
 
+/**
+ * Function to use the global CURRENT_ROW_ID to pop up ajaxModalRow.php modal
+ */
 function loadModalRow() {
     $('#tableTarget').html('<img src="https://icon-library.net/images/loading-icon-transparent-background/loading-icon-transparent-background-3.jpg" style=\"width:50px;height:50px;text-align:center;\"  />');
     
@@ -292,6 +315,10 @@ function loadModalRow() {
     });
 }
 
+/**
+ * pass qupte it to sanctionQuote.php to set quote status to 3
+ * @param {int} id 
+ */
 function sanctionQuote(id) {    
     jQuery.ajax({
         url: "/public_html/In_House/views/sanctionQuote.php",

@@ -1,3 +1,14 @@
+<!-- 
+Update line_item
+parameters:       
+        lineItemId
+        lineItemNumber
+        lineItemDescription
+        lineItemPrice
+        lineItemQuoteId
+
+Updates the query based on the lineItemId
+ -->
 <?php
 require_once($_SERVER["DOCUMENT_ROOT"] . "/resources/library/devDatabase.php");
 
