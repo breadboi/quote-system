@@ -1,6 +1,6 @@
 <?php
-require_once($_SERVER["DOCUMENT_ROOT"] . '/resources/library/loginSession.php');
-require_once('../../../resources/library/bootstrap.php');
+require_once(__DIR__ . '/../../../resources/library/loginSession.php');
+require_once(__DIR__.'/../../../resources/library/bootstrap.php');
 ?>
 
 <html>
@@ -25,7 +25,7 @@ require_once('../../../resources/library/bootstrap.php');
 
     <!-- Return To Index Page -->
     <div class="p-1 btn-group">
-        <a href="../index.php" class="btn btn-dark" role="button">Back To Home Page</a>
+        <a href="../../index.php" class="btn btn-dark" role="button">Back To Home Page</a>
     </div>
 
     <div style="text-align:center" class="jumbotron jumbotron-fluid p-2 m-1 bg-info text-white rounded">
