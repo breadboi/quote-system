@@ -1,4 +1,4 @@
-
+/* Basic Styling for Tables*/
 .cellfill {
     background-color: #337ab7;
     width: 5%
@@ -8,6 +8,7 @@
     background-color: #2a6394;
 }
 
+/* Styling for controls that are to be hidden */
 .hiddenControl {
     display: none;
 }

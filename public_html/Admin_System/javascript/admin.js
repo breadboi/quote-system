@@ -1,4 +1,8 @@
-// DataTable Functionality
+/**
+ * Once the document has loaded,
+ * setup datatables on tables with
+ * table class.
+ */
 $(document).ready(function () {
     var params = {
         searching: false,
@@ -8,12 +12,16 @@ $(document).ready(function () {
     $('table').DataTable(params);
 });
 
-// Change in radio button selection for quote and sales associate search
+/**
+ * On change event for radio buttons with the name of searchChoice
+ */
 $('input[type=radio][name=searchChoice]').change(function() {
     toggleQuoteFormItems(this);
 });
 
-// Date Range Picker
+/**
+ * Daterange picker function
+ */
 $(function() {
 
     var start = moment().subtract(29, 'days');
@@ -40,7 +48,10 @@ $(function() {
 
 });
 
-// Toggles form controls (0=SalesAssociate, 1=Quote)
+/**
+ * Toggles form controls (0=SalesAssociate, 1=Quote)
+ * @param {"Pass 'this' to provide context"} context 
+ */
 function toggleQuoteFormItems(context) {
     if (context.value == 0) 
     {
@@ -54,7 +65,11 @@ function toggleQuoteFormItems(context) {
     }
 }
 
-// On click event for tables
+/**
+ * On click event for td that grabs the row values
+ * and passes them to the next form while also highlighting
+ * the selected row.
+ */
 $("td").on("click", function(e) {
     // Ensure the radio is checked so we aren't checking quotes
     if ($("#salesassociate").prop("checked"))
@@ -89,12 +104,16 @@ $("td").on("click", function(e) {
     }    
 });
 
-// Used for Modal form submission
+/**
+ * Passes confirmSubmission click to associateForm
+ */
 $("#confirmSubmission").on("click", function() {
     $("#associateForm").trigger("click");
 });
 
-// Add Associate Click event
+/**
+ * On click setup form for add associate action
+ */
 $("#addAssociateButton").on("click", function() {
     // Enable editing (if previously disabled)
     $("#associateFieldName").attr("disabled", false);
@@ -115,7 +134,9 @@ $("#addAssociateButton").on("click", function() {
     $("#associateModalTitle").text("Add a new Sales Associate");
 });
 
-// Edit Associate Click event
+/**
+ * On click setup form for edit associate action
+ */
 $("#editAssociateButton").on("click", function() {
     // Enable editing (if previously disabled)
     $("#associateFieldName").attr("disabled", false);
@@ -130,7 +151,9 @@ $("#editAssociateButton").on("click", function() {
     $("#associateModalTitle").text("Edit Selected Sales Associate");
 });
 
-// Delete Associate Click event
+/**
+ * On click setup form for delete associate action
+ */
 $("#deleteAssociateButton").on("click", function() {
     // Define what the form is for
     $("#deleteAssociate").attr("checked", true);
