@@ -1,3 +1,13 @@
+<!--
+Group 5B
+12/07/19
+CSCI 467
+Quote System
+
+Purpose:
+    Page is to select customer from the database and input their data 
+    into the quote currently being created.
+-->
 <?php
 require_once(__DIR__ . '/../../resources/library/loginSession.php');
 require_once(__DIR__ . '/../../resources/library/legacy.php');
@@ -71,6 +81,7 @@ require_once(__DIR__ . '/../../resources/library/bootstrap.php');
     var previousrow;
 
     function addRowHandlers() {
+        //Get rows in table
         var table = document.getElementsByClassName("datatbl");
         var rows = table[0].getElementsByTagName("tr");
         for (i = 0; i < rows.length; i++) {
@@ -78,6 +89,11 @@ require_once(__DIR__ . '/../../resources/library/bootstrap.php');
             var createClickHandler =
                 function(row) {
                     return function() {
+                        /**For each row selection:
+                         * Remove previous selection styling
+                         * Change color of row
+                         * Alter input box
+                         */
                         if (previousrow != undefined) {
                             previousrow.setAttribute("style", "");
                         }
