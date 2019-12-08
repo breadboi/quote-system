@@ -6,8 +6,7 @@
 </div>
 
 <!-- Modal Form -->
-<div class="modal fade" id="confirmationModal" tabindex="-1" role="dialog"
-    aria-labelledby="confirmationModalCenterTitle" aria-hidden="true">
+<div class="modal fade" id="confirmationModal" tabindex="-1" role="dialog" aria-labelledby="confirmationModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -19,7 +18,7 @@
 
             <div class="modal-body">
                 <form id="convertForm" name="convert" role="form" method="POST">
-                    <!-- Input Fields for Sales Associates -->
+                    <!-- Input Fields for Quote Conversion -->
                     <div class="form-group">
                         <label for="quoteId">ID</label>
                         <input type="text" class="form-control" name="id" id="quoteId" readonly>
@@ -42,6 +41,7 @@
                     <button id="submitModal" type="submit" class="btn btn-primary hiddenControl">Update</button>
                 </form>
             </div>
+            <!-- Modal Form footer for Update and Cancel Button -->
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
                 <button id="confirmSubmission" type="button" class="btn btn-primary">Update</button>
