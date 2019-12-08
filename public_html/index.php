@@ -22,7 +22,7 @@ a login page for accessing the components.
     //Show if user is logged in or not
     if ( isset( $_SESSION['user_id'] ) ) 
     {
-        /**Displays wether or not a user is logged in and if they are an admin */
+        /** Displays wether or not a user is logged in and if they are an admin */
         $loggedIn = '<p style="text-align:center" class="bg-success text-white">Logged In As: ' . $_SESSION["user_id"];
         if($_SESSION['admin'] == true)
         {

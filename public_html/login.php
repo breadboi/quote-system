@@ -38,7 +38,7 @@ if (!empty($_POST)) {
       $userSession = $found[1];
       $password = $found[2];
       $admin = $found[5];
-      // Verify user password and set $_SESSION
+      // Verify user password and set $_SESSION admin and user
       if (md5($passwordInput) == $password) {
         $_SESSION['user_id'] = $userSession;
         $_SESSION['admin'] = $admin;

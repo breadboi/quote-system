@@ -30,8 +30,7 @@ require_once(__DIR__ . '/../../resources/library/devDatabase.php');
         $data = htmlspecialchars($data);
         return $data;
     }
-?>
-<?php
+    
 //Variables For Customer Information
 $id = $name = $city = $street = $contact = "";
 //If Post request from customer list then Autofill Information
