@@ -65,6 +65,7 @@
          $success1 = $prepared1->execute(array(':id' => $customerId));    
     }
 
+    //Selects Quotes Where the status is equal to 2 Sanctioned
     $sql = "SELECT * FROM quotes
             WHERE status = 2;";
     $AllQuotes = $devPdo->query($sql);
