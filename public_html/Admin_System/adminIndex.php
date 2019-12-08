@@ -2,6 +2,7 @@
 require_once(__DIR__ . '/../../resources/library/loginSession.php');
 require_once(__DIR__ . '/../../resources/library/bootstrap.php');
 
+// Ensure user is logged in as admin
 if ($_SESSION['admin'] == false) 
 {
     header("Location: ../index.php");
@@ -32,6 +33,7 @@ if ($_SESSION['admin'] == false)
         <a href="../index.php" class="btn btn-dark" role="button">Back To Home Page</a>
     </div>
 
+    <!-- Banner for top of page -->
     <div style="text-align:center" class="jumbotron jumbotron-fluid p-2 m-1 bg-info text-white rounded">
         <h1>Admin Interface</h1>
         <h5>Manage Sales Associates and View Quotes/Line Items</h5>
@@ -78,12 +80,9 @@ if ($_SESSION['admin'] == false)
                 </input>
             </div>
 
+            <!-- Submit -->
             <div class="form-group">
                 <button type="submit" class="btn btn-primary">Search</button>
-            </div>
-
-            <div class="form-group">
-
             </div>
 
         </form>
