@@ -1,3 +1,13 @@
+<!--
+Group 5B
+12/07/19
+CSCI 467
+Quote System
+
+Purpose:
+    This page checks if all data is accurate and correctly formated in the final 
+    quote and if so then the quote and line items are entered into the database.
+-->
 <?php
 require_once(__DIR__ . '/../../resources/library/loginSession.php');
 require_once(__DIR__ . '/../../resources/library/bootstrap.php');
@@ -78,6 +88,7 @@ require_once(__DIR__ . '/../../resources/library/devDatabase.php');
             $valid = false;
         }
     }
+    //Check if message has any input if not make it blank
     if (empty($_POST["message"])) {
         $message = "";
     } 
@@ -86,6 +97,7 @@ require_once(__DIR__ . '/../../resources/library/devDatabase.php');
         $message = test_input($_POST["message"]);
     }
 
+    //Check each line item for valid input
     $lineNumber = 1;
     foreach ($lineitem as $L) {
         if (empty($L)) {
@@ -95,7 +107,7 @@ require_once(__DIR__ . '/../../resources/library/devDatabase.php');
         $lineNumber++;
         $L = test_input($L);
     }
-
+    //Check if price is formated in decimal.
     $lineNumber = 1;
     foreach ($price as $P) {
         if (!preg_match("/^\d+\.?\d\d$/", $P) || empty($P)) {
@@ -112,12 +124,13 @@ require_once(__DIR__ . '/../../resources/library/devDatabase.php');
     if ($valid) 
     {
         try {
+            //Find user from session id.
             $salesassociate = $_SESSION['user_id'];
             $SA = $devPdo->prepare("SELECT * FROM sales_associates WHERE name = :user");
             $SA->bindParam(':user', $salesassociate);
             $SA->execute();
             $found = $SA->fetch();
-
+            //variable for empty cell, mysql needs some valid input
             $nullable = 0;
 
             $insertQuote = $devPdo->prepare("INSERT INTO quotes (customer_name, contact, street, city, email ,secret_notes, status, discount, date_created, sales_associate_id)
@@ -132,10 +145,10 @@ require_once(__DIR__ . '/../../resources/library/devDatabase.php');
             $insertQuote->bindParam(':discount', $nullable);
             $insertQuote->bindParam(':salesassociate', $found[0]);
             $insertQuote->execute();
-
+            //id of current inserted quote
             $last_id = $devPdo->lastInsertId();
 
-            //Insert Lines with prices into database
+            //Insert Lines with Prices into database
             $LineNumber = 1;
             foreach ($Line_Price as $Line => $Price) {
                 $insertLine = $devPdo->prepare("INSERT INTO line_item (line_number, description, price, quote_id)
@@ -147,54 +160,24 @@ require_once(__DIR__ . '/../../resources/library/devDatabase.php');
                 $insertLine->execute();
                 $LineNumber++;
             }
+            //If all was inserted correctly show success and quote number
             echo '<div style="text-align:center" class="alert alert-success">';
             echo '<strong>Success!</strong> New Quote Created #' . $last_id;
             echo '</div>';
         } catch (PDOException $e) {
+            //if their was a pdo exception print it
             echo '<div style="text-align:center" class="alert alert-danger">';
             echo "MYSQL Error:<br>" . $e->getMessage();
             echo '</div>';
         }
         $conn = null;
     } else {
+        //if any of the data was invalid.
         echo '<div style="text-align:center" class="alert alert-danger">';
         echo '<strong>Quote Creation Was Unsuccessful. Read Issues Bellow: </strong>' . $quotevalidation;
         echo '</div>';
     }
     ?>
-
-
-<!-- Testing For Data Insertion -->
-    <table class="table col-4">
-        <?php
-        /*
-    foreach ($_POST as $key => $value) {
-        if (is_array($value)) {
-            foreach ($value as $k) {
-                echo "<tr>";
-                echo "<td>";
-                echo $key;
-                echo "</td>";
-                echo "<td>";
-                echo $k;
-                echo "</td>";
-                echo "</tr>";
-            }
-        } else {
-            echo "<tr>";
-            echo "<td>";
-            echo $key;
-            echo "</td>";
-            echo "<td>";
-            echo $value;
-            echo "</td>";
-            echo "</tr>";
-        }
-    }
-    */
-        ?>
-    </table>
-
 </body>
 
 </html>

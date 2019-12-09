@@ -1,3 +1,13 @@
+/**
+ * Group 5B
+ * 12/07/19
+ * CSCI 467
+ * Quote System
+ *  Purpose:
+ * Holds all javascript functionality for the tracking page such as the updating of the 
+ *  line item input boxes.
+ */
+
 $(document).ready(function() 
 {
     //Max Number Of Lines

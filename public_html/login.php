@@ -1,3 +1,14 @@
+<!--
+Group 5B
+12/07/19
+CSCI 467
+Quote System
+
+Purpose:
+    This is the login page for the system.
+    It checks if the user has entered the correct username and password and triggers
+the correct session accordingly.
+-->
 <?php
 require_once(__DIR__.'/../resources/library/bootstrap.php');
 require_once(__DIR__."/../resources/library/devDatabase.php");
@@ -6,9 +17,10 @@ require_once(__DIR__."/../resources/library/devDatabase.php");
 <?php
 // Always start this first
 session_start();
-
+//If user is trying to sign in.
 if (!empty($_POST)) {
   if (isset($_POST['username']) && isset($_POST['password'])) {
+    //username and password input
     $usernameInput = $_POST['username'];
     $passwordInput = $_POST['password'];
     // Getting submitted user data from database
@@ -22,10 +34,11 @@ if (!empty($_POST)) {
       echo '<strong>No User Found Under that Username: ' . $usernameInput;
       echo '</div>';
     } else {
+      //if user is found then grab admin status and password
       $userSession = $found[1];
       $password = $found[2];
       $admin = $found[5];
-      // Verify user password and set $_SESSION
+      // Verify user password and set $_SESSION admin and user
       if (md5($passwordInput) == $password) {
         $_SESSION['user_id'] = $userSession;
         $_SESSION['admin'] = $admin;
@@ -54,14 +67,15 @@ if (isset($_SESSION['user_id'])) {
 </head>
 
 <body>
+<!--Page Head Title-->
   <div style="text-align:center" class="jumbotron jumbotron-fluid p-2 m-1 bg-info text-white rounded">
     <h1>Sales Associate Login</h1>
   </div>
-
+<!--Back Button-->
   <div class="p-1 m-1 btn-group d-flex">
     <a href="index.php" class="btn btn-dark" role="button">Back To Home Page</a>
   </div>
-
+<!--Login Form with validation-->
   <form action="login.php" class="border border-primary rounded m-2 p-2 needs-validation" method="post">
     <div class="form-group">
       <label for="uname">Username:</label>
@@ -82,15 +96,15 @@ if (isset($_SESSION['user_id'])) {
 </body>
 
 </html>
-
+<!--Script to disable form submition without valid data-->
 <script>
-  // Disable form submissions if there are invalid fields
+  // Disable form submissions
   (function() {
     'use strict';
     window.addEventListener('load', function() {
-      // Get the forms we want to add validation styles to
+      //find form for validation
       var forms = document.getElementsByClassName('needs-validation');
-      // Loop over them and prevent submission
+      // Prevent submition in invalid form
       var validation = Array.prototype.filter.call(forms, function(form) {
         form.addEventListener('submit', function(event) {
           if (form.checkValidity() === false) {

@@ -1,36 +1,47 @@
+<!--
+Group 5B
+12/07/19
+CSCI 467
+Quote System
+
+Purpose:
+    This is the main quote generation page for the system
+    It contains a user friendly form to create a customer quote
+    and add it into the system.
+    Any customer data can be pulled from the legacy database via the link
+-->
+<!--Require Nesesary files and login validation-->
 <?php
-require_once(__DIR__.'/../../resources/library/loginSession.php');
-require_once(__DIR__.'/../../resources/library/bootstrap.php');
-require_once(__DIR__.'/../../resources/library/tableformat.php');
-require_once(__DIR__.'/../../resources/library/legacy.php');
-require_once(__DIR__.'/../../resources/library/devDatabase.php');
+require_once(__DIR__ . '/../../resources/library/loginSession.php');
+require_once(__DIR__ . '/../../resources/library/bootstrap.php');
+require_once(__DIR__ . '/../../resources/library/tableformat.php');
+require_once(__DIR__ . '/../../resources/library/legacy.php');
+require_once(__DIR__ . '/../../resources/library/devDatabase.php');
 ?>
 
 <!DOCTYPE html>
 <html>
+    <!--Validate Input Function-->
 <?php
-function test_input($data)
-{
-    $data = trim($data);
-    $data = stripslashes($data);
-    $data = htmlspecialchars($data);
-    return $data;
-}
-?>
-
-<?php
+    function test_input($data)
+    {
+        $data = trim($data);
+        $data = stripslashes($data);
+        $data = htmlspecialchars($data);
+        return $data;
+    }
+    
 //Variables For Customer Information
 $id = $name = $city = $street = $contact = "";
-
-if ($_SERVER["REQUEST_METHOD"] == "POST") 
-{
-    if ($_POST["selectCust"] != "") 
-    {
+//If Post request from customer list then Autofill Information
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    if ($_POST["selectCust"] != "") {
         $customerSelection = test_input($_POST["selectCust"]);
         //MySQL Query for retrieving customer data from database
         $sql = "SELECT * FROM customers WHERE name='$customerSelection'";
         $customer = $legacyPDO->query($sql);
         $info = $customer->fetchAll(PDO::FETCH_ASSOC);
+        //if the post request isnt empty gather the data from it
         if (!empty($info)) {
             $name = $info[0]["name"];
             $city = $info[0]["city"];
@@ -53,7 +64,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
     <!-- Return To Index Page -->
     <div class="p-1 btn-group">
         <a href="../index.php" class="btn btn-dark" role="button">Back To Home Page</a>
-     </div>
+    </div>
     <!-- Title Of Page -->
     <div style="text-align:center" class="jumbotron jumbotron-fluid p-2 m-1 bg-info text-white rounded">
         <h1>Quote Tracking</h1>
@@ -71,7 +82,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
     <form id="QuoteForm" action="confirm.php" class="border border-primary rounded mx-1 px-2" method="post">
         <fieldset>
             <h4 class=".bg-info">Create New Quote</h4>
-            <!-- Customer Information form group, All data is imported from MySQL -->
+            <!-- Customer Information form group, All data is imported from Legacy database -->
             <div class="form-group">
                 <div class="row">
                     <div class="col">
@@ -120,4 +131,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
     <script type="text/javascript" src="javascript/tracking.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/es6-shim/0.35.3/es6-shim.min.js"></script>
 </body>
+
 </html>
