@@ -5,20 +5,20 @@
 $config = array(
     "db" => array(
         "dev" => array(
-            "dbname" => "prod",
-            "username" => "webserver",
-            "password" => "CSCI467S3rverAuth2019",
-            "host" => "cnet.brettcarney.com"
+            "dbname" => "",
+            "username" => "",
+            "password" => "",
+            "host" => ""
         ),
         "legacy" => array(
-            "dbname" => "b25oudnru9u3blk4",
-            "username" => "rs0czd6o8w8e8r3j",
-            "password" => "w1ffboir25orrcs4",
-            "host" => "er7lx9km02rjyf3n.cbetxkdyhwsb.us-east-1.rds.amazonaws.com"
+            "dbname" => "",
+            "username" => "",
+            "password" => "",
+            "host" => ""
         )
     ),
     "urls" => array(
-        "legacyURL" => "http://blitz.cs.niu.edu/CreditCard/"
+        "legacyURL" => ""
     ),
     "paths" => array(
         "resources" => "/resources",
